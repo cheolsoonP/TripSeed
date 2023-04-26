@@ -1,0 +1,2 @@
+INDEX VERSION 1.4+C:\SSAFY\workspace\project\EnjoyTrip\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3683219441.index

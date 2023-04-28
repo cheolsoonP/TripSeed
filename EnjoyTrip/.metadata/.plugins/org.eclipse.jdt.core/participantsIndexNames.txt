@@ -1,7 +1,0 @@
-INDEX VERSION 1.131
-C:\SSAFY\workspace\project\EnjoyTrip\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2177757749.index
-\Enjoytrip_Spring\src\main\java
-C:\SSAFY\workspace\project\EnjoyTrip\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\437254477.index
-\Enjoytrip\src\main\java
-C:\SSAFY\workspace\project\EnjoyTrip\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1643411173.index
-\enjoytrip_spring\src\main\java

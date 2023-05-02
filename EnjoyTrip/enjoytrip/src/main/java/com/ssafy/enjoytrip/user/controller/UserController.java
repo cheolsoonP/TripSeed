@@ -1,10 +1,13 @@
 package com.ssafy.enjoytrip.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.user.dto.UserDto;
@@ -33,7 +36,24 @@ public class UserController {
 		}
 	}
 	
-//	@PostMapping("/login")
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody UserDto userDto, HttpSession session) {
+		try {
+			UserDto user = userService.loginUser(userDto);
+			
+			if(user != null) {
+				session.setAttribute("userinfo", user);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("일치하는 정보가 없습니다.\n 아이디 또는 비밀번호 확인 후 다시 로그인하세요!", HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return exceptionHandling(e);
+		}
+		
+	}
+	
 //	@GetMapping("/logout")
 //	@GetMapping("/{userid}")
 //	@PutMapping("/password")

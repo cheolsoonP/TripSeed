@@ -9,8 +9,8 @@ public interface UserService {
 	
 //	int idCheck(String userId) throws Exception;
 	void joinUser(UserDto userDto) throws Exception;
-//	UserDto loginUser(Map<String, String> map) throws Exception;
-//	
+	UserDto loginUser(UserDto userDto) throws Exception;
+	
 //	/* Admin */
 //	List<UserDto> listUser(Map<String, Object> map) throws Exception;
 //	UserDto getUser(String userId) throws Exception;

@@ -28,13 +28,13 @@ public class UserServiceImpl implements UserService {
 		userMapper.joinUser(userDto);
 	}
 
-//	@Override
-//	public UserDto loginUser(Map<String, String> map) throws Exception {
-//		return userMapper.loginUser(map);
-//	}
-//
-//	
-//	/* Admin */
+	@Override
+	public UserDto loginUser(UserDto userDto) throws Exception {
+		return userMapper.loginUser(userDto);
+	}
+
+	
+	/* Admin */
 //	@Override
 //	public List<UserDto> listUser(Map<String, Object> map) throws Exception {
 //		return userMapper.listUser(map);

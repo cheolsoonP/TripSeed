@@ -13,7 +13,7 @@ public interface UserMapper {
 
 //	int idCheck(String userId) throws SQLException;
 	void joinUser(UserDto userDto) throws SQLException;
-//	UserDto loginUser(Map<String, String> map) throws SQLException;
+	UserDto loginUser(UserDto userDto) throws SQLException;
 	
 //	/* Admin */
 //	List<UserDto> listUser(Map<String, Object> map) throws SQLException;

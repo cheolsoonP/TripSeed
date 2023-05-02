@@ -56,11 +56,11 @@ public class PlanController {
 	}
 	
 	@DeleteMapping("/{planid}")
-	public ResponseEntity<?> deletePlan(@PathVariable("planid") String planId, HttpSession session){
-		session.setAttribute("userId", "ssafy");
+	public ResponseEntity<?> deletePlan(@PathVariable("planid") String planId){
+		
 		try {
 			planService.deletePlan(planId);
-			List<PlanDto> planList = planService.getPlanList((String) session.getAttribute("userId"));
+			List<PlanDto> planList = planService.getPlanList("ssafy");
 			
 			if(planList != null)
 				return new ResponseEntity<List<PlanDto>>(planList, HttpStatus.OK);

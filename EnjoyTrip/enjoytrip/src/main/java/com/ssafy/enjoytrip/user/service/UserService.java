@@ -9,11 +9,5 @@ public interface UserService {
 	
 	void joinUser(UserDto userDto) throws Exception;
 	UserDto loginUser(UserDto userDto) throws Exception;
-	
-//	/* Admin */
-//	List<UserDto> listUser(Map<String, Object> map) throws Exception;
-//	UserDto getUser(String userId) throws Exception;
-//	void updateUser(UserDto userDto) throws Exception;
-//	void deleteUser(String userId) throws Exception;
-	
+
 }

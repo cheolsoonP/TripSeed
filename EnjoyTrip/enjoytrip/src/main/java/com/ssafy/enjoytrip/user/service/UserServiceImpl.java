@@ -27,26 +27,4 @@ public class UserServiceImpl implements UserService {
 	public UserDto loginUser(UserDto userDto) throws Exception {
 		return userMapper.loginUser(userDto);
 	}
-
-
-	/* Admin */
-//	@Override
-//	public List<UserDto> listUser(Map<String, Object> map) throws Exception {
-//		return userMapper.listUser(map);
-//	}
-//
-//	@Override
-//	public UserDto getUser(String userId) throws Exception {
-//		return userMapper.getUser(userId);
-//	}
-//
-//	@Override
-//	public void updateUser(UserDto userDto) throws Exception {
-//		userMapper.updateUser(userDto);
-//	}
-//
-//	@Override
-//	public void deleteUser(String userId) throws Exception {
-//	}
-
 }

@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
 import com.ssafy.enjoytrip.plan.service.PlanService;
 
-@RestController("/plans")
+@RestController
+@RequestMapping("/plans")
 @CrossOrigin("*")
 public class PlanController {
 	
@@ -54,7 +56,7 @@ public class PlanController {
 	}
 	
 	@DeleteMapping("/{planid}")
-	public ResponseEntity<?> getPlanList(@PathVariable("planid") String planId, HttpSession session){
+	public ResponseEntity<?> deletePlan(@PathVariable("planid") String planId, HttpSession session){
 		session.setAttribute("userId", "ssafy");
 		try {
 			planService.deletePlan(planId);
@@ -73,7 +75,6 @@ public class PlanController {
 	public ResponseEntity<?> updatePlan(PlanDto planDto, HttpSession session){
 		session.setAttribute("userId", "ssafy");
 		try {
-			System.out.println(planDto);
 			planService.updatePlan(planDto);
 			List<PlanDto> planList = planService.getPlanList((String) session.getAttribute("userId"));
 			
@@ -85,8 +86,22 @@ public class PlanController {
 			return exceptionHandling(e);
 		}
 	}
-//	@GetMapping("/{planid}")
-//	@DeleteMapping("/{planid}")
+	
+	@GetMapping("/{planid}")
+	public ResponseEntity<?> getPlan(@PathVariable("planid") String planId){
+		
+		try {
+			PlanDto planDto = planService.getPlan(planId);			
+			if(planDto != null)
+				return new ResponseEntity<PlanDto>(planDto, HttpStatus.OK);
+			else
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
 	
 	
 	

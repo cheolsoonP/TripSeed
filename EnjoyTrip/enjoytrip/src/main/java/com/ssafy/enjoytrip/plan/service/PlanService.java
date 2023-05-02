@@ -14,4 +14,6 @@ public interface PlanService {
 	
 	void updatePlan(PlanDto planDto) throws Exception;
 
+	PlanDto getPlan(String planId) throws Exception;
+
 }

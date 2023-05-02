@@ -20,7 +20,7 @@
 	<select id="getPlanList" parameterType="string" resultMap="plan">
 		select plan_id, user_id, plan_title, start_date, end_date, complete 
 		from trip_plan
-		where user_id=#{userid}	
+		where user_id=#{userId}	
 	</select>
 	
 	<delete id="deletePlan" parameterType="string">
@@ -39,4 +39,9 @@
 		where plan_id = #{planId};		
 	</update>
 	
+	<select id="getPlan" parameterType="string" resultMap="plan">
+		select plan_id, user_id, plan_title, start_date, end_date, complete 
+		from trip_plan
+		where plan_id=#{planId}	
+	</select>
 </mapper>

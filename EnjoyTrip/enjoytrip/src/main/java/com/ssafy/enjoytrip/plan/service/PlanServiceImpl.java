@@ -37,4 +37,9 @@ public class PlanServiceImpl implements PlanService {
 		planMapper.updatePlan(planDto);
 	}
 
+	@Override
+	public PlanDto getPlan(String planId) throws Exception {
+		return planMapper.getPlan(planId);
+	}
+
 }

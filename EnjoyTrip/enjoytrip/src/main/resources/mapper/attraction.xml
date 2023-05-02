@@ -56,7 +56,7 @@
 		</trim>
 	</select>
 	
-		<select id="getHotplaceList" parameterType="hashMap" resultMap="attraction">
+	<select id="getHotplaceList" parameterType="hashMap" resultMap="attraction">
 		select 	attraction_id, content_type_id, title, 
 				addr1, addr2, zipcode, tel, first_image, first_image2, 
 				readcount, sido_code, gugun_code, 

@@ -2,6 +2,7 @@ package com.ssafy.enjoytrip.plan.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,11 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public PlanDto getPlan(String planId) throws Exception {
 		return planMapper.getPlan(planId);
+	}
+
+	@Override
+	public void addRoute(String planId, List<Map<String, Object>> routes) throws Exception {
+		planMapper.addRoute(planId, routes);
 	}
 
 }

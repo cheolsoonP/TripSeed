@@ -2,6 +2,7 @@ package com.ssafy.enjoytrip.plan.mapper;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,5 +20,7 @@ public interface PlanMapper {
 	void updatePlan(PlanDto planDto) throws SQLException;
 
 	PlanDto getPlan(String planId) throws SQLException;
+
+	void addRoute(String planId, List<Map<String, Object>> routes) throws SQLException;
 
 }

@@ -1,6 +1,8 @@
 package com.ssafy.enjoytrip.plan.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +34,7 @@ public class PlanController {
 		this.planService = planService;
 	}
 	
+	/* 여행 계획 추가/조회/수정/삭제  */
 	@PostMapping("/plan")
 	public ResponseEntity<?> addPlan(PlanDto planDto) {
 		
@@ -101,8 +105,19 @@ public class PlanController {
 	}
 	
 	
-	
-	
+	/* 여행 경로 추가/조회/변경/삭제 */
+	@PostMapping("/{planid}/routes")
+	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> param){
+		try {
+			System.out.println(param);
+			List<Map<String, Object>> routes = (List<Map<String, Object>>) param.get("routes");
+			System.out.println(routes);
+			planService.addRoute(planId, routes);
+				return new ResponseEntity<PlanDto>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 	
 	
 	

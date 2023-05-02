@@ -1,6 +1,7 @@
 package com.ssafy.enjoytrip.plan.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
 
@@ -15,5 +16,7 @@ public interface PlanService {
 	void updatePlan(PlanDto planDto) throws Exception;
 
 	PlanDto getPlan(String planId) throws Exception;
+
+	void addRoute(String planId, List<Map<String, Object>> routes) throws Exception;
 
 }

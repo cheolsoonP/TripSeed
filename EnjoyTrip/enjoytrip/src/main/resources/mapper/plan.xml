@@ -11,6 +11,7 @@
 		<result column="complete" property="complete" />
 	</resultMap>
 	
+	<!-- 여행 계획 추가/조회/변경/삭제  -->
 	<insert id="addPlan" parameterType="planDto">
 		insert into trip_plan 
 				(user_id, plan_title, start_date, end_date, complete) 
@@ -44,4 +45,13 @@
 		from trip_plan
 		where plan_id=#{planId}	
 	</select>
+	
+	<!-- 여행 경로 추가/조회/삭제/변경 -->
+	<insert id="addRoute" parameterType="hashMap" >
+		insert into trip_route (plan_id, attraction_id, `order`) 
+		values
+		<foreach collection="routes" item="route" separator=",">
+			(#{planId}, #{route.attraction_id}, #{route.order})
+		</foreach>
+	</insert>
 </mapper>

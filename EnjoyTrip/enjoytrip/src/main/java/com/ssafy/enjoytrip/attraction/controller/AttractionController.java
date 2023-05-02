@@ -1,7 +1,8 @@
 package com.ssafy.enjoytrip.attraction.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.enjoytrip.attraction.dto.AttractionDto;
 import com.ssafy.enjoytrip.attraction.dto.GugunDto;
 import com.ssafy.enjoytrip.attraction.dto.SidoDto;
 import com.ssafy.enjoytrip.attraction.service.AttractionService;
@@ -27,6 +30,24 @@ public class AttractionController {
 		this.attractionService = attractionService;
 	}
 	
+	@GetMapping("/")
+	public ResponseEntity<?> getAttractionList(@RequestParam(value = "sido", required = false) Integer sidoCode, 
+												@RequestParam(value = "gugun", required = false) Integer gugunCode,
+												@RequestParam(value = "contentType", required = false) Integer contentTypeId,
+												@RequestParam(value = "keyword", required = false) String keyword){
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("sidoCode", sidoCode);
+			map.put("gugunCode", gugunCode);
+			map.put("contentTypeId", contentTypeId);
+			map.put("keyword", keyword);			
+			List<AttractionDto> attractionList = attractionService.getAttractionList(map);
+			return new ResponseEntity<List<AttractionDto>>(attractionList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
 	@GetMapping("/sido")
 	public ResponseEntity<?> getSidoList(){
 		try {
@@ -36,6 +57,7 @@ public class AttractionController {
 			return exceptionHandling(e);
 		}
 	}
+	
 	@GetMapping("/gugun")
 	public ResponseEntity<?> getGugunList(){
 		try {
@@ -47,12 +69,11 @@ public class AttractionController {
 	}
 	
 	
-//	@GetMapping("/{sidoCode}")
-//	public ResponseEntity<?> getAttractionList(@RequestAttribute ) {
-//		
+//	@GetMapping("/hotplace")
+//	public ResponseEntity<?> getHotplaceList(){
 //		try {
-//			attractionService.addPlan(planDto);
-//			return new ResponseEntity<Void>(HttpStatus.OK);
+//			List<GugunDto> gugunList = attractionService.getGugunList();
+//			return new ResponseEntity<List<GugunDto>>(gugunList, HttpStatus.OK);
 //		} catch (Exception e) {
 //			return exceptionHandling(e);
 //		}

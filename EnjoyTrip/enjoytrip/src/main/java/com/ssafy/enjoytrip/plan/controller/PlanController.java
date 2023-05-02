@@ -72,11 +72,10 @@ public class PlanController {
 	}
 	
 	@PutMapping("/plan")
-	public ResponseEntity<?> updatePlan(PlanDto planDto, HttpSession session){
-		session.setAttribute("userId", "ssafy");
+	public ResponseEntity<?> updatePlan(PlanDto planDto){
 		try {
 			planService.updatePlan(planDto);
-			List<PlanDto> planList = planService.getPlanList((String) session.getAttribute("userId"));
+			List<PlanDto> planList = planService.getPlanList("ssafy");
 			
 			if(planList != null)
 				return new ResponseEntity<List<PlanDto>>(planList, HttpStatus.OK);

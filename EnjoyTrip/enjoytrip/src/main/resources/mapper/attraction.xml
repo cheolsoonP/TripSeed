@@ -13,6 +13,24 @@
 		<result column="sido_code" property="sidoCode" />
 	</resultMap>
 	
+	<resultMap type="attractionDto" id="attraction">
+		<result column="attraction_id" property="attractionId"/>
+		<result column="content_type_id" property="contentTypeId"/>
+		<result column="title" property="title"/>
+		<result column="addr1" property="addr1"/>
+		<result column="addr2" property="addr2"/>
+		<result column="zipcode" property="zipcode"/>
+		<result column="tel" property="tel"/>
+		<result column="first_image" property="firstImage"/>
+		<result column="first_image2" property="firstImage2"/>
+		<result column="readcount" property="readcount"/>
+		<result column="sido_code" property="sidoCode"/>
+		<result column="gugun_code" property="gugunCode"/>
+		<result column="latitude" property="latitude"/>
+		<result column="longitude" property="longitude"/>
+		<result column="mlevel" property="mlevel"/>
+	</resultMap>
+	
 
 	<select id="getSidoList" resultMap="sido">
 		select sido_code, sido_name 
@@ -22,6 +40,20 @@
 	<select id="getGugunList" resultMap="gugun">
 		select gugun_code, gugun_name, sido_code
 		from gugun
+	</select>
+	
+	<select id="getAttractionList" parameterType="hashMap" resultMap="attraction">
+		select 	attraction_id, content_type_id, title, 
+				addr1, addr2, zipcode, tel, first_image, first_image2, 
+				readcount, sido_code, gugun_code, 
+				latitude, longitude, mlevel
+		from attraction_info
+		<trim prefix="where" suffixOverrides="and">
+			<if test="sidoCode != null">sido_code=#{sidoCode} and</if>
+			<if test="gugunCode != null">gugun_code=#{gugunCode} and</if>
+			<if test="contentTypeId != null">content_type_id=#{contentTypeId} and</if>
+			<if test="keyword != null">title like concat('%', #{keyword}, '%')</if>
+		</trim>
 	</select>
 	
 </mapper>

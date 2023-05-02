@@ -1,9 +1,11 @@
 package com.ssafy.enjoytrip.attraction.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.ssafy.enjoytrip.attraction.dto.AttractionDto;
 import com.ssafy.enjoytrip.attraction.dto.GugunDto;
 import com.ssafy.enjoytrip.attraction.dto.SidoDto;
 import com.ssafy.enjoytrip.attraction.mapper.AttractionMapper;
@@ -25,6 +27,11 @@ public class AttractionServiceImpl implements AttractionService {
 	@Override
 	public List<GugunDto> getGugunList() throws Exception {
 		return attractionMapper.getGugunList();
+	}
+
+	@Override
+	public List<AttractionDto> getAttractionList(Map<String, Object> map) throws Exception {
+		return attractionMapper.getAttractionList(map);
 	}
 	
 

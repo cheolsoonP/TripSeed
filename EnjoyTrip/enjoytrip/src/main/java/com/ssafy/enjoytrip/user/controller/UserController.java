@@ -80,7 +80,15 @@ public class UserController {
 		}
 	}
 	
-//	@PutMapping("/password")
+	@PutMapping("/password")
+	public ResponseEntity<?> updatePw(String newPw, HttpSession session) {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return exceptionHandling(e);
+		}
+	}
 //	@PutMapping("/nickname")
 //	@DeleteMapping("/{userid}")
 	

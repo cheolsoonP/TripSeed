@@ -1,7 +1,6 @@
 package com.ssafy.enjoytrip.user.service;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -26,5 +25,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto loginUser(UserDto userDto) throws Exception {
 		return userMapper.loginUser(userDto);
+	}
+
+
+	@Override
+	public UserDto getUserInfo(HttpSession session) throws Exception {
+		UserDto user = (UserDto) session.getAttribute("userInfo");		
+		return user;
 	}
 }

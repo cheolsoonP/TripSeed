@@ -68,7 +68,7 @@ public class UserController {
 	@GetMapping("/info")
 	public ResponseEntity<?> getUserInfo(HttpSession session) {
 		try {
-			UserDto user = (UserDto) session.getAttribute("userInfo");
+			UserDto user = userService.getUserInfo(session);
 			if(user != null) {
 				return new ResponseEntity<UserDto>(user, HttpStatus.OK);
 			} else {
@@ -80,15 +80,15 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping("/password")
-	public ResponseEntity<?> updatePw(String newPw, HttpSession session) {
-		try {
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return exceptionHandling(e);
-		}
-	}
+//	@PutMapping("/password")
+//	public ResponseEntity<?> updatePw(String newPw, HttpSession session) {
+//		try {
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return exceptionHandling(e);
+//		}
+//	}
 //	@PutMapping("/nickname")
 //	@DeleteMapping("/{userid}")
 	

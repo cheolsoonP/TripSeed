@@ -39,4 +39,10 @@ public class UserServiceImpl implements UserService {
 	public void updatePw(UserDto userDto) throws Exception {
 		userMapper.updatePw(userDto);
 	}
+
+
+	@Override
+	public void updateNickname(UserDto userDto) throws Exception {
+		userMapper.updateNickname(userDto);
+	}
 }

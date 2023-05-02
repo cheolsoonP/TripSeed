@@ -99,7 +99,24 @@ public class UserController {
 		}
 	}
 	
-//	@PutMapping("/nickname")
+	@PutMapping("/nickname")
+	public ResponseEntity<?> updateNickname(@RequestParam String newNickname, HttpSession session) {
+		try {
+			UserDto user = (UserDto) session.getAttribute("userInfo");
+			if(user != null) {				
+				user.setNickname(newNickname);
+				userService.updateNickname(user);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return exceptionHandling(e);
+		}
+	}
+	
 //	@DeleteMapping("/{userid}")
 	
 	private ResponseEntity<String> exceptionHandling(Exception e) {

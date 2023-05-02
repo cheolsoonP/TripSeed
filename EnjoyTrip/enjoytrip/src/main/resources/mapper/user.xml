@@ -18,5 +18,11 @@
 		set pw = #{pw}
 		where id = #{id}
 	</update>
+	
+	<update id="updateNickname" parameterType="userDto">
+		update user
+		set nickname = #{nickname}
+		where id = #{id}
+	</update>
 
 </mapper>

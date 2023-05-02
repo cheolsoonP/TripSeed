@@ -24,5 +24,10 @@
 		set nickname = #{nickname}
 		where id = #{id}
 	</update>
+	
+	<delete id="deleteUser" parameterType="string">
+		delete from user
+		where id = #{userId}
+	</delete>
 
 </mapper>

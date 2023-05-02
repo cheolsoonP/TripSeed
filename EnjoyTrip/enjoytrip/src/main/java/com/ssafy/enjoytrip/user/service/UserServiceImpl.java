@@ -45,4 +45,10 @@ public class UserServiceImpl implements UserService {
 	public void updateNickname(UserDto userDto) throws Exception {
 		userMapper.updateNickname(userDto);
 	}
+
+
+	@Override
+	public void deleteUser(String userId) throws Exception {
+		userMapper.deleteUser(userId);
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -117,7 +118,27 @@ public class UserController {
 		}
 	}
 	
-//	@DeleteMapping("/{userid}")
+	@DeleteMapping("/{userid}")
+	public ResponseEntity<?> deleteUser(@PathVariable("userid") String userId, HttpSession session) {
+	    try {
+	        UserDto user = (UserDto) session.getAttribute("userInfo");
+	        if (user != null) {
+	            if (user.getId().equals(userId)) { // 현재 로그인된 사용자의 아이디와 삭제할 사용자 아이디가 일치하는 경우
+	                userService.deleteUser(userId);
+	                session.invalidate(); // 세션 정보 삭제
+	                return new ResponseEntity<Void>(HttpStatus.OK);
+	            } else {
+	                return new ResponseEntity<String>("삭제 권한이 없습니다.", HttpStatus.UNAUTHORIZED);
+	            }
+	        } else {
+	            return new ResponseEntity<String>("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return exceptionHandling(e);
+	    }
+	}
 	
 	private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();

@@ -12,5 +12,6 @@ public interface UserService {
 	UserDto getUserInfo(HttpSession session) throws Exception;
 	void updatePw(UserDto userDto) throws Exception;
 	void updateNickname(UserDto userDto) throws Exception;
+	void deleteUser(String userId) throws Exception;
 
 }

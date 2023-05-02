@@ -30,7 +30,7 @@ public class AttractionController {
 		this.attractionService = attractionService;
 	}
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<?> getAttractionList(@RequestParam(value = "sido", required = false) Integer sidoCode, 
 												@RequestParam(value = "gugun", required = false) Integer gugunCode,
 												@RequestParam(value = "contentType", required = false) Integer contentTypeId,
@@ -69,15 +69,23 @@ public class AttractionController {
 	}
 	
 	
-//	@GetMapping("/hotplace")
-//	public ResponseEntity<?> getHotplaceList(){
-//		try {
-//			List<GugunDto> gugunList = attractionService.getGugunList();
-//			return new ResponseEntity<List<GugunDto>>(gugunList, HttpStatus.OK);
-//		} catch (Exception e) {
-//			return exceptionHandling(e);
-//		}
-//	}
+	@GetMapping("/hotplace")
+	public ResponseEntity<?> getHotplaceList(@RequestParam(value = "sido", required = false) Integer sidoCode, 
+												@RequestParam(value = "gugun", required = false) Integer gugunCode,
+												@RequestParam(value = "limit", required = false) Integer limit,
+												@RequestParam(value = "keyword", required = false) String keyword){
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("sidoCode", sidoCode);
+			map.put("gugunCode", gugunCode);
+			map.put("limit", limit);
+			map.put("keyword", keyword);	
+			List<AttractionDto> hotPlaceList = attractionService.getHotplaceList(map);
+			return new ResponseEntity<List<AttractionDto>>(hotPlaceList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 	
 
 	

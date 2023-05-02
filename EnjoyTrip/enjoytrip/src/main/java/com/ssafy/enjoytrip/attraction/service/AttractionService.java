@@ -16,4 +16,6 @@ public interface AttractionService {
 
 	List<AttractionDto> getAttractionList(Map<String, Object> map) throws Exception;
 
+	List<AttractionDto> getHotplaceList(Map<String, Object> map) throws Exception;
+
 }

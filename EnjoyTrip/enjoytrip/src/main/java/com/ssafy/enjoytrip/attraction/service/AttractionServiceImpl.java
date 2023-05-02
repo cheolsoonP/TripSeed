@@ -33,6 +33,11 @@ public class AttractionServiceImpl implements AttractionService {
 	public List<AttractionDto> getAttractionList(Map<String, Object> map) throws Exception {
 		return attractionMapper.getAttractionList(map);
 	}
+
+	@Override
+	public List<AttractionDto> getHotplaceList(Map<String, Object> map) throws Exception {
+		return attractionMapper.getHotplaceList(map);
+	}
 	
 
 }

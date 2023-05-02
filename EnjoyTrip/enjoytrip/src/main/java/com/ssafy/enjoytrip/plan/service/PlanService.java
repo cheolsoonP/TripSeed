@@ -11,5 +11,7 @@ public interface PlanService {
 	List<PlanDto> getPlanList(String userId) throws Exception;
 
 	void deletePlan(String planId) throws Exception;
+	
+	void updatePlan(PlanDto planDto) throws Exception;
 
 }

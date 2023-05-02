@@ -1,5 +1,6 @@
 package com.ssafy.enjoytrip.plan.mapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,5 +15,7 @@ public interface PlanMapper {
 	List<PlanDto> getPlanList(String userId);
 
 	void deletePlan(String planId);
+
+	void updatePlan(PlanDto planDto) throws SQLException;
 
 }

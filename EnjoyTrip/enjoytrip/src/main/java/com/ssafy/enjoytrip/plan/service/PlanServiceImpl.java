@@ -1,5 +1,6 @@
 package com.ssafy.enjoytrip.plan.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,11 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public void deletePlan(String planId) throws Exception {
 		planMapper.deletePlan(planId);
+	}
+
+	@Override
+	public void updatePlan(PlanDto planDto) throws Exception {
+		planMapper.updatePlan(planDto);
 	}
 
 }

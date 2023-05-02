@@ -28,4 +28,15 @@
 		where plan_id = #{planId}
 	</delete>
 	
+	<update id="updatePlan" parameterType="planDto">
+		update trip_plan 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="planTitle != null">plan_title=#{planTitle},</if>
+			<if test="startDate != null">start_date=#{startDate},</if>
+			<if test="endDate != null">end_date=#{endDate},</if>
+			<if test="complete != null">complete=#{complete},</if>
+		</trim>
+		where plan_id = #{planId};		
+	</update>
+	
 </mapper>

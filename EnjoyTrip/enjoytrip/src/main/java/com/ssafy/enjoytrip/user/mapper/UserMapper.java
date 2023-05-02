@@ -11,7 +11,6 @@ import com.ssafy.enjoytrip.user.dto.UserDto;
 @Mapper
 public interface UserMapper {
 
-//	int idCheck(String userId) throws SQLException;
 	void joinUser(UserDto userDto) throws SQLException;
 	UserDto loginUser(UserDto userDto) throws SQLException;
 	

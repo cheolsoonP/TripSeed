@@ -7,7 +7,6 @@ import com.ssafy.enjoytrip.user.dto.UserDto;
 
 public interface UserService {
 	
-//	int idCheck(String userId) throws Exception;
 	void joinUser(UserDto userDto) throws Exception;
 	UserDto loginUser(UserDto userDto) throws Exception;
 	

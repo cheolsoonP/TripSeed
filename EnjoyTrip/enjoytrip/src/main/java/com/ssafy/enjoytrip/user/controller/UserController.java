@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.user.dto.UserDto;
 import com.ssafy.enjoytrip.user.service.UserService;
 
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 @CrossOrigin("*")
 public class UserController {
 	
@@ -23,6 +26,7 @@ public class UserController {
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
+	
 	
 	@PostMapping("/join")
 	public ResponseEntity<?> join(UserDto userDto) {
@@ -54,7 +58,12 @@ public class UserController {
 		
 	}
 	
-//	@GetMapping("/logout")
+	@GetMapping("/logout")
+	public ResponseEntity<?> logout(HttpSession session) {
+		session.invalidate();
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 //	@GetMapping("/{userid}")
 //	@PutMapping("/password")
 //	@PutMapping("/nickname")

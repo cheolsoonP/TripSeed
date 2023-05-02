@@ -17,11 +17,6 @@ public class UserServiceImpl implements UserService {
 		this.userMapper = userMapper;
 	}
 
-	
-//	@Override
-//	public int idCheck(String userId) throws Exception {
-//		return userMapper.idCheck(userId);
-//	}
 
 	@Override
 	public void joinUser(UserDto userDto) throws Exception {
@@ -33,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.loginUser(userDto);
 	}
 
-	
+
 	/* Admin */
 //	@Override
 //	public List<UserDto> listUser(Map<String, Object> map) throws Exception {

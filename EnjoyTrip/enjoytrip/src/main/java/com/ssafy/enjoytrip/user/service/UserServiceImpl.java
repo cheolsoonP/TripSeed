@@ -33,4 +33,10 @@ public class UserServiceImpl implements UserService {
 		UserDto user = (UserDto) session.getAttribute("userInfo");		
 		return user;
 	}
+
+
+	@Override
+	public void updatePw(UserDto userDto) throws Exception {
+		userMapper.updatePw(userDto);
+	}
 }

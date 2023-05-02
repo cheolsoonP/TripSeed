@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.user.dto.UserDto;
@@ -72,7 +73,7 @@ public class UserController {
 			if(user != null) {
 				return new ResponseEntity<UserDto>(user, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<String>("로그인 후 사용해주세요.", HttpStatus.UNAUTHORIZED);
+				return new ResponseEntity<String>("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,15 +81,24 @@ public class UserController {
 		}
 	}
 	
-//	@PutMapping("/password")
-//	public ResponseEntity<?> updatePw(String newPw, HttpSession session) {
-//		try {
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return exceptionHandling(e);
-//		}
-//	}
+	@PutMapping("/password")
+	public ResponseEntity<?> updatePw(@RequestParam String newPw, HttpSession session) {
+		try {
+			UserDto user = (UserDto) session.getAttribute("userInfo");
+			if(user != null) {				
+				user.setPw(newPw);
+				userService.updatePw(user);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return exceptionHandling(e);
+		}
+	}
+	
 //	@PutMapping("/nickname")
 //	@DeleteMapping("/{userid}")
 	

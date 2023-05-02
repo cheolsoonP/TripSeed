@@ -10,5 +10,6 @@ public interface UserService {
 	UserDto loginUser(UserDto userDto) throws Exception;
 	
 	UserDto getUserInfo(HttpSession session) throws Exception;
+	void updatePw(UserDto userDto) throws Exception;
 
 }

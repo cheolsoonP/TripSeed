@@ -13,5 +13,6 @@ public interface UserMapper {
 
 	void joinUser(UserDto userDto) throws SQLException;
 	UserDto loginUser(UserDto userDto) throws SQLException;
+	void updatePw(UserDto userDto) throws SQLException;
 
 }

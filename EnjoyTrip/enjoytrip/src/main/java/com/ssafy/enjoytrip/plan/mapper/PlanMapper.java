@@ -11,6 +11,8 @@ public interface PlanMapper {
 
 	void addPlan(PlanDto planDto);
 
-	List<PlanDto> getPlanList(String userid);
+	List<PlanDto> getPlanList(String userId);
+
+	void deletePlan(String planId);
 
 }

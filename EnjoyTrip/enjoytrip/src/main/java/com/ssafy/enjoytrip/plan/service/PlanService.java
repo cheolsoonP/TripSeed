@@ -8,6 +8,8 @@ public interface PlanService {
 
 	void addPlan(PlanDto planDto) throws Exception;
 
-	List<PlanDto> getPlanList(String userid) throws Exception;
+	List<PlanDto> getPlanList(String userId) throws Exception;
+
+	void deletePlan(String planId) throws Exception;
 
 }

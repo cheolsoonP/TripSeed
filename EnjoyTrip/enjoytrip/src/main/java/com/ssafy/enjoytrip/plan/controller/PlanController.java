@@ -2,6 +2,8 @@ package com.ssafy.enjoytrip.plan.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
@@ -39,9 +40,9 @@ public class PlanController {
 	}
 	
 	@GetMapping("/{userid}")
-	public ResponseEntity<?> getPlanList(@PathVariable("userid") String userid){
+	public ResponseEntity<?> getPlanList(@PathVariable("userid") String userId){
 		try {
-			List<PlanDto> planList = planService.getPlanList(userid);
+			List<PlanDto> planList = planService.getPlanList(userId);
 			if(planList != null)
 				return new ResponseEntity<List<PlanDto>>(planList, HttpStatus.OK);
 			else
@@ -50,7 +51,22 @@ public class PlanController {
 			return exceptionHandling(e);
 		}
 	}
-//	@DeleteMapping("/{planid}")
+	
+	@DeleteMapping("/{planid}")
+	public ResponseEntity<?> getPlanList(@PathVariable("planid") String planId, HttpSession session){
+		session.setAttribute("userId", "ssafy");
+		try {
+			planService.deletePlan(planId);
+			List<PlanDto> planList = planService.getPlanList((String) session.getAttribute("userId"));
+			
+			if(planList != null)
+				return new ResponseEntity<List<PlanDto>>(planList, HttpStatus.OK);
+			else
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 //	@PutMapping("/{planid}")
 //	@GetMapping("/{planid}")
 //	@DeleteMapping("/{planid}")

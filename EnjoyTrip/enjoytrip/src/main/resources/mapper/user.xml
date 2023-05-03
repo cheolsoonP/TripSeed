@@ -7,8 +7,8 @@
 		values (#{id}, #{name}, #{nickname}, #{pw}, #{email})
 	</insert>
 	
-	<select id="loginUser" parameterType="userDto">
-		select id, name, nickname
+	<select id="loginUser" parameterType="userDto" resultType="userDto">
+		select id, name, nickname, email
 		from user
 		where id = #{id} and pw = #{pw}
 	</select>
@@ -31,7 +31,7 @@
 	</delete>
 	
 	<select id="getUserInfo" parameterType="string" resultType="userDto">
-		select id, name, nickname 
+		select id, name, nickname, email 
 		from user
 		where id = #{userId}
 	</select>

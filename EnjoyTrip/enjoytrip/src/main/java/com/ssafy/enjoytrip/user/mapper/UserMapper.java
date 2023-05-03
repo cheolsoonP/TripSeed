@@ -16,5 +16,6 @@ public interface UserMapper {
 	void updatePw(UserDto userDto) throws SQLException;
 	void updateNickname(UserDto userDto) throws SQLException;
 	void deleteUser(String userId) throws SQLException;
-
+	UserDto getUserInfo(String userId);
+	
 }

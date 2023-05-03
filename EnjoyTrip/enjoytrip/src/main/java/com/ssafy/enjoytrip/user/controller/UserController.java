@@ -44,12 +44,11 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody UserDto userDto, HttpSession session) {
+	public ResponseEntity<?> login(@RequestBody UserDto userDto) {
 		try {
 			UserDto user = userService.loginUser(userDto);
 			
 			if(user != null) {
-				session.setAttribute("userInfo", user);
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>("일치하는 정보가 없습니다.\n 아이디 또는 비밀번호 확인 후 다시 로그인하세요!", HttpStatus.NO_CONTENT);
@@ -62,15 +61,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public ResponseEntity<?> logout(HttpSession session) {
-		session.invalidate();
+	public ResponseEntity<?> logout() {
+		//session.invalidate();
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@GetMapping("/info")
-	public ResponseEntity<?> getUserInfo(HttpSession session) {
+	public ResponseEntity<?> getUserInfo() {
 		try {
-			UserDto user = userService.getUserInfo(session);
+			UserDto user = userService.getUserInfo("ssafy");
 			if(user != null) {
 				return new ResponseEntity<UserDto>(user, HttpStatus.OK);
 			} else {
@@ -83,9 +82,9 @@ public class UserController {
 	}
 	
 	@PutMapping("/password")
-	public ResponseEntity<?> updatePw(@RequestParam String newPw, HttpSession session) {
+	public ResponseEntity<?> updatePw(@RequestParam String newPw) {
 		try {
-			UserDto user = (UserDto) session.getAttribute("userInfo");
+			UserDto user = userService.getUserInfo("ssafy");
 			if(user != null) {				
 				user.setPw(newPw);
 				userService.updatePw(user);
@@ -101,9 +100,9 @@ public class UserController {
 	}
 	
 	@PutMapping("/nickname")
-	public ResponseEntity<?> updateNickname(@RequestParam String newNickname, HttpSession session) {
+	public ResponseEntity<?> updateNickname(@RequestParam String newNickname) {
 		try {
-			UserDto user = (UserDto) session.getAttribute("userInfo");
+			UserDto user = userService.getUserInfo("ssafy");
 			if(user != null) {				
 				user.setNickname(newNickname);
 				userService.updateNickname(user);
@@ -119,13 +118,13 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{userid}")
-	public ResponseEntity<?> deleteUser(@PathVariable("userid") String userId, HttpSession session) {
+	public ResponseEntity<?> deleteUser(@PathVariable("userid") String userId) {
 	    try {
-	        UserDto user = (UserDto) session.getAttribute("userInfo");
+	        UserDto user = userService.getUserInfo(userId);
 	        if (user != null) {
 	            if (user.getId().equals(userId)) { // 현재 로그인된 사용자의 아이디와 삭제할 사용자 아이디가 일치하는 경우
 	                userService.deleteUser(userId);
-	                session.invalidate(); // 세션 정보 삭제
+	                //session.invalidate(); // 세션 정보 삭제
 	                return new ResponseEntity<Void>(HttpStatus.OK);
 	            } else {
 	                return new ResponseEntity<String>("삭제 권한이 없습니다.", HttpStatus.UNAUTHORIZED);

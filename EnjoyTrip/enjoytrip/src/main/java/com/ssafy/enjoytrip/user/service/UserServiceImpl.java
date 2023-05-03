@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public UserDto getUserInfo(HttpSession session) throws Exception {
-		UserDto user = (UserDto) session.getAttribute("userInfo");		
-		return user;
+	public UserDto getUserInfo(String userId) throws Exception {
+//		UserDto user = (UserDto) session.getAttribute("userInfo");
+		return userMapper.getUserInfo(userId);
 	}
 
 

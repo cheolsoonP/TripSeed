@@ -29,5 +29,11 @@
 		delete from user
 		where id = #{userId}
 	</delete>
+	
+	<select id="getUserInfo" parameterType="string" resultType="userDto">
+		select id, name, nickname 
+		from user
+		where id = #{userId}
+	</select>
 
 </mapper>

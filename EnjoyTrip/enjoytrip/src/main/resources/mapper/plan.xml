@@ -73,4 +73,12 @@
 		delete from trip_route
 		where plan_id = #{planId}
 	</delete>
+	
+	<!-- 메모 추가/삭제 -->
+	<update id="addMemo" parameterType="hashMap">
+		update trip_route 
+		set memo = #{memo}
+		where plan_id = #{planId}
+		and attraction_id = #{attractionId}
+	</update>
 </mapper>

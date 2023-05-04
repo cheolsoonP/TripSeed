@@ -1,5 +1,6 @@
 package com.ssafy.enjoytrip.plan.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +109,7 @@ public class PlanController {
 		try {
 			data.put("planId", planId);
 			planService.addRoute(data);
-				return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
@@ -119,7 +120,7 @@ public class PlanController {
 	public ResponseEntity<?> getRoute(@PathVariable("planid") String planId){
 		try {
 			List<RouteDto> routeList = planService.getRoute(planId);
-				return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);
+			return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
@@ -132,7 +133,7 @@ public class PlanController {
 
 			data.put("planId", planId);
 			planService.updateRoute(data);
-				return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
@@ -143,16 +144,28 @@ public class PlanController {
 	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId){
 		try {
 			planService.deleteRoute(planId);
-				return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
 	
-	
-	
-	
-	
+	/* 메모 추가 */
+	@PostMapping("/{planid}/routes/{attractionid}/memo")
+	public ResponseEntity<?> addMemo(@PathVariable("planid") String planId,
+									@PathVariable("attractionid") String attractionId,
+									@RequestBody Map<String, Object> data){
+		try {
+			// data.put("memo")
+			data.put("planId", planId);
+			data.put("attractionId", attractionId);
+			planService.addMemo(data);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

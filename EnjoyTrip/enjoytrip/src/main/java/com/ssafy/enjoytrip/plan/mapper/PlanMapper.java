@@ -30,4 +30,6 @@ public interface PlanMapper {
 
 	void deleteRoute(String planId) throws SQLException;
 
+	void addMemo(Map<String, Object> data) throws SQLException;
+
 }

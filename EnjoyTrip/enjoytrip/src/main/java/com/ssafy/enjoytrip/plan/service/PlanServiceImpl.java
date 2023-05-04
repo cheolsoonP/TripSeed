@@ -44,13 +44,28 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public void addRoute(String planId, List<Map<String, Object>> routes) throws Exception {
-		planMapper.addRoute(planId, routes);
+	public void addRoute(Map<String, Object> data) throws Exception {
+		planMapper.addRoute(data);
 	}
 
 	@Override
 	public List<RouteDto> getRoute(String planId) throws Exception {
 		return planMapper.getRoute(planId);
 	}
+
+	@Override
+	public void updateRoute(Map<String, Object> data) throws Exception {
+		String planId = (String) data.get("planId");
+		planMapper.deleteRoute(planId);
+		planMapper.addRoute(data);
+	}
+
+	@Override
+	public void deleteRoute(String planId) throws Exception {
+		planMapper.deleteRoute(planId);
+	}
+
+
+
 
 }

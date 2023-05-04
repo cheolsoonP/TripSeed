@@ -104,10 +104,10 @@ public class PlanController {
 	
 	/* 여행 경로 추가/조회/변경/삭제 */
 	@PostMapping("/{planid}/routes")
-	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> param){
+	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> data){
 		try {
-			List<Map<String, Object>> routes = (List<Map<String, Object>>) param.get("routes");
-			planService.addRoute(planId, routes);
+			data.put("planId", planId);
+			planService.addRoute(data);
 				return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
@@ -124,6 +124,33 @@ public class PlanController {
 			return exceptionHandling(e);
 		}
 	}
+	
+	/* 여행 경로 변경 */
+	@PutMapping("/{planid}/routes")
+	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> data){
+		try {
+
+			data.put("planId", planId);
+			planService.updateRoute(data);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	/* 여행 경로 변경 */
+	@DeleteMapping("/{planid}/routes")
+	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId){
+		try {
+			planService.deleteRoute(planId);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
+	
 	
 	
 	private ResponseEntity<String> exceptionHandling(Exception e) {

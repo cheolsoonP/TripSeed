@@ -93,28 +93,33 @@ class PlanServiceImplTest {
 	@DisplayName("여행 경로 추가 테스트")
 	void testAddRoute() {
 		try {			
-			List<Map<String, Object>> list = new ArrayList<>();
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("planId", "1");
+			
+			List<Map<String, Object>> routes = new ArrayList<>();
 			Map<String, Object> map1 = new HashMap<>();
 			map1.put("visit_order", "1");
 			map1.put("attraction_id", "2028440");
-			list.add(map1);
+			routes.add(map1);
 
 			Map<String, Object> map2 = new HashMap<>();
 			map2.put("visit_order", "2");
 			map2.put("attraction_id", "2028440");
-			list.add(map2);
+			routes.add(map2);
 
 			Map<String, Object> map3 = new HashMap<>();
 			map3.put("visit_order", "3");
 			map3.put("attraction_id", "2028440");
-			list.add(map3);
+			routes.add(map3);
 
 			Map<String, Object> map4 = new HashMap<>();
 			map4.put("visit_order", "4");
 			map4.put("attraction_id", "2028440");
-			list.add(map4);
+			routes.add(map4);
 			
-			planService.addRoute("1", list);
+			data.put("routes", routes);
+			
+			planService.addRoute(data);
 		} catch (Exception e) {
 			fail("여행 경로 추가 실패");
 		}	
@@ -129,4 +134,42 @@ class PlanServiceImplTest {
 			fail("여행 경로 조회 실패");
 		}
 	}
+	
+	
+	@Test
+	@DisplayName("여행 경로 수정 테스트")
+	void testUpdateRoute() {
+		try {			
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("planId", "1");
+			
+			List<Map<String, Object>> routes = new ArrayList<>();
+			Map<String, Object> map1 = new HashMap<>();
+			map1.put("visit_order", "1");
+			map1.put("attraction_id", "2028440");
+			routes.add(map1);
+
+			Map<String, Object> map2 = new HashMap<>();
+			map2.put("visit_order", "2");
+			map2.put("attraction_id", "2028440");
+			routes.add(map2);
+
+			Map<String, Object> map3 = new HashMap<>();
+			map3.put("visit_order", "3");
+			map3.put("attraction_id", "2028440");
+			routes.add(map3);
+
+			Map<String, Object> map4 = new HashMap<>();
+			map4.put("visit_order", "4");
+			map4.put("attraction_id", "2028440");
+			routes.add(map4);
+			
+			data.put("routes", routes);
+			
+			planService.updateRoute(data);
+		} catch (Exception e) {
+			fail("여행 경로 수정 실패");
+		}	
+	}
+	
 }

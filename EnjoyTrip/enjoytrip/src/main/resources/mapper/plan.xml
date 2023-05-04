@@ -68,4 +68,9 @@
 		from trip_route
 		where plan_id = #{planId}
 	</select>
+	
+	<delete id="deleteRoute" parameterType="string">
+		delete from trip_route
+		where plan_id = #{planId}
+	</delete>
 </mapper>

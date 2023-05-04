@@ -82,4 +82,13 @@
 		where plan_id = #{planId}
 		and attraction_id = #{attractionId}
 	</update>
+	
+	<!-- 방문 시간 추가/변경/삭제 -->
+	<update id="updateVisitTime" parameterType="hashMap">
+		update trip_route
+		<if test="visitTime == null">set memo = null</if>
+		<if test="visitTime != null">set memo = #{visitTime}</if>
+		where plan_id = #{planId}
+		and attraction_id = #{attractionId}
+	</update>
 </mapper>

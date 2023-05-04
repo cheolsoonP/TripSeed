@@ -32,4 +32,6 @@ public interface PlanMapper {
 
 	void updateMemo(Map<String, Object> data) throws SQLException;
 
+	void updateVisitTime(Map<String, Object> data) throws SQLException;
+
 }

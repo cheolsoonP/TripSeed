@@ -28,4 +28,6 @@ public interface PlanService {
 
 	void updateMemo(Map<String, Object> data) throws Exception;
 
+	void updateVisitTime(Map<String, Object> data) throws Exception;
+
 }

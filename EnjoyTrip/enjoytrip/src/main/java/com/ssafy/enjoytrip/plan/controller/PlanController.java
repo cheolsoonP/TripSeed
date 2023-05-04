@@ -44,8 +44,8 @@ public class PlanController {
 		}
 	}
 	
-	@GetMapping("/{userid}")
-	public ResponseEntity<?> getPlanList(@PathVariable("userid") String userId){
+	@GetMapping("/{userId}")
+	public ResponseEntity<?> getPlanList(@PathVariable("userId") String userId){
 		try {
 			List<PlanDto> planList = planService.getPlanList(userId);
 			if(planList != null)
@@ -57,8 +57,8 @@ public class PlanController {
 		}
 	}
 	
-	@DeleteMapping("/{planid}")
-	public ResponseEntity<?> deletePlan(@PathVariable("planid") String planId){
+	@DeleteMapping("/{planId}")
+	public ResponseEntity<?> deletePlan(@PathVariable("planId") String planId){
 		
 		try {
 			planService.deletePlan(planId);
@@ -88,8 +88,8 @@ public class PlanController {
 		}
 	}
 	
-	@GetMapping("/{planid}")
-	public ResponseEntity<?> getPlan(@PathVariable("planid") String planId){
+	@GetMapping("/{planId}")
+	public ResponseEntity<?> getPlan(@PathVariable("planId") String planId){
 		
 		try {
 			PlanDto planDto = planService.getPlan(planId);			
@@ -104,8 +104,8 @@ public class PlanController {
 	
 	
 	/* 여행 경로 추가/조회/변경/삭제 */
-	@PostMapping("/{planid}/routes")
-	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> data){
+	@PostMapping("/{planId}/routes")
+	public ResponseEntity<?> addRoute(@PathVariable("planId") String planId, @RequestBody Map<String, Object> data){
 		try {
 			data.put("planId", planId);
 			planService.addRoute(data);
@@ -116,8 +116,8 @@ public class PlanController {
 	}
 	
 	/* 여행 경로 조회 */
-	@GetMapping("/{planid}/routes")
-	public ResponseEntity<?> getRoute(@PathVariable("planid") String planId){
+	@GetMapping("/{planId}/routes")
+	public ResponseEntity<?> getRoute(@PathVariable("planId") String planId){
 		try {
 			List<RouteDto> routeList = planService.getRoute(planId);
 			return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);
@@ -127,8 +127,9 @@ public class PlanController {
 	}
 	
 	/* 여행 경로 변경 */
-	@PutMapping("/{planid}/routes")
-	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> data){
+	@PutMapping("/{planId}/routes")
+	public ResponseEntity<?> updateRoute(@PathVariable("planId") String planId, 
+										@RequestBody Map<String, Object> data){
 		try {
 
 			data.put("planId", planId);
@@ -140,8 +141,8 @@ public class PlanController {
 	}
 	
 	/* 여행 경로 변경 */
-	@DeleteMapping("/{planid}/routes")
-	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId){
+	@DeleteMapping("/{planId}/routes")
+	public ResponseEntity<?> updateRoute(@PathVariable("planId") String planId){
 		try {
 			planService.deleteRoute(planId);
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -151,9 +152,9 @@ public class PlanController {
 	}
 	
 	/* 메모 추가/변경/삭제 */
-	@PutMapping("/{planid}/routes/{attractionid}/memo")
-	public ResponseEntity<?> updateMemo(@PathVariable("planid") String planId,
-									@PathVariable("attractionid") String attractionId,
+	@PutMapping("/{planId}/routes/{attractionId}/memo")
+	public ResponseEntity<?> updateMemo(@PathVariable("planId") String planId,
+									@PathVariable("attractionId") String attractionId,
 									@RequestBody Map<String, Object> data){
 		try {
 			data.put("planId", planId);
@@ -165,6 +166,20 @@ public class PlanController {
 		}
 	}
 	
+	/* 방문 시간 추가/변경/삭제 */
+	@PutMapping("/{planId}/routes/{attractionId}/time")
+	public ResponseEntity<?> updateVisitTime(@PathVariable("planId") String planId,
+									@PathVariable("attractionId") String attractionId,
+									@RequestBody Map<String, Object> data){
+		try {
+			data.put("planId", planId);
+			data.put("attractionId", attractionId);
+			planService.updateVisitTime(data);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();

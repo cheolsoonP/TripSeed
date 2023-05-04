@@ -70,6 +70,11 @@ public class PlanServiceImpl implements PlanService {
 		planMapper.updateMemo(data);
 	}
 
+	@Override
+	public void updateVisitTime(Map<String, Object> data) throws Exception {
+		planMapper.updateVisitTime(data);
+	}
+
 
 
 

@@ -26,6 +26,6 @@ public interface PlanService {
 
 	void deleteRoute(String planId) throws Exception;
 
-	void addMemo(Map<String, Object> data) throws Exception;
+	void updateMemo(Map<String, Object> data) throws Exception;
 
 }

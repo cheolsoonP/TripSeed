@@ -150,21 +150,21 @@ public class PlanController {
 		}
 	}
 	
-	/* 메모 추가 */
-	@PostMapping("/{planid}/routes/{attractionid}/memo")
-	public ResponseEntity<?> addMemo(@PathVariable("planid") String planId,
+	/* 메모 추가/변경/삭제 */
+	@PutMapping("/{planid}/routes/{attractionid}/memo")
+	public ResponseEntity<?> updateMemo(@PathVariable("planid") String planId,
 									@PathVariable("attractionid") String attractionId,
 									@RequestBody Map<String, Object> data){
 		try {
-			// data.put("memo")
 			data.put("planId", planId);
 			data.put("attractionId", attractionId);
-			planService.addMemo(data);
+			planService.updateMemo(data);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
+	
 
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();

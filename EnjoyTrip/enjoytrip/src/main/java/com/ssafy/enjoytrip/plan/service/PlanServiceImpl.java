@@ -66,8 +66,8 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public void addMemo(Map<String, Object> data) throws Exception {
-		planMapper.addMemo(data);
+	public void updateMemo(Map<String, Object> data) throws Exception {
+		planMapper.updateMemo(data);
 	}
 
 

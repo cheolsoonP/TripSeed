@@ -175,17 +175,30 @@ class PlanServiceImplTest {
 	
 	@Test
 	@DisplayName("메모 추가 테스트")
-	void testAddMemo() {
+	void testUpdateMemo() {
 		try {			
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("memo", "이곳은 메밀전병이 맛있습니다.");
-			data.put("planId", "1");
+			data.put("planId", "2");
 			data.put("attractionId", "126479");
 			
-			planService.addMemo(data);
+			planService.updateMemo(data);
 		} catch (Exception e) {
-			fail("메모 추가 실패");
-		}	
-		
+			fail("메모 변경 실패");
+		}
+	}
+	
+	@Test
+	@DisplayName("메모 삭제 테스트")
+	void testDeleteMemo() {
+		try {			
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("planId", "2");
+			data.put("attractionId", "126479");
+			
+			planService.updateMemo(data);
+		} catch (Exception e) {
+			fail("메모 삭제 실패");
+		}
 	}
 }

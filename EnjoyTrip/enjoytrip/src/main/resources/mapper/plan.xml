@@ -74,10 +74,11 @@
 		where plan_id = #{planId}
 	</delete>
 	
-	<!-- 메모 추가/삭제 -->
-	<update id="addMemo" parameterType="hashMap">
-		update trip_route 
-		set memo = #{memo}
+	<!-- 메모 추가/변경/삭제 -->
+	<update id="updateMemo" parameterType="hashMap">
+		update trip_route
+		<if test="memo == null">set memo = null</if>
+		<if test="memo != null">set memo = #{memo}</if>
 		where plan_id = #{planId}
 		and attraction_id = #{attractionId}
 	</update>

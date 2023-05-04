@@ -171,5 +171,4 @@ class PlanServiceImplTest {
 			fail("여행 경로 수정 실패");
 		}	
 	}
-	
 }

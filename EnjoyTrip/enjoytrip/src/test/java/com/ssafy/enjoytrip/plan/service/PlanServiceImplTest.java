@@ -171,4 +171,21 @@ class PlanServiceImplTest {
 			fail("여행 경로 수정 실패");
 		}	
 	}
+	
+	
+	@Test
+	@DisplayName("메모 추가 테스트")
+	void testAddMemo() {
+		try {			
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("memo", "이곳은 메밀전병이 맛있습니다.");
+			data.put("planId", "1");
+			data.put("attractionId", "126479");
+			
+			planService.addMemo(data);
+		} catch (Exception e) {
+			fail("메모 추가 실패");
+		}	
+		
+	}
 }

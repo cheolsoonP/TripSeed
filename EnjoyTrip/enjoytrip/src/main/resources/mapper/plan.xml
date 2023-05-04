@@ -14,7 +14,7 @@
 	<resultMap type="routeDto" id="route">
 		<result column="plan_id" property="planId"/>
 		<result column="attraction_id" property="attractionId"/>
-		<result column="order" property="order"/>
+		<result column="visit_order" property="visitOrder"/>
 		<result column="memo" property="memo"/>
 		<result column="visit_time" property="visitTime"/>		
 	</resultMap>
@@ -56,15 +56,15 @@
 	
 	<!-- 여행 경로 추가/조회/삭제/변경 -->
 	<insert id="addRoute" parameterType="hashMap" >
-		insert into trip_route (plan_id, attraction_id, `order`) 
+		insert into trip_route (plan_id, attraction_id, visit_order) 
 		values
 		<foreach collection="routes" item="route" separator=",">
-			(#{planId}, #{route.attraction_id}, #{route.order})
+			(#{planId}, #{route.attraction_id}, #{route.visit_order})
 		</foreach>
 	</insert>
 	
 	<select id="getRoute" parameterType="string" resultMap="route">
-		select plan_id, attraction_id, order, memo, visit_time
+		select plan_id, attraction_id, visit_order, memo, visit_time
 		from trip_route
 		where plan_id = #{planId}
 	</select>

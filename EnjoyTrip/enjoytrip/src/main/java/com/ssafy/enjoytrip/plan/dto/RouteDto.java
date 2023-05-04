@@ -3,7 +3,7 @@ package com.ssafy.enjoytrip.plan.dto;
 public class RouteDto {
 	private int planId;
 	private int attractionId;
-	private int order;
+	private int visitOrder;
 	private String memo;
 	private String visitTime;
 	public int getPlanId() {
@@ -19,10 +19,10 @@ public class RouteDto {
 		this.attractionId = attractionId;
 	}
 	public int getOrder() {
-		return order;
+		return visitOrder;
 	}
-	public void setOrder(int order) {
-		this.order = order;
+	public void setOrder(int visitOrder) {
+		this.visitOrder = visitOrder;
 	}
 	public String getMemo() {
 		return memo;
@@ -38,7 +38,7 @@ public class RouteDto {
 	}
 	@Override
 	public String toString() {
-		return "RouteDto [planId=" + planId + ", attractionId=" + attractionId + ", order=" + order + ", memo=" + memo
+		return "RouteDto [planId=" + planId + ", attractionId=" + attractionId + ", visitOrder=" + visitOrder + ", memo=" + memo
 				+ ", visitTime=" + visitTime + "]";
 	}
 	

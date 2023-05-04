@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
+import com.ssafy.enjoytrip.plan.dto.RouteDto;
 import com.ssafy.enjoytrip.plan.service.PlanService;
 
 @RestController
@@ -105,16 +106,24 @@ public class PlanController {
 	@PostMapping("/{planid}/routes")
 	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> param){
 		try {
-			System.out.println(param);
 			List<Map<String, Object>> routes = (List<Map<String, Object>>) param.get("routes");
-			System.out.println(routes);
 			planService.addRoute(planId, routes);
-				return new ResponseEntity<PlanDto>(HttpStatus.OK);
+				return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
 	
+	/* 여행 경로 조회 */
+	@GetMapping("/{planid}/routes")
+	public ResponseEntity<?> getRoute(@PathVariable("planid") String planId){
+		try {
+			List<RouteDto> routeList = planService.getRoute(planId);
+				return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 	
 	
 	private ResponseEntity<String> exceptionHandling(Exception e) {

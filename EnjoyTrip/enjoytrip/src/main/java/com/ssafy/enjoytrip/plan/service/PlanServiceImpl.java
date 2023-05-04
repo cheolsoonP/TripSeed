@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
+import com.ssafy.enjoytrip.plan.dto.RouteDto;
 import com.ssafy.enjoytrip.plan.mapper.PlanMapper;
 
 @Service
@@ -46,6 +47,11 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public void addRoute(String planId, List<Map<String, Object>> routes) throws Exception {
 		planMapper.addRoute(planId, routes);
+	}
+
+	@Override
+	public List<RouteDto> getRoute(String planId) throws Exception {
+		return planMapper.getRoute(planId);
 	}
 
 }

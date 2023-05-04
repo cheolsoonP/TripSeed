@@ -11,6 +11,14 @@
 		<result column="complete" property="complete" />
 	</resultMap>
 	
+	<resultMap type="routeDto" id="route">
+		<result column="plan_id" property="planId"/>
+		<result column="attraction_id" property="attractionId"/>
+		<result column="order" property="order"/>
+		<result column="memo" property="memo"/>
+		<result column="visit_time" property="visitTime"/>		
+	</resultMap>
+	
 	<!-- 여행 계획 추가/조회/변경/삭제  -->
 	<insert id="addPlan" parameterType="planDto">
 		insert into trip_plan 
@@ -54,4 +62,10 @@
 			(#{planId}, #{route.attraction_id}, #{route.order})
 		</foreach>
 	</insert>
+	
+	<select id="getRoute" parameterType="string" resultMap="route">
+		select plan_id, attraction_id, order, memo, visit_time
+		from trip_route
+		where plan_id = #{planId}
+	</select>
 </mapper>

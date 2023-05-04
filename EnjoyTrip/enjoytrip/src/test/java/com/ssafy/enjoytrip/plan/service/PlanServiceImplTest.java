@@ -90,6 +90,7 @@ class PlanServiceImplTest {
 		try {			
 			List<Map<String, Object>> list = new ArrayList<>();
 			Map<String, Object> map1 = new HashMap<>();
+//			map1.put("")
 			map1.put("order", "1");
 			map1.put("attraction_id", "2028440");
 			list.add(map1);

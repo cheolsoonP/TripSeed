@@ -25,8 +25,8 @@ public class AttractionServiceImpl implements AttractionService {
 	}
 
 	@Override
-	public List<GugunDto> getGugunList() throws Exception {
-		return attractionMapper.getGugunList();
+	public List<GugunDto> getGugunList(String sidoCode) throws Exception {
+		return attractionMapper.getGugunList(sidoCode);
 	}
 
 	@Override

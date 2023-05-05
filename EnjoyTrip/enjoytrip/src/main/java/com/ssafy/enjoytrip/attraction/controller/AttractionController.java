@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,10 +59,10 @@ public class AttractionController {
 		}
 	}
 	
-	@GetMapping("/gugun")
-	public ResponseEntity<?> getGugunList(){
+	@GetMapping("/sido/{sidoCode}/gugun")
+	public ResponseEntity<?> getGugunList(@PathVariable("sidoCode") String sidoCode){
 		try {
-			List<GugunDto> gugunList = attractionService.getGugunList();
+			List<GugunDto> gugunList = attractionService.getGugunList(sidoCode);
 			return new ResponseEntity<List<GugunDto>>(gugunList, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

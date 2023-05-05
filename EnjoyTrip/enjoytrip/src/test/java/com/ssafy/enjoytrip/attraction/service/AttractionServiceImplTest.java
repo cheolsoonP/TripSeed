@@ -36,7 +36,7 @@ class AttractionServiceImplTest {
 	@DisplayName("구군 리스트 불러오기 테스트")
 	void testGetGugunList() {
 		try {
-			attractionService.getGugunList();
+			attractionService.getGugunList("1");
 		} catch (Exception e) {
 			fail("구군 리스트 불러오기 실패");
 		}	

@@ -14,7 +14,7 @@ import com.ssafy.enjoytrip.attraction.dto.SidoDto;
 public interface AttractionMapper {
 
 	List<SidoDto> getSidoList() throws SQLException;
-	List<GugunDto> getGugunList() throws SQLException;
+	List<GugunDto> getGugunList(String sidoCode) throws SQLException;
 	List<AttractionDto> getAttractionList(Map<String, Object> map) throws SQLException;
 	List<AttractionDto> getHotplaceList(Map<String, Object> map) throws SQLException;
 }

@@ -12,7 +12,7 @@ public interface AttractionService {
 
 	List<SidoDto> getSidoList() throws Exception;
 
-	List<GugunDto> getGugunList() throws Exception;
+	List<GugunDto> getGugunList(String sidoCode) throws Exception;
 
 	List<AttractionDto> getAttractionList(Map<String, Object> map) throws Exception;
 

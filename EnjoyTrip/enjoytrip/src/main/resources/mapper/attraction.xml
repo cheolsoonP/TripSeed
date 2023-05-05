@@ -37,9 +37,10 @@
 		from sido
 	</select>
 	
-	<select id="getGugunList" resultMap="gugun">
+	<select id="getGugunList" parameterType="string" resultMap="gugun">
 		select gugun_code, gugun_name, sido_code
 		from gugun
+		<if test="sidoCode">where sido_code = #{sidoCode}</if>
 	</select>
 	
 	<select id="getAttractionList" parameterType="hashMap" resultMap="attraction">

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
+import com.ssafy.enjoytrip.plan.dto.RouteDto;
 import com.ssafy.enjoytrip.plan.service.PlanService;
 
 @RestController
@@ -103,17 +104,52 @@ public class PlanController {
 	
 	/* 여행 경로 추가/조회/변경/삭제 */
 	@PostMapping("/{planid}/routes")
-	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> param){
+	public ResponseEntity<?> addRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> data){
 		try {
-			System.out.println(param);
-			List<Map<String, Object>> routes = (List<Map<String, Object>>) param.get("routes");
-			System.out.println(routes);
-			planService.addRoute(planId, routes);
-				return new ResponseEntity<PlanDto>(HttpStatus.OK);
+			data.put("planId", planId);
+			planService.addRoute(data);
+				return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
 	}
+	
+	/* 여행 경로 조회 */
+	@GetMapping("/{planid}/routes")
+	public ResponseEntity<?> getRoute(@PathVariable("planid") String planId){
+		try {
+			List<RouteDto> routeList = planService.getRoute(planId);
+				return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	/* 여행 경로 변경 */
+	@PutMapping("/{planid}/routes")
+	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId, @RequestBody Map<String, Object> data){
+		try {
+
+			data.put("planId", planId);
+			planService.updateRoute(data);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	/* 여행 경로 변경 */
+	@DeleteMapping("/{planid}/routes")
+	public ResponseEntity<?> updateRoute(@PathVariable("planid") String planId){
+		try {
+			planService.deleteRoute(planId);
+				return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
 	
 	
 	

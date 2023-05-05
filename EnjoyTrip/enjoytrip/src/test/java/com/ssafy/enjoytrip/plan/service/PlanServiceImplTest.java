@@ -98,23 +98,23 @@ class PlanServiceImplTest {
 			
 			List<Map<String, Object>> routes = new ArrayList<>();
 			Map<String, Object> map1 = new HashMap<>();
-			map1.put("visit_order", "1");
-			map1.put("attraction_id", "2028440");
+			map1.put("visitOrder", "1");
+			map1.put("attractionId", "2028440");
 			routes.add(map1);
 
 			Map<String, Object> map2 = new HashMap<>();
-			map2.put("visit_order", "2");
-			map2.put("attraction_id", "2028440");
+			map2.put("visitOrder", "2");
+			map2.put("attractionId", "2028440");
 			routes.add(map2);
 
 			Map<String, Object> map3 = new HashMap<>();
-			map3.put("visit_order", "3");
-			map3.put("attraction_id", "2028440");
+			map3.put("visitOrder", "3");
+			map3.put("attractionId", "2028440");
 			routes.add(map3);
 
 			Map<String, Object> map4 = new HashMap<>();
-			map4.put("visit_order", "4");
-			map4.put("attraction_id", "2028440");
+			map4.put("visitOrder", "4");
+			map4.put("attractionId", "2028440");
 			routes.add(map4);
 			
 			data.put("routes", routes);
@@ -135,7 +135,6 @@ class PlanServiceImplTest {
 		}
 	}
 	
-	
 	@Test
 	@DisplayName("여행 경로 수정 테스트")
 	void testUpdateRoute() {
@@ -145,23 +144,23 @@ class PlanServiceImplTest {
 			
 			List<Map<String, Object>> routes = new ArrayList<>();
 			Map<String, Object> map1 = new HashMap<>();
-			map1.put("visit_order", "1");
-			map1.put("attraction_id", "2028440");
+			map1.put("visitOrder", "1");
+			map1.put("attractionId", "2028440");
 			routes.add(map1);
 
 			Map<String, Object> map2 = new HashMap<>();
-			map2.put("visit_order", "2");
-			map2.put("attraction_id", "2028440");
+			map2.put("visitOrder", "2");
+			map2.put("attractionId", "2028440");
 			routes.add(map2);
 
 			Map<String, Object> map3 = new HashMap<>();
-			map3.put("visit_order", "3");
-			map3.put("attraction_id", "2028440");
+			map3.put("visitOrder", "3");
+			map3.put("attractionId", "2028440");
 			routes.add(map3);
 
 			Map<String, Object> map4 = new HashMap<>();
-			map4.put("visit_order", "4");
-			map4.put("attraction_id", "2028440");
+			map4.put("visitOrder", "4");
+			map4.put("attractionId", "2028440");
 			routes.add(map4);
 			
 			data.put("routes", routes);
@@ -171,7 +170,6 @@ class PlanServiceImplTest {
 			fail("여행 경로 수정 실패");
 		}	
 	}
-	
 	
 	@Test
 	@DisplayName("메모 추가 테스트")
@@ -199,6 +197,35 @@ class PlanServiceImplTest {
 			planService.updateMemo(data);
 		} catch (Exception e) {
 			fail("메모 삭제 실패");
+		}
+	}
+	
+	@Test
+	@DisplayName("방문 시간 추가 테스트")
+	void testUpdateVisitTime() {
+		try {			
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("visitTime", "17:00");
+			data.put("planId", "2");
+			data.put("attractionId", "126479");
+			
+			planService.updateVisitTime(data);
+		} catch (Exception e) {
+			fail("방문 시간 변경 실패");
+		}
+	}
+	
+	@Test
+	@DisplayName("방문 시간 삭제 테스트")
+	void testDeleteVisitTime() {
+		try {			
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("planId", "2");
+			data.put("attractionId", "126479");
+			
+			planService.updateVisitTime(data);
+		} catch (Exception e) {
+			fail("방문 시간 삭제 실패");
 		}
 	}
 }

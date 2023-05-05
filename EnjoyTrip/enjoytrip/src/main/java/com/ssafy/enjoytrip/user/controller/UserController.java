@@ -1,7 +1,5 @@
 package com.ssafy.enjoytrip.user.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -117,8 +115,8 @@ public class UserController {
 		}
 	}
 	
-	@DeleteMapping("/{userid}")
-	public ResponseEntity<?> deleteUser(@PathVariable("userid") String userId) {
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<?> deleteUser(@PathVariable("userId") String userId) {
 	    try {
 	        UserDto user = userService.getUserInfo(userId);
 	        if (user != null) {

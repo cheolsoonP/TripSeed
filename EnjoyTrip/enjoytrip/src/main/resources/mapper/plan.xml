@@ -59,7 +59,7 @@
 		insert into trip_route (plan_id, attraction_id, visit_order) 
 		values
 		<foreach collection="routes" item="route" separator=",">
-			(#{planId}, #{route.attraction_id}, #{route.visit_order})
+			(#{planId}, #{route.attractionId}, #{route.visitOrder})
 		</foreach>
 	</insert>
 	
@@ -73,4 +73,22 @@
 		delete from trip_route
 		where plan_id = #{planId}
 	</delete>
+	
+	<!-- 메모 추가/변경/삭제 -->
+	<update id="updateMemo" parameterType="hashMap">
+		update trip_route
+		<if test="memo == null">set memo = null</if>
+		<if test="memo != null">set memo = #{memo}</if>
+		where plan_id = #{planId}
+		and attraction_id = #{attractionId}
+	</update>
+	
+	<!-- 방문 시간 추가/변경/삭제 -->
+	<update id="updateVisitTime" parameterType="hashMap">
+		update trip_route
+		<if test="visitTime == null">set visit_time = null</if>
+		<if test="visitTime != null">set visit_time = #{visitTime}</if>
+		where plan_id = #{planId}
+		and attraction_id = #{attractionId}
+	</update>
 </mapper>

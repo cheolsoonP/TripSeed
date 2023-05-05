@@ -65,6 +65,16 @@ public class PlanServiceImpl implements PlanService {
 		planMapper.deleteRoute(planId);
 	}
 
+	@Override
+	public void updateMemo(Map<String, Object> data) throws Exception {
+		planMapper.updateMemo(data);
+	}
+
+	@Override
+	public void updateVisitTime(Map<String, Object> data) throws Exception {
+		planMapper.updateVisitTime(data);
+	}
+
 
 
 

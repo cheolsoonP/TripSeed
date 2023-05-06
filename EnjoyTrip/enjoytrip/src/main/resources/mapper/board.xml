@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.enjoytrip.board.mapper.BoardMapper">
+	
+	<insert id="writePost" parameterType="boardDto">
+		insert into tour_info_board
+			(title, writer_id, content, sido_code, gugun_code)
+			values (#{title}, #{writerId}, #{content}, #{sidoCode}, #{gugunCode})
+	</insert>
+
+</mapper>

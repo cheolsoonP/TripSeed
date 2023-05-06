@@ -1,5 +1,8 @@
 package com.ssafy.enjoytrip.board.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.ssafy.enjoytrip.board.dto.BoardDto;
@@ -19,6 +22,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void writePost(BoardDto boardDto) throws Exception {
 		boardMapper.writePost(boardDto);
+	}
+
+
+	@Override
+	public List<BoardDto> getPostList(Map<String, Object> map) throws Exception {
+		return boardMapper.getPostList(map);
 	}
 	
 

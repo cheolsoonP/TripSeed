@@ -2,10 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssafy.enjoytrip.board.mapper.BoardMapper">
 	
+	<resultMap type="boardDto" id="post">
+		<result column="content_id" property="contentId" />
+		<result column="title" property="title" />
+		<result column="writer_id" property="writerId" />
+		<result column="content" property="content" />
+		<result column="like" property="like" />
+		<result column="view" property="view" />
+		<result column="write_date" property="writeDate" />
+		<result column="update_date" property="updateDate" />
+		<result column="sido_code" property="sidoCode" />
+		<result column="gugun_code" property="gugunCode" />
+	</resultMap>
+	
 	<insert id="writePost" parameterType="boardDto">
 		insert into tour_info_board
 			(title, writer_id, content, sido_code, gugun_code)
 			values (#{title}, #{writerId}, #{content}, #{sidoCode}, #{gugunCode})
 	</insert>
+	
+	<select id="getPostList" parameterType="string" resultMap="post">
+		select content_id, title, writer_id, `like`, `view`, write_date
+		from tour_info_board
+		<trim prefix="where" suffixOverrides="and">
+			<if test="sidoCode != null">sido_code=#{sidoCode} and</if>
+			<if test="gugunCode != null">gugun_code=#{gugunCode} and</if>
+			<if test="keyword != null">title like concat('%', #{keyword}, '%')</if>
+		</trim>
+		order by content_id DESC
+	</select>
+	
 
 </mapper>

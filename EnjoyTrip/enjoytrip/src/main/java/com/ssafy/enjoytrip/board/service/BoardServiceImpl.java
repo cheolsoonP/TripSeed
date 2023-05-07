@@ -41,6 +41,12 @@ public class BoardServiceImpl implements BoardService {
 	public void updatePost(BoardDto boardDto) throws Exception {
 		boardMapper.updatePost(boardDto);
 	}
+
+
+	@Override
+	public void deletePost(String postId) throws Exception {
+		boardMapper.deletePost(postId);
+	}
 	
 
 }

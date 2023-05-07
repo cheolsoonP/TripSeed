@@ -47,5 +47,10 @@
 			update_date = CURRENT_TIMESTAMP
 		where content_id = #{contentId}
 	</update>
+	
+	<delete id="deletePost">
+		delete from tour_info_board
+		where content_id = #{postId}
+	</delete>
 
 </mapper>

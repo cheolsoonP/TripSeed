@@ -13,4 +13,6 @@ public interface BoardService {
 
 	BoardDto getPost(String postId) throws Exception;
 
+	void updatePost(BoardDto boardDto) throws Exception;
+
 }

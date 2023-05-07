@@ -35,6 +35,12 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDto getPost(String postId) throws Exception {
 		return boardMapper.getPost(postId);
 	}
+
+
+	@Override
+	public void updatePost(BoardDto boardDto) throws Exception {
+		boardMapper.updatePost(boardDto);
+	}
 	
 
 }

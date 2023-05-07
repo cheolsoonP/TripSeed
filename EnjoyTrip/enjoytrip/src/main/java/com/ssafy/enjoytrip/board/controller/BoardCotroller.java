@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +34,7 @@ public class BoardCotroller {
 	@PostMapping("/write")
 	public ResponseEntity<?> writePost(BoardDto boardDto) {
 		try {
-			if (boardDto.getTitle() == null) {
+			if (boardDto.getTitle() == null || boardDto.getContent() == null) {
 				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
 			}
 			boardService.writePost(boardDto);
@@ -70,6 +72,21 @@ public class BoardCotroller {
 			else {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@PutMapping("/edit/{postId}")
+	public ResponseEntity<?> updatePost(@PathVariable("postId") String postId,
+										@RequestBody BoardDto boardDto) {
+		try {
+			if (boardDto.getTitle() == null || boardDto.getContent() == null) {
+				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
+			}
+			boardDto.setContentId(Integer.parseInt(postId));
+			boardService.updatePost(boardDto);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}

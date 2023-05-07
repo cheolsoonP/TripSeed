@@ -38,5 +38,14 @@
 		where content_id = #{postId}
 	</select>
 	
+	<update id="updatePost" parameterType="boardDto">
+		update tour_info_board
+		set title = #{title},
+			content = #{content},
+			<if test="sidoCode != null">sido_code=#{sidoCode},</if>
+			<if test="gugunCode != null">gugun_code=#{gugunCode},</if>			
+			update_date = CURRENT_TIMESTAMP
+		where content_id = #{contentId}
+	</update>
 
 </mapper>

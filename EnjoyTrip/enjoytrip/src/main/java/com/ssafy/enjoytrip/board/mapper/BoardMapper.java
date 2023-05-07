@@ -17,4 +17,6 @@ public interface BoardMapper {
 
 	BoardDto getPost(String postId) throws SQLException;
 
+	void updatePost(BoardDto boardDto) throws SQLException;
+
 }

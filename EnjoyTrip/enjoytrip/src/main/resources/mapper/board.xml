@@ -7,8 +7,8 @@
 		<result column="title" property="title" />
 		<result column="writer_id" property="writerId" />
 		<result column="content" property="content" />
-		<result column="like" property="like" />
-		<result column="view" property="view" />
+		<result column="like_count" property="likeCount" />
+		<result column="view_count" property="viewCount" />
 		<result column="write_date" property="writeDate" />
 		<result column="update_date" property="updateDate" />
 		<result column="sido_code" property="sidoCode" />
@@ -22,7 +22,7 @@
 	</insert>
 	
 	<select id="getPostList" parameterType="string" resultMap="post">
-		select content_id, title, writer_id, `like`, `view`, write_date
+		select content_id, title, writer_id, like_count, view_count, write_date
 		from tour_info_board
 		<trim prefix="where" suffixOverrides="and">
 			<if test="sidoCode != null">sido_code=#{sidoCode} and</if>

@@ -5,8 +5,8 @@ public class BoardDto {
 	private String title;
 	private String writerId;
 	private String content;
-	private int like;
-	private int view;
+	private int likeCount;
+	private int viewCount;
 	private String writeDate;
 	private String updateDate;
 	private int sidoCode;
@@ -36,17 +36,17 @@ public class BoardDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getLike() {
-		return like;
+	public int getLikeCount() {
+		return likeCount;
 	}
-	public void setLike(int like) {
-		this.like = like;
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
-	public int getView() {
-		return view;
+	public int getViewCount() {
+		return viewCount;
 	}
-	public void setView(int view) {
-		this.view = view;
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
 	public String getWriteDate() {
 		return writeDate;
@@ -76,7 +76,7 @@ public class BoardDto {
 	@Override
 	public String toString() {
 		return "BoardDto [contentId=" + contentId + ", title=" + title + ", writerId=" + writerId + ", content="
-				+ content + ", like=" + like + ", view=" + view + ", writeDate=" + writeDate + ", updateDate="
-				+ updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + "]";
+				+ content + ", likeCount=" + likeCount + ", viewCount=" + viewCount + ", writeDate=" + writeDate
+				+ ", updateDate=" + updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + "]";
 	}
 }

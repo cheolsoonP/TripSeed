@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,7 @@ public class BoardCotroller {
 	@PostMapping("/write")
 	public ResponseEntity<?> writePost(BoardDto boardDto) {
 		try {
-			if (boardDto.getTitle() == null) { //
+			if (boardDto.getTitle() == null) {
 				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
 			}
 			boardService.writePost(boardDto);
@@ -54,6 +55,21 @@ public class BoardCotroller {
 			List<BoardDto> postList;
 			postList = boardService.getPostList(map);
 			return new ResponseEntity<List<BoardDto>>(postList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@GetMapping("/view/{postId}")
+	public ResponseEntity<?> getPost(@PathVariable("postId") String postId) {
+		try {
+			BoardDto boardDto = boardService.getPost(postId);
+			if(boardDto != null) {
+				return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}

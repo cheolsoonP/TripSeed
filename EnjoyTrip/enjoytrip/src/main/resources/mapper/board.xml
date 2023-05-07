@@ -32,5 +32,11 @@
 		order by content_id DESC
 	</select>
 	
+	<select id="getPost" parameterType="string" resultMap="post">
+		select *
+		from tour_info_board
+		where content_id = #{postId}
+	</select>
+	
 
 </mapper>

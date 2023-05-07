@@ -29,6 +29,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> getPostList(Map<String, Object> map) throws Exception {
 		return boardMapper.getPostList(map);
 	}
+
+
+	@Override
+	public BoardDto getPost(String postId) throws Exception {
+		return boardMapper.getPost(postId);
+	}
 	
 
 }

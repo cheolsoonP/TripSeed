@@ -11,4 +11,6 @@ public interface BoardService {
 
 	List<BoardDto> getPostList(Map<String, Object> map) throws Exception;
 
+	BoardDto getPost(String postId) throws Exception;
+
 }

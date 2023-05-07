@@ -15,4 +15,6 @@ public interface BoardMapper {
 
 	List<BoardDto> getPostList(Map<String, Object> map) throws SQLException;
 
+	BoardDto getPost(String postId) throws SQLException;
+
 }

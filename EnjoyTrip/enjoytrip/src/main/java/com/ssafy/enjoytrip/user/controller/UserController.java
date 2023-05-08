@@ -44,10 +44,13 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody UserDto userDto) {
 		try {
-			UserDto user = userService.loginUser(userDto);
 			
-			if(user != null) {
-				return new ResponseEntity<Void>(HttpStatus.OK);
+//			UserDto user = userService.loginUser(userDto);
+			String token = userService.login(userDto.getId(), userDto.getPw());
+			
+			if(token != null) {
+			    return ResponseEntity.ok(token);
+//				return new ResponseEntity<Void>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>("일치하는 정보가 없습니다.\n 아이디 또는 비밀번호 확인 후 다시 로그인하세요!", HttpStatus.NO_CONTENT);
 			}

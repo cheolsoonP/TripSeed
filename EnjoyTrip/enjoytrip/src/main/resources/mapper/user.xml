@@ -31,7 +31,7 @@
 	</delete>
 	
 	<select id="getUserInfo" parameterType="string" resultType="userDto">
-		select id, name, nickname, email 
+		select id, name, nickname, email, pw
 		from user
 		where id = #{userId}
 	</select>

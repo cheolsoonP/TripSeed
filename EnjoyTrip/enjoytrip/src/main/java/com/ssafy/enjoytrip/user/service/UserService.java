@@ -13,5 +13,6 @@ public interface UserService {
 	void updatePw(UserDto userDto) throws Exception;
 	void updateNickname(UserDto userDto) throws Exception;
 	void deleteUser(String userId) throws Exception;
+	String login(String id, String password) throws Exception;
 
 }

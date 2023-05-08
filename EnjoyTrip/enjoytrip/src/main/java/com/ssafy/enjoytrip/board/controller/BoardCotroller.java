@@ -85,7 +85,7 @@ public class BoardCotroller {
 			if (boardDto.getTitle() == null || boardDto.getContent() == null) {
 				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
 			}
-			boardDto.setContentId(Integer.parseInt(postId));
+			boardDto.setPostId(Integer.parseInt(postId));
 			boardService.updatePost(boardDto);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {

@@ -3,7 +3,7 @@
 <mapper namespace="com.ssafy.enjoytrip.board.mapper.BoardMapper">
 	
 	<resultMap type="boardDto" id="post">
-		<result column="content_id" property="contentId" />
+		<result column="post_id" property="postId" />
 		<result column="title" property="title" />
 		<result column="writer_id" property="writerId" />
 		<result column="content" property="content" />
@@ -22,20 +22,20 @@
 	</insert>
 	
 	<select id="getPostList" parameterType="string" resultMap="post">
-		select content_id, title, writer_id, like_count, view_count, write_date
+		select post_id, title, writer_id, like_count, view_count, write_date
 		from tour_info_board
 		<trim prefix="where" suffixOverrides="and">
 			<if test="sidoCode != null">sido_code=#{sidoCode} and</if>
 			<if test="gugunCode != null">gugun_code=#{gugunCode} and</if>
 			<if test="keyword != null">title like concat('%', #{keyword}, '%')</if>
 		</trim>
-		order by content_id DESC
+		order by post_id DESC
 	</select>
 	
 	<select id="getPost" parameterType="string" resultMap="post">
 		select *
 		from tour_info_board
-		where content_id = #{postId}
+		where post_id = #{postId}
 	</select>
 	
 	<update id="updatePost" parameterType="boardDto">
@@ -45,12 +45,12 @@
 			<if test="sidoCode != null">sido_code=#{sidoCode},</if>
 			<if test="gugunCode != null">gugun_code=#{gugunCode},</if>			
 			update_date = CURRENT_TIMESTAMP
-		where content_id = #{contentId}
+		where post_id = #{postId}
 	</update>
 	
 	<delete id="deletePost">
 		delete from tour_info_board
-		where content_id = #{postId}
+		where post_id = #{postId}
 	</delete>
 
 </mapper>

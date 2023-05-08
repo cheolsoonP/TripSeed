@@ -1,7 +1,7 @@
 package com.ssafy.enjoytrip.board.dto;
 
 public class BoardDto {
-	private int contentId;
+	private int postId;
 	private String title;
 	private String writerId;
 	private String content;
@@ -12,11 +12,11 @@ public class BoardDto {
 	private int sidoCode;
 	private int gugunCode;
 	
-	public int getContentId() {
-		return contentId;
+	public int getPostId() {
+		return postId;
 	}
-	public void setContentId(int contentId) {
-		this.contentId = contentId;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
 	public String getTitle() {
 		return title;
@@ -75,8 +75,8 @@ public class BoardDto {
 	
 	@Override
 	public String toString() {
-		return "BoardDto [contentId=" + contentId + ", title=" + title + ", writerId=" + writerId + ", content="
-				+ content + ", likeCount=" + likeCount + ", viewCount=" + viewCount + ", writeDate=" + writeDate
-				+ ", updateDate=" + updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + "]";
+		return "BoardDto [postId=" + postId + ", title=" + title + ", writerId=" + writerId + ", content=" + content
+				+ ", likeCount=" + likeCount + ", viewCount=" + viewCount + ", writeDate=" + writeDate + ", updateDate="
+				+ updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + "]";
 	}
 }

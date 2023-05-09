@@ -8,11 +8,11 @@
 		<version>2.7.11</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>authentication</artifactId>
+	<groupId>com.ssafy</groupId>
+	<artifactId>authentication-home</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>authentication</name>
-	<description>authentication project for Spring Boot</description>
+	<name>authentication-home</name>
+	<description>enjoytrip project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -58,25 +58,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- AOP setting -->
-    	<dependency>
-			<groupId>org.springframework.boot</groupId>
-     		<artifactId>spring-boot-starter-aop</artifactId>
-    	</dependency>
-		
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-
-		
 		<!-- JSP setting  -->
     	<dependency>
         	<groupId>javax.servlet</groupId>
@@ -88,7 +69,7 @@
         	<artifactId>tomcat-embed-jasper</artifactId>
       	</dependency>
       	
-      	<!-- hikari connection pool setting -->
+     	<!-- hikari connection pool setting -->
       	<dependency>
 		   	<groupId>com.zaxxer</groupId>
 		   	<artifactId>HikariCP</artifactId>
@@ -108,7 +89,8 @@
 		    <artifactId>jjwt</artifactId>
 		    <version>0.9.1</version>
 		</dependency>
-				
+
+		
 	</dependencies>
 
 	<build>

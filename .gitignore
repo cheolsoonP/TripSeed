@@ -27,6 +27,6 @@ replay_pid*
 /.metadata/
 
 
-.properties
+*.properties
 .idea
 .project 

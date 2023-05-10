@@ -1,5 +1,7 @@
 # Compiled class file
 *.class
+.classpath
+.settings/
 
 # Log file
 *.log
@@ -23,3 +25,8 @@
 hs_err_pid*
 replay_pid*
 /.metadata/
+
+
+.properties
+.idea
+.project 

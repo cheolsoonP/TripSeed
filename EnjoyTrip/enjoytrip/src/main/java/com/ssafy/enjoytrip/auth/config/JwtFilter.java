@@ -1,4 +1,4 @@
-package com.ssafy.auth.config;
+package com.ssafy.enjoytrip.auth.config;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,8 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.ssafy.auth.service.UserService;
-import com.ssafy.auth.util.JwtUtil;
+import com.ssafy.enjoytrip.auth.service.UserService;
+import com.ssafy.enjoytrip.auth.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

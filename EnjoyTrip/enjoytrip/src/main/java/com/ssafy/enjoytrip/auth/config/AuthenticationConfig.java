@@ -1,4 +1,4 @@
-package com.ssafy.auth.config;
+package com.ssafy.enjoytrip.auth.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.ssafy.auth.service.UserService;
+import com.ssafy.enjoytrip.auth.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 

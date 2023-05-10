@@ -1,4 +1,4 @@
-package com.ssafy.auth.controller;
+package com.ssafy.enjoytrip.auth.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.auth.domain.dto.UserDto;
-import com.ssafy.auth.service.UserService;
+import com.ssafy.enjoytrip.auth.dto.UserDto;
+import com.ssafy.enjoytrip.auth.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 

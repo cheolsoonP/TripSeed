@@ -1,4 +1,4 @@
-package com.ssafy.auth.domain.dto;
+package com.ssafy.enjoytrip.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

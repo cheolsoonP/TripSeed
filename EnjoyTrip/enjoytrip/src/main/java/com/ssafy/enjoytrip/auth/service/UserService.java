@@ -1,18 +1,13 @@
-package com.ssafy.auth.service;
-
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+package com.ssafy.enjoytrip.auth.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.auth.domain.dto.UserDto;
-import com.ssafy.auth.domain.mapper.UserMapper;
-import com.ssafy.auth.util.JwtUtil;
-import com.ssafy.auth.util.PasswordUtil;
+import com.ssafy.enjoytrip.auth.dto.UserDto;
+import com.ssafy.enjoytrip.auth.mapper.UserMapper;
+import com.ssafy.enjoytrip.auth.util.JwtUtil;
+import com.ssafy.enjoytrip.auth.util.PasswordUtil;
 
 import lombok.extern.slf4j.Slf4j;
 

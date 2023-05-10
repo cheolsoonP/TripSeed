@@ -1,0 +1,58 @@
+@startuml
+interface com.ssafy.enjoytrip.user.mapper.UserMapper {
+~ void joinUser(UserDto)
+~ UserDto loginUser(UserDto)
+~ void updatePw(UserDto)
+~ void updateNickname(UserDto)
+~ void deleteUser(String)
+}
+interface com.ssafy.enjoytrip.user.service.UserService {
+~ void joinUser(UserDto)
+~ UserDto loginUser(UserDto)
+~ UserDto getUserInfo(HttpSession)
+~ void updatePw(UserDto)
+~ void updateNickname(UserDto)
+~ void deleteUser(String)
+}
+class com.ssafy.enjoytrip.user.service.UserServiceImpl {
+- UserMapper userMapper
++ void joinUser(UserDto)
++ UserDto loginUser(UserDto)
++ UserDto getUserInfo(HttpSession)
++ void updatePw(UserDto)
++ void updateNickname(UserDto)
++ void deleteUser(String)
+}
+class com.ssafy.enjoytrip.user.dto.UserDto {
+- String id
+- String name
+- String nickname
+- String pw
+- String email
++ String getId()
++ void setId(String)
++ String getName()
++ void setName(String)
++ String getNickname()
++ void setNickname(String)
++ String getPw()
++ void setPw(String)
++ String getEmail()
++ void setEmail(String)
++ String toString()
+}
+class com.ssafy.enjoytrip.user.controller.UserController {
+- UserService userService
++ ResponseEntity<?> join(UserDto)
++ ResponseEntity<?> login(UserDto,HttpSession)
++ ResponseEntity<?> logout(HttpSession)
++ ResponseEntity<?> getUserInfo(HttpSession)
++ ResponseEntity<?> updatePw(String,HttpSession)
++ ResponseEntity<?> updateNickname(String,HttpSession)
++ ResponseEntity<?> deleteUser(String,HttpSession)
+- ResponseEntity<String> exceptionHandling(Exception)
+}
+
+
+com.ssafy.enjoytrip.user.service.UserService <|.. com.ssafy.enjoytrip.user.service.UserServiceImpl
+@enduml

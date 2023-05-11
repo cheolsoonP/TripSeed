@@ -34,8 +34,7 @@ public class PlanController {
 	
 	/* 여행 계획 추가/조회/수정/삭제  */
 	@PostMapping("/plan")
-	public ResponseEntity<?> addPlan(PlanDto planDto) {
-		
+	public ResponseEntity<?> addPlan(@RequestBody PlanDto planDto) {
 		try {
 			planService.addPlan(planDto);
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -74,7 +73,7 @@ public class PlanController {
 	}
 	
 	@PutMapping("/plan")
-	public ResponseEntity<?> updatePlan(PlanDto planDto){
+	public ResponseEntity<?> updatePlan(@RequestBody PlanDto planDto){
 		try {
 			planService.updatePlan(planDto);
 			List<PlanDto> planList = planService.getPlanList("ssafy");

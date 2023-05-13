@@ -20,6 +20,7 @@ public class PlanServiceImpl implements PlanService {
 	
 	@Override
 	public void addPlan(PlanDto planDto) throws Exception {
+		System.out.println(planDto);
 		planMapper.addPlan(planDto);
 	}
 

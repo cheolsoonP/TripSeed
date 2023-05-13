@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.plan.dto.PlanDto;
@@ -34,8 +35,7 @@ public class PlanController {
 	
 	/* 여행 계획 추가/조회/수정/삭제  */
 	@PostMapping("/plan")
-	public ResponseEntity<?> addPlan(PlanDto planDto) {
-		
+	public ResponseEntity<?> addPlan(@RequestBody PlanDto planDto) {
 		try {
 			planService.addPlan(planDto);
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -44,8 +44,8 @@ public class PlanController {
 		}
 	}
 	
-	@GetMapping("/{userId}")
-	public ResponseEntity<?> getPlanList(@PathVariable("userId") String userId){
+	@GetMapping("/list")
+	public ResponseEntity<?> getPlanList(@RequestParam("userId") String userId){
 		try {
 			List<PlanDto> planList = planService.getPlanList(userId);
 			if(planList != null)
@@ -74,7 +74,7 @@ public class PlanController {
 	}
 	
 	@PutMapping("/plan")
-	public ResponseEntity<?> updatePlan(PlanDto planDto){
+	public ResponseEntity<?> updatePlan(@RequestBody PlanDto planDto){
 		try {
 			planService.updatePlan(planDto);
 			List<PlanDto> planList = planService.getPlanList("ssafy");
@@ -88,8 +88,8 @@ public class PlanController {
 		}
 	}
 	
-	@GetMapping("/{planId}")
-	public ResponseEntity<?> getPlan(@PathVariable("planId") String planId){
+	@GetMapping("/view")
+	public ResponseEntity<?> getPlan(@RequestParam("planId") String planId){
 		
 		try {
 			PlanDto planDto = planService.getPlan(planId);			
@@ -116,8 +116,8 @@ public class PlanController {
 	}
 	
 	/* 여행 경로 조회 */
-	@GetMapping("/{planId}/routes")
-	public ResponseEntity<?> getRoute(@PathVariable("planId") String planId){
+	@GetMapping("/view/routes")
+	public ResponseEntity<?> getRoute(@RequestParam("planId") String planId){
 		try {
 			List<RouteDto> routeList = planService.getRoute(planId);
 			return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);

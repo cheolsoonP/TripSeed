@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.auth.domain.mapper.UserMapper">
+
+	
+	<resultMap type="hashMap" id="authinfo">
+		<result column="salt" property="salt"/>
+		<result column="user_password" property="userPassword"/>
+	</resultMap>
+	
+
+
+	<insert id="joinUser" parameterType="userDto" >
+		insert into user 
+		values (#{userId}, #{userName}, #{userNickname}, #{userEmail}, #{userPassword}, #{salt})
+	</insert>
+
+	<select id="getAuthInfo" parameterType="string" resultMap="authinfo">
+		select salt, user_password
+		from user
+		where user_id=#{userId}
+	</select>
+	
+	
+</mapper>

@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ssafy.enjoytrip.user.mapper.UserMapper">
+<mapper namespace="com.ssafy.enjoytrip.auth.mapper.UserMapper">
 	
-	<insert id="joinUser" parameterType="userDto">
-		insert into user (id, name, nickname, pw, email)
-		values (#{id}, #{name}, #{nickname}, #{pw}, #{email})
+	<resultMap type="hashMap" id="authinfo">
+		<result column="salt" property="salt"/>
+		<result column="user_password" property="userPassword"/>
+	</resultMap>
+	
+	<insert id="joinUser" parameterType="userDto" >
+		insert into user 
+		values (#{userId}, #{userName}, #{userNickname}, #{userEmail}, #{userPassword}, #{salt})
 	</insert>
-	
-	<select id="loginUser" parameterType="userDto" resultType="userDto">
-		select id, name, nickname, email
+
+	<select id="getAuthInfo" parameterType="string" resultMap="authinfo">
+		select salt, user_password
 		from user
-		where id = #{id} and pw = #{pw}
+		where user_id=#{userId}
 	</select>
 	
-	<update id="updatePw" parameterType="userDto">
+	
+	<update id="updateUserInfo" parameterType="userDto">
 		update user
-		set pw = #{pw}
-		where id = #{id}
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="userPassword != null">user_password=#{userPassword},</if>
+			<if test="userNickname != null">user_nickname=#{userNickname},</if>
+			<if test="salt != null">salt=#{salt},</if>
+		</trim>
+		where user_id = #{userId}
 	</update>
 	
-	<update id="updateNickname" parameterType="userDto">
-		update user
-		set nickname = #{nickname}
-		where id = #{id}
-	</update>
 	
 	<delete id="deleteUser" parameterType="string">
 		delete from user
-		where id = #{userId}
+		where user_id = #{userId}
 	</delete>
 	
 	<select id="getUserInfo" parameterType="string" resultType="userDto">
-		select id, name, nickname, email 
+		select user_id, user_name, user_nickname
 		from user
 		where id = #{userId}
 	</select>

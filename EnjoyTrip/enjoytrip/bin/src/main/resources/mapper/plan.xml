@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssafy.enjoytrip.plan.mapper.PlanMapper">
+	
+	<resultMap type="planDto" id="plan">
+		<result column="plan_id" property="planId" />
+		<result column="user_id" property="userId" />
+		<result column="plan_title" property="planTitle" />
+		<result column="start_date" property="startDate" />
+		<result column="end_date" property="endDate" />
+		<result column="complete" property="complete" />
+	</resultMap>
+	
+	<resultMap type="routeDto" id="route">
+		<result column="plan_id" property="planId"/>
+		<result column="attraction_id" property="attractionId"/>
+		<result column="visit_order" property="visitOrder"/>
+		<result column="memo" property="memo"/>
+		<result column="visit_time" property="visitTime"/>		
+	</resultMap>
+	
+	<!-- 여행 계획 추가/조회/변경/삭제  -->
+	<insert id="addPlan" parameterType="planDto">
+		insert into trip_plan 
+				(user_id, plan_title, start_date, end_date, complete) 
+				values (#{userId},#{planTitle},#{startDate},#{endDate},#{complete})
+	</insert>	
+	
+	<select id="getPlanList" parameterType="string" resultMap="plan">
+		select plan_id, user_id, plan_title, start_date, end_date, complete 
+		from trip_plan
+		where user_id=#{userId}	
+	</select>
+	
+	<delete id="deletePlan" parameterType="string">
+		delete from trip_plan
+		where plan_id = #{planId}
+	</delete>
+	
+	<update id="updatePlan" parameterType="planDto">
+		update trip_plan 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="planTitle != null">plan_title=#{planTitle},</if>
+			<if test="startDate != null">start_date=#{startDate},</if>
+			<if test="endDate != null">end_date=#{endDate},</if>
+			<if test="complete != null">complete=#{complete},</if>
+		</trim>
+		where plan_id = #{planId};		
+	</update>
+	
+	<select id="getPlan" parameterType="string" resultMap="plan">
+		select plan_id, user_id, plan_title, start_date, end_date, complete 
+		from trip_plan
+		where plan_id=#{planId}	
+	</select>
+	
+	<!-- 여행 경로 추가/조회/삭제/변경 -->
+	<insert id="addRoute" parameterType="hashMap" >
+		insert into trip_route (plan_id, attraction_id, visit_order) 
+		values
+		<foreach collection="routes" item="route" separator=",">
+			(#{planId}, #{route.attractionId}, #{route.visitOrder})
+		</foreach>
+	</insert>
+	
+	<select id="getRoute" parameterType="string" resultMap="route">
+		select plan_id, attraction_id, visit_order, memo, visit_time
+		from trip_route
+		where plan_id = #{planId}
+	</select>
+	
+	<delete id="deleteRoute" parameterType="string">
+		delete from trip_route
+		where plan_id = #{planId}
+	</delete>
+	
+	<!-- 메모 추가/변경/삭제 -->
+	<update id="updateMemo" parameterType="hashMap">
+		update trip_route
+		<if test="memo == null">set memo = null</if>
+		<if test="memo != null">set memo = #{memo}</if>
+		where plan_id = #{planId}
+		and attraction_id = #{attractionId}
+	</update>
+	
+	<!-- 방문 시간 추가/변경/삭제 -->
+	<update id="updateVisitTime" parameterType="hashMap">
+		update trip_route
+		<if test="visitTime == null">set visit_time = null</if>
+		<if test="visitTime != null">set visit_time = #{visitTime}</if>
+		where plan_id = #{planId}
+		and attraction_id = #{attractionId}
+	</update>
+</mapper>

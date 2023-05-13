@@ -62,23 +62,11 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<?> deleteUser(@PathVariable("userId") String userId, HttpSession session) {
+	public ResponseEntity<?> deleteUser(@PathVariable("userId") String userId) {
 	    try {
-	        UserDto user = (UserDto) session.getAttribute("userInfo");
-	        if (user != null) {
-	            if (user.getId().equals(userId)) { // 현재 로그인된 사용자의 아이디와 삭제할 사용자 아이디가 일치하는 경우
-	                userService.deleteUser(userId);
-	                session.invalidate(); // 세션 정보 삭제
-	                return new ResponseEntity<Void>(HttpStatus.OK);
-	            } else {
-	                return new ResponseEntity<String>("삭제 권한이 없습니다.", HttpStatus.UNAUTHORIZED);
-	            }
-	        } else {
-	            return new ResponseEntity<String>("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED);
-	        }
-
+            userService.deleteUser(userId);
+            return new ResponseEntity<Void>(HttpStatus.OK);
 	    } catch (Exception e) {
-	        e.printStackTrace();
 	        return exceptionHandling(e);
 	    }
 	}

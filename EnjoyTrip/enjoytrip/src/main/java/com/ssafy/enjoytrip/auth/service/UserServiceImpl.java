@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 	
 	private Long expiredMs = 1000 * 60 * 60L;
 	
+	@Override
 	public void joinUser(UserDto userDto) throws Exception {
 		String salt = PasswordUtil.generateSalt();
 		userDto.setSalt(salt);
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
 		userMapper.joinUser(userDto);
 	}
 	
+	@Override
 	public String login(String userId, String userPassword) throws Exception {
 		// 인증과정
 		Map<String, Object> authInfo = userMapper.getAuthInfo(userId);
@@ -46,8 +48,8 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
 	public void updateUserInfo(UserDto userDto) throws Exception {
-		// 인증과정
 		Map<String, Object> authInfo = userMapper.getAuthInfo(userDto.getUserId());
 		String currPassword = PasswordUtil.generateHash(userDto.getUserPassword(), (String)authInfo.get("salt"));
 		if(currPassword.equals(authInfo.get("userPassword"))) {
@@ -59,5 +61,10 @@ public class UserServiceImpl implements UserService {
 			userDto.setUserPassword(PasswordUtil.generateHash(userDto.getUserPassword(), salt));			
 		}
 		userMapper.updateUserInfo(userDto);
+	}
+
+	@Override
+	public void deleteUser(String userId) throws Exception {
+		userMapper.deleteUser(userId);
 	}
 }

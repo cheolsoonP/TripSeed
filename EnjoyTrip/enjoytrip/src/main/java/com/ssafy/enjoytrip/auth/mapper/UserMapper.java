@@ -22,5 +22,5 @@ public interface UserMapper {
 	void deleteUser(String userId) throws SQLException;
 	
 	UserDto getUserInfo(String userId) throws SQLException;
-	
+
 }

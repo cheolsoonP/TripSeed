@@ -44,8 +44,8 @@ public class PlanController {
 		}
 	}
 	
-	@GetMapping("/list")
-	public ResponseEntity<?> getPlanList(@RequestParam("userId") String userId){
+	@GetMapping("/list/{userId}")
+	public ResponseEntity<?> getPlanList(@PathVariable("userId") String userId){
 		try {
 			List<PlanDto> planList = planService.getPlanList(userId);
 			if(planList != null)
@@ -88,8 +88,8 @@ public class PlanController {
 		}
 	}
 	
-	@GetMapping("/view")
-	public ResponseEntity<?> getPlan(@RequestParam("planId") String planId){
+	@GetMapping("/view/{planId}")
+	public ResponseEntity<?> getPlan(@PathVariable("planId") String planId){
 		
 		try {
 			PlanDto planDto = planService.getPlan(planId);			
@@ -116,8 +116,8 @@ public class PlanController {
 	}
 	
 	/* 여행 경로 조회 */
-	@GetMapping("/view/routes")
-	public ResponseEntity<?> getRoute(@RequestParam("planId") String planId){
+	@GetMapping("/{planId}/routes")
+	public ResponseEntity<?> getRoute(@PathVariable("planId") String planId){
 		try {
 			List<RouteDto> routeList = planService.getRoute(planId);
 			return new ResponseEntity<List<RouteDto>>(routeList, HttpStatus.OK);

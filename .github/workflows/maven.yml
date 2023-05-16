@@ -24,10 +24,9 @@ jobs:
 
 
       - name: Make application.properties
-      - run: | 
-          touch ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
-          cat ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
+      - run: touch ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
+      - run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
+      - run: cat ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
         
         
       - name: Build with Maven

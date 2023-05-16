@@ -15,27 +15,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Move Directory
-        run: |
-          cd EnjoyTrip/enjoytrip
           
       - name: Set up Java
         uses: actions/setup-java@v1
         with:
           java-version: '8'
-          cache: maven
+
 
       - name: Make application.properties
         run: |
-          cd ./EnjoyTrip/enjoytrip/src/main/resources
-          touch application.properties
+          ls
+          cd back/enjoytrip
+          touch ./src/main/resources/application.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> ./src/main/resources/application.properties
 
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> ./application.properties
-        shell: bash
-
+        shell: bash 
+        
       - name: Build with Maven
-        run: mvn -B package --file ./EnjoyTrip/enjoytrip/pom.xml
+        run: |
+          cd back/enjoytrip
+          mvn -B package --file ./pom.xml
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
@@ -53,8 +52,8 @@ jobs:
           push: true
           tags: ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
           build-args: |
-            JAR_FILE=target/*.jar
-          dockerfile: ./src/main/docker/Dockerfile
+            JAR_FILE=./back/enjoytrip/target/*.jar
+          dockerfile: ./back/enjoytrip/src/main/docker/Dockerfile
           
           
       - name: SSH and run Docker image on EC2 instance

@@ -24,6 +24,8 @@ jobs:
 
       - name: Make application.properties
         run: |
+          ls
+          cd back/enjoytrip
           touch ./src/main/resources/application.properties
           echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
           pwd

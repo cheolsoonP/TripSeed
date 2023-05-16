@@ -15,10 +15,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Move Directory
-        run: |
-          cd EnjoyTrip/enjoytrip
           
       - name: Set up Java
         uses: actions/setup-java@v1
@@ -26,14 +22,14 @@ jobs:
           java-version: '8'
           cache: maven
 
+
       - name: Make application.properties
         run: |
-          cd ./EnjoyTrip/enjoytrip/src/main/resources
-          touch application.properties
-
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> ./application.properties
-        shell: bash
-
+          touch ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./EnjoyTrip/enjoytrip/src/main/resources/application.properties
+          pwd
+        shell: bash 
+        
       - name: Build with Maven
         run: mvn -B package --file ./EnjoyTrip/enjoytrip/pom.xml
 
@@ -54,7 +50,7 @@ jobs:
           tags: ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
           build-args: |
             JAR_FILE=target/*.jar
-          dockerfile: ./src/main/docker/Dockerfile
+          dockerfile: ./EnjoyTrip/enjoytrip/src/main/docker/Dockerfile
           
           
       - name: SSH and run Docker image on EC2 instance

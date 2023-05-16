@@ -27,8 +27,11 @@ jobs:
           ls
           cd back/enjoytrip
           touch ./src/main/resources/application.properties
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
-          pwd
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> ./src/main/resources/application.properties
+          echo "spring.datasource.url=${{ secrets.DB_URL }}" >> ./src/main/resources/application.properties
+          echo "spring.datasource.hikari.username=${{ secrets.DB_USER }}" >> ./src/main/resources/application.properties
+          echo "spring.datasource.hikari.password=${{ secrets.DB_PASSWORD }}" >> ./src/main/resources/application.properties
+
         shell: bash 
         
       - name: Build with Maven

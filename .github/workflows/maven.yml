@@ -1,0 +1,70 @@
+name: Build and Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: 
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Move Directory
+        run: |
+          cd EnjoyTrip/enjoytrip
+          
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+          cache: maven
+
+      - name: Make application.properties
+        run: |
+          cd src/main/resources
+          touch application.properties
+
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> application.properties
+        shell: bash
+
+      - name: Build with Maven
+        run: mvn -B package --file EnjoyTrip/enjoytrip/pom.xml
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry: ${{ secrets.ECR_REGISTRY_URI }}
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+          
+      - name: Build and push Docker image to ECR
+        id: build-image
+        uses: docker/build-push-action@v2
+        with:
+          context: EnjoyTrip/enjoytrip
+          push: true
+          tags: ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
+          build-args: |
+            JAR_FILE=target/*.jar
+          dockerfile: src/main/docker/Dockerfile
+          
+          
+      - name: SSH and run Docker image on EC2 instance
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker stop ${{ secrets.CONTAINER_NAME }} || true
+            docker rm ${{ secrets.CONTAINER_NAME }} || true
+            docker pull ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
+            docker run -d -p 8080:8080 --name ${{ secrets.CONTAINER_NAME }} ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}

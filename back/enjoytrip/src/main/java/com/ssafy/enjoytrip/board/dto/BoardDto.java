@@ -11,6 +11,8 @@ public class BoardDto {
 	private String updateDate;
 	private int sidoCode;
 	private int gugunCode;
+	private String sidoName;
+	private String gugunName;
 	
 	public int getPostId() {
 		return postId;
@@ -72,11 +74,24 @@ public class BoardDto {
 	public void setGugunCode(int gugunCode) {
 		this.gugunCode = gugunCode;
 	}
+	public String getSidoName() {
+		return sidoName;
+	}
+	public void setSidoName(String sidoName) {
+		this.sidoName = sidoName;
+	}
+	public String getGugunName() {
+		return gugunName;
+	}
+	public void setGugunName(String gugunName) {
+		this.gugunName = gugunName;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardDto [postId=" + postId + ", title=" + title + ", writerId=" + writerId + ", content=" + content
 				+ ", likeCount=" + likeCount + ", viewCount=" + viewCount + ", writeDate=" + writeDate + ", updateDate="
-				+ updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + "]";
+				+ updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + ", sidoName=" + sidoName
+				+ ", gugunName=" + gugunName + "]";
 	}
 }

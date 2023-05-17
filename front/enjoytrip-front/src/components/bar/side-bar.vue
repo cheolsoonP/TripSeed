@@ -49,7 +49,7 @@ import { mapActions, mapState } from "vuex"
 const regionStore = "regionStore";
 
 export default {
-    name: "SideVar",
+    name: "SideBar",
     data () {
       return {
         sidoCode: null,

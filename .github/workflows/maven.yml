@@ -3,6 +3,7 @@ name: Build and Deploy to EC2
 on:
   push:
     branches:
+      - main
       - fix/back-ci-cd
   pull_request: 
     branches:

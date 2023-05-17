@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="board">
     <side-bar></side-bar>
   </div>
 </template>
@@ -10,7 +10,7 @@ import { mapActions, mapState } from "vuex"
 const regionStore = "regionStore";
 
 export default {
-    name: 'AboutView',
+    name: 'BoardView',
   components: { sideBar },
   data() {
     return {

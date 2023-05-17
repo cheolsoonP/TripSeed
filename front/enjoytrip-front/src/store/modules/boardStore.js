@@ -1,4 +1,4 @@
-const planStore = {
+const boardStore = {
   namespaced: true,
   state: {},
   getters: {},
@@ -6,4 +6,4 @@ const planStore = {
   actions: {},
 };
 
-export default planStore;
+export default boardStore;

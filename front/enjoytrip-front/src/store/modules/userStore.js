@@ -1,9 +1,9 @@
 const userStore = {
-    namespaced: true,
-    state: {},
-    getters: {},
-    mutations: {},
-    actions: {},
+  namespaced: true,
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
 };
 
 export default userStore;

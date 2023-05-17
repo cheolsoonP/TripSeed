@@ -1,12 +1,30 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <side-bar></side-bar>
   </div>
 </template>
 <script>
+import sideBar from "@/components/bar/side-bar.vue"
+import { mapActions, mapState } from "vuex"
 
-  export default {
-  name: 'AboutView',
-    
+const regionStore = "regionStore";
+
+export default {
+    name: 'AboutView',
+  components: { sideBar },
+  data() {
+    return {
+
+    };
+  },
+  computed: {
+    ...mapState(regionStore, ["sidos"]),
+  },
+  created() {
+    this.getSido();
+  },
+  methods: {
+    ...mapActions(regionStore, ["getSido"]),
+    }
   }
 </script>

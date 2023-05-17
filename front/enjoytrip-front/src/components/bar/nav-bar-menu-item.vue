@@ -1,11 +1,11 @@
 <template>
   <div>
     <v-btn
-      class="d-none d-md-flex"
+      class="d-none d-flex"
       v-for="menu in menus"
       :key="menu.title"
+      :to="menu.url"
       text
-      @click="goToPage(menu.url)"
     >
       {{ menu.title }}
     </v-btn>
@@ -27,5 +27,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

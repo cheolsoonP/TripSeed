@@ -2,11 +2,9 @@
   <div>
     <v-app-bar app flat elevation="2" color="white">
       <v-app-bar-title>
-        <img
-          src="@/assets/logo_title.svg"
-          height="40px"
-          @click="goToPage('/')"
-        />
+        <router-link to="/">
+          <img src="@/assets/logo_title.svg" height="40px" />
+        </router-link>
       </v-app-bar-title>
 
       <v-spacer />
@@ -18,12 +16,18 @@
         <nav-bar-user-item />
       </template>
     </v-app-bar>
+
     <v-navigation-drawer v-model="drawer" absolute right temporary>
-      <v-list-item class="py-3 justify-end">
+      <v-list-item class="py-1 justify-end">
         <img src="@/assets/logo_icon.svg" height="40px" />
       </v-list-item>
+      <v-row justify="center" class="py-3">
+        <v-col cols="12" class="d-flex justify-center">
+          <nav-bar-user-item />
+        </v-col>
+      </v-row>
+      <v-divider class="py-3" />
       <nav-bar-menu-item />
-      <nav-bar-user-item />
     </v-navigation-drawer>
   </div>
 </template>
@@ -45,11 +49,12 @@ export default {
   },
   methods: {
     goToPage(path) {
-      this.$router.push(path);
+      if (this.$route.path !== path) {
+        console.log(path);
+        this.$router.push(path);
+      }
     },
   },
 };
 </script>
-<style>
-
-</style>
+<style></style>

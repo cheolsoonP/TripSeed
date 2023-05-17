@@ -22,14 +22,16 @@
 	</insert>
 	
 	<select id="getPostList" parameterType="string" resultMap="post">
-		select post_id, title, writer_id, like_count, view_count, write_date
-		from tour_info_board
+		select b.*, sg.sido_name, sg.gugun_name
+		from (select s.sido_code, s.sido_name, g.gugun_code, g.gugun_name from 
+			sido s join gugun g on s.sido_code = g.sido_code) sg join tour_info_board b
+			on sg.sido_code = b.sido_code and sg.gugun_code = b.gugun_code
 		<trim prefix="where" suffixOverrides="and">
-			<if test="sidoCode != null">sido_code=#{sidoCode} and</if>
-			<if test="gugunCode != null">gugun_code=#{gugunCode} and</if>
-			<if test="keyword != null">title like concat('%', #{keyword}, '%')</if>
+			<if test="sidoCode != null">b.sido_code=#{sidoCode} and</if>
+			<if test="gugunCode != null">b.gugun_code=#{gugunCode} and</if>
+			<if test="keyword != null">b.title like concat('%', #{keyword}, '%')</if>
 		</trim>
-		order by post_id DESC
+		order by b.post_id DESC
 	</select>
 	
 	<select id="getPost" parameterType="string" resultMap="post">

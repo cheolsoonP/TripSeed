@@ -1,12 +1,12 @@
 <template>
-  <v-card tile>
+  <v-card tile :to='"/board/view/"+post.postId'>
     <v-row>
       <v-col cols="8">
         <v-card-title>
           <span class="text-h4 font-weight-bold">{{post.title}}</span>
         </v-card-title>
         <v-card-subtitle>
-          <span class="text-h6 font-weight-light">{{post.sidoName}} {{post.gugunName}}</span>
+          <span class="text-h6 font-weight-light">{{post.sidoName}} {{ post.gugunName }}</span>
         </v-card-subtitle>
         <v-card-text class="text-h5 font-weight-bold">
           {{ post.content }}
@@ -36,9 +36,9 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="4">
+      <!-- <v-col cols="4">
         <v-img src="" aspect-ratio="1" style="background-color: black" />
-      </v-col>
+      </v-col> -->
     </v-row>
   </v-card>
 </template>

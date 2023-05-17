@@ -20,7 +20,9 @@ const boardStore = {
           writeDate: post.writeDate,
           updateDate: post.updateDate,
           sidoCode: post.sidoCode,
+          sidoName: post.sidoName,
           gugunCode: post.gugunCode,
+          gugunName: post.gugunName,
         });
       });
     },

@@ -28,6 +28,12 @@ const routes = [
         name: "boardlist",
         component: () => import("@/components/board/board-list"),
       },
+      {
+        path: "view/:postId",
+        name: "boardview",
+        // beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/board-detail"),
+      },
     ],
   },
 ];

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import SideBar from "../bar/side-bar.vue"
+import SideBar from "@/components/bar/side-bar.vue"
 import BoardListItem from "@/components/board/board-list-item.vue"
 import { mapActions, mapState } from "vuex"
 

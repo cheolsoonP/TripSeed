@@ -31,6 +31,19 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/login-view"),
+    redirect: "/user/login",
+    children: [
+      {
+        path: "login",
+        name: "userlogin",
+        component: () => import("@/components/user/user-login"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

@@ -32,7 +32,7 @@ export default {
   name: "NavBarUserItem",
   data() {
     return {
-      loginStatus: true,
+      loginStatus: false,
       username: "갓길재",
     };
   },

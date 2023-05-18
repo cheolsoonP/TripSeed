@@ -1,8 +1,23 @@
 <template>
   <div>
-    <v-container grid-list-xs>
+
+    <v-container >
+      <!-- github-markdown-light -->
+
+      <v-row>{{ post.sidoName }} > {{ post.gugunName }}</v-row>
       <v-row>{{ post.title }}</v-row>
+      <v-row>
+        <v-col>{{ post.writerId }}</v-col>
+        <v-col>{{ post.writerDate }}</v-col>
+      </v-row>
+      <v-row>
+        <v-col>좋아요 {{ post.likeCount }}</v-col>
+        <v-col>조회수 {{ post.viewCount }}</v-col>
+      </v-row>
+      
       <v-row>{{ post.content }}</v-row>
+
+
     </v-container>
   </div>
 </template>

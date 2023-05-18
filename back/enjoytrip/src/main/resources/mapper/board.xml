@@ -40,9 +40,14 @@
 	</select>
 	
 	<select id="getPost" parameterType="string" resultMap="post">
-		select *
-		from tour_info_board
-		where post_id = #{postId}
+		select b.*, sg.sido_name, sg.gugun_name
+		from tour_info_board b
+		left join(
+			select s.sido_code, s.sido_name, g.gugun_code, g.gugun_name
+			from  sido s join gugun g on s.sido_code = g.sido_code
+		) sg
+		on sg.sido_code = b.sido_code and sg.gugun_code = b.gugun_code
+		where b.post_id = #{postId}
 	</select>
 	
 	<update id="updatePost" parameterType="boardDto">

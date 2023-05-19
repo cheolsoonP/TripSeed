@@ -1,17 +1,17 @@
 <template>
 <div class="d-none d-flex">
-  <v-menu open-on-hover offset-y v-if="loginStatus">
+  <v-menu open-on-hover offset-y v-if="this.isLogin">
     <template v-slot:activator="{ on }">
         <v-btn block text max-width="200px" v-on="on">
           <v-avatar color="teal" size="36">
             <v-icon dark> mdi-account-circle </v-icon>
           </v-avatar>
-          <span> &nbsp; {{ username }} 님</span>
+          <span> &nbsp; {{ userNickname }} 님</span>
         </v-btn>
     </template>
     <v-list>
       <v-list-item to="/user/info">마이페이지</v-list-item>
-      <v-list-item to="/user/logout">로그아웃</v-list-item>
+      <v-list-item @click="onClickLogout">로그아웃</v-list-item>
     </v-list>
   </v-menu>
 
@@ -28,13 +28,25 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
+const userStore = "userStore";
+
 export default {
   name: "NavBarUserItem",
+  computed: {
+    ...mapState(userStore, ["isLogin", "userId", "userNickname"]),
+  },
   data() {
     return {
-      loginStatus: false,
-      username: "갓길재",
     };
+  },
+  methods: {
+    ...mapActions(userStore, ["initUserInfoAction"]),
+    onClickLogout() {
+      this.initUserInfoAction()
+        .then(alert("로그아웃 되었습니다."));
+    },
   },
 };
 </script>

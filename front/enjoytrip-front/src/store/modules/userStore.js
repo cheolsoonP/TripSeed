@@ -34,26 +34,22 @@ const userStore = {
     },
   },
   actions: {
-    loginUserAction: ({ commit }, body) => {
-      loginUserApi(
+    loginUserAction: async ({ commit }, body) => {
+      await loginUserApi(
         body,
         ({ data }) => {
           commit("SET_AUTH_USER", data);
         },
         (error) => {
+          commit("SET_INIT_USER");
           commit("SET_AUTH_FAIL");
           console.log(error);
         }
       );
     },
-    initUserInfoAction: ({ commit }) => [
-      () => {
-        commit("SET_INIT_USER");
-      },
-      (error) => {
-        console.log(error);
-      },
-    ],
+    initUserInfoAction: ({ commit }) => {
+      commit("SET_INIT_USER");
+    },
   },
 };
 

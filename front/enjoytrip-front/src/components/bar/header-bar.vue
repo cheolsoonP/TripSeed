@@ -12,13 +12,13 @@
             <v-card-actions>
               <v-btn elevation="0" color="primary" :to="url">
                 <v-icon>mdi-plus</v-icon>
-                <span class="pl-1">{{ action }}</span>
+                <span class="pl-1">{{ btntext }}</span>
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
         <v-col cols="auto" class="d-flex justify-center">
-          <img :src="imgsrc" />
+          <img :src="imgsrc" alt="header_img" />
         </v-col>
       </v-row>
     </v-card>
@@ -33,8 +33,8 @@ export default {
     title: String,
     content: String,
     url: String,
-    action: String ,
-    imgsrc: String, 
+    btntext: String ,
+    imgsrc: String 
   },
 };
 </script>

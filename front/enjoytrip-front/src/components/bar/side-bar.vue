@@ -64,10 +64,6 @@ export default {
   },
   methods: {
     ...mapActions(regionStore, ["getGugun"]),
-
-    getGugunList() {
-      this.getGugun(this.sidoCode);
-    },
   }
 }
 </script>

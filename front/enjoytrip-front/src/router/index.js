@@ -29,6 +29,12 @@ const routes = [
         // beforeEnter: onlyAuthUser,
         component: () => import("@/components/board/board-detail"),
       },
+      {
+        path: "write",
+        name: "boardwrite",
+        // beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/board-write"),
+      }
     ],
   },
   {

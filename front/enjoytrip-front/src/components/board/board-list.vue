@@ -4,7 +4,8 @@
       title = "여행 꿀팁 공유"
       content = "여행지별 추천 명소나 맛집 정보를 공유하세요!<br/>함께하면 재미가 두배"
       url="/board/write"
-      btntext="글쓰기"
+      btn_icon="mdi-plus"
+      btn_text="글쓰기"
       imgsrc=""
     />
     <v-container>

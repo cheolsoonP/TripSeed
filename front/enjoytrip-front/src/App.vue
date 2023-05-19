@@ -40,7 +40,7 @@ export default {
     mainGridStyles() {
       if (this.$vuetify.breakpoint.lgAndUp) {
         return {
-          maxWidth: "1264px",
+          width: "1264px",
           margin: "0 auto"
         }
       }

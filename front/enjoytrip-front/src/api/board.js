@@ -10,6 +10,7 @@ function getPost(postId, success, fail) {
 }
 
 function writePostApi(body, success, fail) {
+  console.log(body);
   api.post(`/board/write`, body).then(success).catch(fail);
 }
 

@@ -33,9 +33,10 @@ public class BoardCotroller {
 	}
 
 	@PostMapping("/write")
-	public ResponseEntity<?> writePost(BoardDto boardDto) {
+	public ResponseEntity<?> writePost(@RequestBody BoardDto boardDto) {
 		try {
 			if (boardDto.getTitle() == null || boardDto.getContent() == null) {
+				System.out.println(boardDto);
 				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
 			}
 			boardService.writePost(boardDto);

@@ -128,6 +128,7 @@ export default {
         body,
         () => {
           alert("게시글 업로드 성공!")
+          this.$router.push("/board/list");
         },
         (error) => {
           console.log(error);

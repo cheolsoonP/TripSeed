@@ -6,6 +6,7 @@ function joinUserApi(body, success, fail) {
 }
 
 async function loginUserApi(body, success, fail) {
+  console.log(body);
   await api.post(`/users/login`, body).then(success).catch(fail);
 }
 

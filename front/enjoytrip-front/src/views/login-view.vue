@@ -16,6 +16,6 @@ export default {
   background-image: url(@/assets/login_background.png);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 85vh;
+  min-height: 85vh;
 }
 </style>

@@ -1,5 +1,4 @@
 import { apiInstance } from "./index.js";
-
 const api = apiInstance();
 
 function getPlanListApi(userId, success, fail) {

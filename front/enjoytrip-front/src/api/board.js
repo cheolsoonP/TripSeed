@@ -1,5 +1,4 @@
 import { apiInstance } from "./index.js";
-
 const api = apiInstance();
 
 function postList(param, success, fail) {
@@ -11,7 +10,8 @@ function getPost(postId, success, fail) {
 }
 
 function writePostApi(body, success, fail) {
-  api.post(`/board/write`).then(success).catch(fail);
+  console.log(body);
+  api.post(`/board/write`, body).then(success).catch(fail);
 }
 
 export { postList, getPost, writePostApi };

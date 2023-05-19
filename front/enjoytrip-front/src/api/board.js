@@ -10,4 +10,8 @@ function getPost(postId, success, fail) {
   api.get(`/board/view/${postId}`).then(success).catch(fail);
 }
 
-export { postList, getPost };
+function writePostApi(body, success, fail) {
+  api.post(`/board/write`).then(success).catch(fail);
+}
+
+export { postList, getPost, writePostApi };

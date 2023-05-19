@@ -29,6 +29,12 @@ const routes = [
         // beforeEnter: onlyAuthUser,
         component: () => import("@/components/board/board-detail"),
       },
+      {
+        path: "write",
+        name: "boardwrite",
+        // beforeEnter: onlyAuthUser,
+        component: () => import("@/components/board/board-write"),
+      }
     ],
   },
   {
@@ -41,6 +47,29 @@ const routes = [
         path: "login",
         name: "userlogin",
         component: () => import("@/components/user/user-login"),
+      },
+    ],
+  },
+  {
+    path: "/plan",
+    name: "plan",
+    component: () => import("@/views/plan-view"),
+    redirect: "/plan/list",
+    children: [
+      {
+        path: "list",
+        name: "planlist",
+        component: () => import("@/components/plan/plan-list"),
+      },
+      {
+        path: "write",
+        name: "planwrite",
+        component: () => import("@/components/plan/plan-write"),
+      },
+      {
+        path: "detail",
+        name: "plandetail",
+        component: () => import("@/components/plan/plan-detail"),
       },
     ],
   },

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-bar />
-    <v-main>
+    <v-main :style="mainGridStyles">
       <router-view />
     </v-main>
     <v-footer color="primary lighten-1" padless>
@@ -36,5 +36,16 @@ export default {
     // footer link list
     links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
   }),
+  computed: {
+    mainGridStyles() {
+      if (this.$vuetify.breakpoint.lgAndUp) {
+        return {
+          width: "1264px",
+          margin: "0 auto"
+        }
+      }
+      return "";
+    },
+  }
 };
 </script>

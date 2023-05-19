@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       menus: [
-        { title: "나만의 여행 계획", url: "/plans" },
+        { title: "나만의 여행 계획", url: "/plan" },
         { title: "핫 플레이스", url: "/hotplace" },
         { title: "여행 꿀팁 공유", url: "/board" },
       ],

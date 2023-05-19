@@ -9,6 +9,7 @@ const regionStore = {
   getters: {},
   mutations: {
     SET_SIDO_LIST(state, sidos) {
+      state.sidos = [];
       sidos.forEach((sido) => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
       });
@@ -35,6 +36,7 @@ const regionStore = {
       gugunList(
         sidoCode,
         ({ data }) => {
+          console.log(data)
           commit("SET_GUGUN_LIST", data);
         },
         (error) => {

@@ -10,7 +10,14 @@ const userStore = {
     isLogin: false,
     authFail: false,
   },
-  getters: {},
+  getters: {
+    isLogedIn(state) {
+      return !!state.isLogin;
+    },
+    getToken(state) {
+      return !!state.authToken;
+    },
+  },
   mutations: {
     SET_INIT_USER(state) {
       state.authToken = "";

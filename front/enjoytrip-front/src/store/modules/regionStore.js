@@ -36,6 +36,7 @@ const regionStore = {
       gugunList(
         sidoCode,
         ({ data }) => {
+          console.log(data)
           commit("SET_GUGUN_LIST", data);
         },
         (error) => {

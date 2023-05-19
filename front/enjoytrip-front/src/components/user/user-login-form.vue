@@ -18,7 +18,7 @@
     <v-text-field
       label="비밀번호를 입력하세요"
       v-model="userPassword"
-      :rules="[() => ('다시 입력해주세요.')]"
+      :rules="testPassword"
       type='password'
       outlined
       dense
@@ -27,6 +27,7 @@
     <div>
       <v-btn
         type="submit"
+        @click="loginUser"
         color="primary"
         width="100%"
       >
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import { loginUserApi } from "@/api/user";
+
 export default {
   name: "user-login-form",
   data() {
@@ -44,6 +47,31 @@ export default {
       userId:"",
       userPassword: "",
       valid: false,
+      testPassword: [
+        () => {
+          if (this.valid == false) {
+            return "다시 입력해 주세요.";
+          }
+          return true;
+        }
+      ]
+    }
+  },
+  methods: {
+    loginUser() {
+      let body = {
+        userId: this.userId,
+        userPassword: this.userPassword,
+      };
+      loginUserApi(
+        body,
+        () => {
+          alert("로그인 성공!")
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
 }

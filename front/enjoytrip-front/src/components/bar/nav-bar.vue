@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar app flat elevation="2" color="white">
-      <v-app-bar-title>
+      <v-app-bar-title class="ml-2">
         <router-link to="/">
           <img src="@/assets/logo_title.svg" height="40px" />
         </router-link>

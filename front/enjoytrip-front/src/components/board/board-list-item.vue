@@ -27,7 +27,7 @@
       </v-col>
     </v-card-title>
     <v-list-item class="pb-2">
-      {{ post.content }}
+      {{ previewContent(post.content, 120) }}
     </v-list-item>
     <v-col>
       <v-row class="d-flex justify-space-between">
@@ -99,6 +99,14 @@ export default {
         { icon: "mdi-eye-outline", cnt: "256" },
       ],
     };
+  },
+  methods: {
+    previewContent(content, maxLength) {
+      if (content.length > maxLength) {
+        return content.substring(0, maxLength) + "\u00a0\u00a0...더 보기";
+      }
+      return content;
+    },
   },
 };
 </script>

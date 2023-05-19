@@ -1,12 +1,47 @@
 <template>
   <v-col>
-    <v-row class="text-h7">
-      <v-col cols="auto" v-if="!post.sidoName">전체</v-col>
-      <v-col cols="auto" class="pr-1">{{ post.sidoName }}</v-col>
-      <v-col cols="auto" v-if="post.gugunName" class="px-0"
-        ><v-icon>mdi-chevron-right</v-icon></v-col
-      >
-      <v-col cols="auto" class="pl-1">{{ post.gugunName }}</v-col>
+    <v-row class="text-h7 justify-space-between">
+      <div class="d-flex">
+      <v-col cols="auto" v-if="!post.sidoName">
+        <v-btn elevation="0" color="transparent"> 전체 </v-btn>
+      </v-col>
+      <v-col cols="auto" class="pr-1">
+        <v-btn elevation="0" color="transparent"> {{ post.sidoName }} </v-btn>
+      </v-col>
+      <v-col cols="auto" v-if="post.gugunName" class="px-0 d-flex align-center">
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-col>
+      <v-col cols="auto" class="pl-1">
+        <v-btn elevation="0" color="transparent"> {{ post.gugunName }} </v-btn>
+      </v-col>
+      </div>
+      <div>
+      <v-col cols="auto" class="justify-end">
+        <v-menu offset-y bottom left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn elevation="0" color="transparent" v-bind="attrs" v-on="on">
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-content> 수정하기 </v-list-item-content>
+              <v-list-item-icon>
+                <v-icon>mdi-pencil-outline</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+            <v-list-item @click="onClickDeletePost">
+              <v-list-item-content class="red--text text--lighten-2">
+                삭제하기
+              </v-list-item-content>
+              <v-list-item-icon>
+                <v-icon color="red lighten-2">mdi-trash-can-outline</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-col>
+      </div>
     </v-row>
 
     <v-row class="justify-center text-h4 pa-3 pt-0">{{ post.title }}</v-row>
@@ -17,12 +52,12 @@
       </v-col>
       <v-col cols="auto" class="d-flex justify-center">
         <div class="px-4">
-        <v-icon>mdi-heart-outline</v-icon>
-        <span class="pl-2">{{ post.likeCount }}</span>
+          <v-icon>mdi-heart-outline</v-icon>
+          <span class="pl-2">{{ post.likeCount }}</span>
         </div>
         <div class="px-4">
-        <v-icon>mdi-eye-outline</v-icon>
-        <span class="pl-2">{{ post.viewCount }}</span>
+          <v-icon>mdi-eye-outline</v-icon>
+          <span class="pl-2">{{ post.viewCount }}</span>
         </div>
       </v-col>
     </v-row>
@@ -64,5 +99,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -44,6 +44,29 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/plan",
+    name: "plan",
+    component: () => import("@/views/plan-view"),
+    redirect: "/plan/list",
+    children: [
+      {
+        path: "list",
+        name: "planlist",
+        component: () => import("@/components/plan/plan-list"),
+      },
+      {
+        path: "write",
+        name: "planwrite",
+        component: () => import("@/components/plan/plan-write"),
+      },
+      {
+        path: "detail",
+        name: "plandetail",
+        component: () => import("@/components/plan/plan-detail"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

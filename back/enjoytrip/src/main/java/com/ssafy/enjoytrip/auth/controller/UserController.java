@@ -1,5 +1,9 @@
 package com.ssafy.enjoytrip.auth.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.enjoytrip.attraction.dto.AttractionDto;
 import com.ssafy.enjoytrip.auth.dto.UserDto;
 import com.ssafy.enjoytrip.auth.service.UserService;
 
@@ -36,13 +41,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody UserDto userDto ){
-		String token;
+	public ResponseEntity<?> login(@RequestBody UserDto userDto ){
+		Map<String, Object> authInfo = new HashMap<>();
 		try {
-			token = userService.login(userDto.getUserId(), userDto.getUserPassword());
+			authInfo = userService.login(userDto.getUserId(), userDto.getUserPassword());
 			// 입력한 정보가 올바르다면 토큰 발급
-			if(token != null) {
-				return ResponseEntity.ok().body(token);			
+			if(authInfo != null) {
+				return new ResponseEntity<Map<String, Object>>(authInfo, HttpStatus.OK);
 			}
 			// 잘못된 정보 입력할 경우 badRequest
 			return ResponseEntity.badRequest().body("다시 입력해주세요.");

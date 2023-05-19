@@ -5,6 +5,9 @@
 	<resultMap type="hashMap" id="authinfo">
 		<result column="salt" property="salt"/>
 		<result column="user_password" property="userPassword"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>		
+		<result column="user_nickname" property="userNickname"/>
 	</resultMap>
 	
 	<insert id="joinUser" parameterType="userDto" >
@@ -13,7 +16,7 @@
 	</insert>
 
 	<select id="getAuthInfo" parameterType="string" resultMap="authinfo">
-		select salt, user_password
+		select salt, user_password, user_id, user_name, user_nickname
 		from user
 		where user_id=#{userId}
 	</select>

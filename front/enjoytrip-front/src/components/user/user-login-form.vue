@@ -38,7 +38,9 @@
 </template>
 
 <script>
-import { loginUserApi } from "@/api/user";
+import { mapActions } from "vuex";
+
+const userStore = "userStore";
 
 export default {
   name: "user-login-form",
@@ -58,20 +60,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(userStore, ["loginUserAction"]),
     loginUser() {
       let body = {
         userId: this.userId,
         userPassword: this.userPassword,
       };
-      loginUserApi(
-        body,
-        () => {
-          alert("로그인 성공!")
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.loginUserAction(body);
     }
   }
 }

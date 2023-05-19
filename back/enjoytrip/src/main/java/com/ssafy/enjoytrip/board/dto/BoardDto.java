@@ -4,6 +4,7 @@ public class BoardDto {
 	private int postId;
 	private String title;
 	private String writerId;
+	private String writerNickname;
 	private String content;
 	private int likeCount;
 	private int viewCount;
@@ -31,6 +32,12 @@ public class BoardDto {
 	}
 	public void setWriterId(String writerId) {
 		this.writerId = writerId;
+	}
+	public String getWriterNickname() {
+		return writerNickname;
+	}
+	public void setWriterNickname(String writerNickname) {
+		this.writerNickname = writerNickname;
 	}
 	public String getContent() {
 		return content;
@@ -89,9 +96,9 @@ public class BoardDto {
 	
 	@Override
 	public String toString() {
-		return "BoardDto [postId=" + postId + ", title=" + title + ", writerId=" + writerId + ", content=" + content
-				+ ", likeCount=" + likeCount + ", viewCount=" + viewCount + ", writeDate=" + writeDate + ", updateDate="
-				+ updateDate + ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + ", sidoName=" + sidoName
-				+ ", gugunName=" + gugunName + "]";
+		return "BoardDto [postId=" + postId + ", title=" + title + ", writerId=" + writerId + ", writerNickname="
+				+ writerNickname + ", content=" + content + ", likeCount=" + likeCount + ", viewCount=" + viewCount
+				+ ", writeDate=" + writeDate + ", updateDate=" + updateDate + ", sidoCode=" + sidoCode + ", gugunCode="
+				+ gugunCode + ", sidoName=" + sidoName + ", gugunName=" + gugunName + "]";
 	}
 }

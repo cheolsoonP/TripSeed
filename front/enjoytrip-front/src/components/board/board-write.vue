@@ -1,7 +1,7 @@
 <template>
   <v-container class="px-8">
     <div class="form-header">
-      <v-row class="text-h6 px-3 align-center">
+      <v-row class="text-h6 align-center">
         <v-col cols="2"> 제목 </v-col>
         <v-col class="py-0">
           <v-text-field

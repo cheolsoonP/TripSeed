@@ -21,7 +21,7 @@
     </template>
     <v-list>
       <v-list-item to="/user/login">로그인</v-list-item>
-      <v-list-item to="/user/join">회원가입</v-list-item>
+      <!-- <v-list-item to="/user/login">회원가입</v-list-item> -->
     </v-list>
   </v-menu>
 </div>
@@ -32,7 +32,7 @@ export default {
   name: "NavBarUserItem",
   data() {
     return {
-      loginStatus: true,
+      loginStatus: false,
       username: "갓길재",
     };
   },

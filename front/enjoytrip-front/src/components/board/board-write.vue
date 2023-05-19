@@ -6,6 +6,7 @@
         <v-col class="py-0">
           <v-text-field
             placeholder="제목을 입력하세요"
+            v-model="title"
             outlined
             rounded
             full-width
@@ -45,6 +46,7 @@
             <v-select
               dark
               background-color="primary"
+              v-model="gugunCode"
               item-text="gugunName"
               item-value="gugunCode"
               :items="guguns"
@@ -63,6 +65,7 @@
       <v-row class="text-h6 pa-3">
         <v-textarea
           placeholder="내용을 입력하세요"
+          v-model="content"
           outlined
           full-width
           row-height="48"
@@ -75,10 +78,11 @@
 </template>
 
 <script>
-// import headerBar from "../bar/header-bar.vue";
+import { writePostApi } from '@/api/board';
 import { mapActions, mapState } from "vuex";
 
 const regionStore = "regionStore";
+const userStore = "userStore";
 
 export default {
   name: "BoardWrite",
@@ -88,17 +92,47 @@ export default {
       sidoName: null,
       gugunCode: null,
       gugunName: null,
-      searchWord: null,
+      title: "",
+      content:"",
     };
   },
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
+    ...mapState(userStore, ["userId", "userNickname"]),
   },
   methods: {
     ...mapActions(regionStore, ["getGugun"]),
 
     getGugunList() {
       this.getGugun(this.sidoCode);
+    },
+
+    onClickWritePost() {
+      if (this.title === "") {
+        this.errorMsg = "제목을 입력해주세요."
+        return;
+      }
+      else if (this.conetent === "") {
+        this.errorMsg = "내용을 입력해주세요."
+        return;
+      }
+      let body = {
+        sidoCode: this.sidoCode,
+        gugunCode: this.gugunCode,
+        title: this.title,
+        content: this.content,
+        writerId: this.userId,
+        writerNickname: this.userNickname
+      }
+      writePostApi(
+        body,
+        () => {
+          alert("게시글 업로드 성공!")
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 };

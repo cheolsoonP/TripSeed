@@ -35,14 +35,15 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public String login(String userId, String userPassword) throws Exception {
+	public Map<String, Object> login(String userId, String userPassword) throws Exception {
 		// 인증과정
 		Map<String, Object> authInfo = userMapper.getAuthInfo(userId);
 		String currPassword = PasswordUtil.generateHash(userPassword, (String)authInfo.get("salt"));
 		if(currPassword.equals(authInfo.get("userPassword"))) {
 			log.info("일치합니다.");
 			// 사용자 로그인 정보가 일치한다면 토큰 발급
-			return JwtUtil.createJwt(userId, secretKey, expiredMs);
+			authInfo.put("authToken", JwtUtil.createJwt(userId, secretKey, expiredMs));
+			return authInfo;
 		}
 		return null;
 

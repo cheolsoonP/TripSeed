@@ -121,6 +121,7 @@ export default {
       title: "",
       content: "",
       thumnail: null,
+      file: null,
       fileRules: [
         value => !value || value.size < 5000000 || '이미지 용량은 5MB를 초과할 수 없습니다.',
       ],
@@ -146,14 +147,19 @@ export default {
         this.errorMsg = "내용을 입력해주세요."
         return;
       }
+      const formData = new FormData();
+      formData.append("file", this.file);
+
       let body = {
         sidoCode: this.sidoCode,
         gugunCode: this.gugunCode,
         title: this.title,
         content: this.content,
         writerId: this.userId,
-        writerNickname: this.userNickname
+        writerNickname: this.userNickname,
+        file: this.file,
       }
+      
       writePostApi(
         body,
         () => {
@@ -168,8 +174,10 @@ export default {
     onChangeFile(file) {
       if (file !== null) {
         this.thumnail = URL.createObjectURL(file);
+        this.file = file;
       } else {
         this.thumnail = null;
+        this.file = null;
       }
     }
   },

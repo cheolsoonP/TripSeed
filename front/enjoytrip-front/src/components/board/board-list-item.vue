@@ -22,13 +22,24 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" class="pa-0">
+
+      <v-row>
+      <v-col>
         <h4>{{ post.title }}</h4>
+        <v-list-item class="pt-2 px-0">
+          {{ previewContent(post.content, 120) }}
+        </v-list-item>
       </v-col>
+
+      <v-col cols="3" v-if="post.image !== null">
+        <v-img
+          :src="post.image"
+          aspect-ratio="1"
+          fill-height
+        ></v-img>
+      </v-col>
+      </v-row>
     </v-card-title>
-    <v-list-item class="pb-2">
-      {{ previewContent(post.content, 120) }}
-    </v-list-item>
     <v-col>
       <v-row class="d-flex justify-space-between">
         <v-col cols="4" class="pd-0">
@@ -53,34 +64,7 @@
         </v-col>
       </v-row>
     </v-col>    
-    <!--
-    <v-row>
-      <v-col cols="6">
-        <v-list-item>
-          <v-list-item-avatar>
-            <v-icon>mdi-account</v-icon>
-          </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ post.writerId }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-col>
- 
-      <v-col cols="6">
-        <v-list-item>
-          <v-row>
-            <v-col v-for="reaction in reactions" :key="reaction.icon">
-              <v-icon>{{ reaction.icon }}</v-icon>
-              <span> {{ reaction.cnt }}</span>
-            </v-col>
-          </v-row>
-        </v-list-item>
-      </v-col>
-    </v-row>-->
-    <!-- <v-col cols="4">
-        <v-img src="" aspect-ratio="1" style="background-color: black" />
-      </v-col> -->
     <v-divider />
   </v-card>
 </template>

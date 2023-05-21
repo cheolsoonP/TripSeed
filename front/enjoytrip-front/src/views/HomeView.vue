@@ -1,15 +1,17 @@
 <template>
-  <board-list-item />
+<div width="100%">
+  <home-banner />
+</div>
 </template>
 
 <script>
-import BoardListItem from '@/components/board/board-list-item'
+import HomeBanner from '@/components/home/home-banner.vue'
 
   export default {
     name: 'HomeView',
 
     components: {
-      BoardListItem,
+      HomeBanner,
     },
   }
 </script>

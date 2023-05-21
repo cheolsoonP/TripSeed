@@ -5,6 +5,7 @@
     height="45vh"
     delimiter-icon="mdi-minus"
     hide-delimiter-background
+    show-arrows-on-hover
   >
     <template v-slot:prev="{ on, attrs }">
       <v-btn 

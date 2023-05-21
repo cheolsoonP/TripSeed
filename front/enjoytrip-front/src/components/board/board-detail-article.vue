@@ -62,6 +62,14 @@
       </v-col>
     </v-row>
 
+    <v-row>
+        <v-img
+          v-if="post.image !== null"
+          :src="post.image"
+          max-height="300"
+          max-width="300"
+        ></v-img>
+    </v-row>
     <v-row class="px-8 py-4">{{ post.content }}</v-row>
 
     <v-row class="px-4 justify-end">

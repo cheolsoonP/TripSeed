@@ -23,11 +23,13 @@ async function awsFileUpload(file) {
       newFileName += str;
     });
 
+    console.log(file);
     // 파일 업로드
     const params = {
       Bucket: bucketName,
       Key: newFileName,
       Body: file,
+      ContentType: file.type,
     };
 
     s3.upload(params, (err, data) => {

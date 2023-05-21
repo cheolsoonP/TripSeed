@@ -1,4 +1,5 @@
 import { apiInstance } from "./index.js";
+import { awsFileUpload } from "@/api/fileUpload.js";
 const api = apiInstance();
 
 function postList(param, success, fail) {
@@ -9,9 +10,28 @@ function getPost(postId, success, fail) {
   api.get(`/board/view/${postId}`).then(success).catch(fail);
 }
 
-function writePostApi(body, success, fail) {
+async function writePostApi(body, success, fail) {
   console.log(body);
-  api.post(`/board/write`, body).then(success).catch(fail);
+  // 업로드할 파일이 있다면
+  // 파일 업로드 후에 해당 링크 Backend 전달
+  if (body.file !== null) {
+    await awsFileUpload(body.file).then((data) => {
+      if (data !== null) {
+        body = {
+          ...body,
+          image: data,
+        };
+        delete body.file;
+        api.post(`/board/write`, body).then(success).catch(fail);
+      } else {
+        console.log("파일 업로드 실패");
+      }
+    });
+  } else {
+    // 업로드할 이미지가 없다면 게시글만 올린다.
+    delete body.file;
+    api.post(`/board/write`, body).then(success).catch(fail);
+  }
 }
 
 export { postList, getPost, writePostApi };

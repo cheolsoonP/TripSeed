@@ -60,7 +60,33 @@
 
       <v-row><v-divider /></v-row>
     </div>
-
+    <div>
+      <v-row class="text-h6">
+        <v-col cols="2">썸네일 이미지</v-col>
+        <v-col cols="3">
+          <v-file-input
+            @change="onChangeFile"
+            color="primary"
+            light
+            chips
+            counter
+            show-size
+            :rules="fileRules"
+            accept="image/*"
+            truncate-length="34"
+          ></v-file-input>
+        </v-col>
+      </v-row>
+      <v-row>미리보기</v-row>
+      <v-row>
+        <v-img
+          v-if="thumnail !== null"
+          :src="thumnail"
+          max-height="300"
+          max-width="300"
+        ></v-img>
+      </v-row>
+    </div>
     <div class="pt-3">
       <v-row class="text-h6 pa-3">
         <v-textarea
@@ -93,7 +119,12 @@ export default {
       gugunCode: null,
       gugunName: null,
       title: "",
-      content:"",
+      content: "",
+      thumnail: null,
+      file: null,
+      fileRules: [
+        value => !value || value.size < 5000000 || '이미지 용량은 5MB를 초과할 수 없습니다.',
+      ],
     };
   },
   computed: {
@@ -116,14 +147,19 @@ export default {
         this.errorMsg = "내용을 입력해주세요."
         return;
       }
+      const formData = new FormData();
+      formData.append("file", this.file);
+
       let body = {
         sidoCode: this.sidoCode,
         gugunCode: this.gugunCode,
         title: this.title,
         content: this.content,
         writerId: this.userId,
-        writerNickname: this.userNickname
+        writerNickname: this.userNickname,
+        file: this.file,
       }
+      
       writePostApi(
         body,
         () => {
@@ -135,6 +171,15 @@ export default {
         }
       );
     },
+    onChangeFile(file) {
+      if (file !== null) {
+        this.thumnail = URL.createObjectURL(file);
+        this.file = file;
+      } else {
+        this.thumnail = null;
+        this.file = null;
+      }
+    }
   },
 };
 </script>

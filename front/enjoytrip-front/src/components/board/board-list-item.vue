@@ -52,7 +52,7 @@
           </v-card-text>
         </v-col>
       </v-row>
-    </v-col>
+    </v-col>    
     <!--
     <v-row>
       <v-col cols="6">

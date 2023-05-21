@@ -23,6 +23,7 @@ const boardStore = {
           sidoName: post.sidoName,
           gugunCode: post.gugunCode,
           gugunName: post.gugunName,
+          image: post.image,
         });
       });
     },

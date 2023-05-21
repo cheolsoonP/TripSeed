@@ -16,12 +16,13 @@
 		<result column="gugun_code" property="gugunCode" />
 		<result column="sido_name" property="sidoName" />
 		<result column="gugun_name" property="gugunName" />
+		<result column="image" property="image" />
 	</resultMap>
 	
 	<insert id="writePost" parameterType="boardDto">
 		insert into tour_info_board
-			(title, writer_id, writer_nickname, content, sido_code, gugun_code)
-			values (#{title}, #{writerId}, #{writerNickname}, #{content}, #{sidoCode}, #{gugunCode})
+			(title, writer_id, writer_nickname, content, sido_code, gugun_code, image)
+			values (#{title}, #{writerId}, #{writerNickname}, #{content}, #{sidoCode}, #{gugunCode}, #{image})
 	</insert>
 	
 	<select id="getPostList" parameterType="string" resultMap="post">

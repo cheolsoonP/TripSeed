@@ -14,6 +14,7 @@ public class BoardDto {
 	private int gugunCode;
 	private String sidoName;
 	private String gugunName;
+	private String image;
 	
 	public int getPostId() {
 		return postId;
@@ -93,12 +94,19 @@ public class BoardDto {
 	public void setGugunName(String gugunName) {
 		this.gugunName = gugunName;
 	}
-	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	@Override
 	public String toString() {
 		return "BoardDto [postId=" + postId + ", title=" + title + ", writerId=" + writerId + ", writerNickname="
 				+ writerNickname + ", content=" + content + ", likeCount=" + likeCount + ", viewCount=" + viewCount
 				+ ", writeDate=" + writeDate + ", updateDate=" + updateDate + ", sidoCode=" + sidoCode + ", gugunCode="
-				+ gugunCode + ", sidoName=" + sidoName + ", gugunName=" + gugunName + "]";
+				+ gugunCode + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", image=" + image + "]";
 	}
+
+	
 }

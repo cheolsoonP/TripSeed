@@ -27,6 +27,7 @@ import com.ssafy.enjoytrip.board.service.BoardService;
 public class BoardCotroller {
 	private BoardService boardService;
 
+
 	@Autowired
 	public BoardCotroller(BoardService boardService) {
 		this.boardService = boardService;
@@ -35,8 +36,8 @@ public class BoardCotroller {
 	@PostMapping("/write")
 	public ResponseEntity<?> writePost(@RequestBody BoardDto boardDto) {
 		try {
+			System.out.println(boardDto);
 			if (boardDto.getTitle() == null || boardDto.getContent() == null) {
-				System.out.println(boardDto);
 				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
 			}
 			boardService.writePost(boardDto);

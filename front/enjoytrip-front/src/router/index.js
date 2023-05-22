@@ -34,7 +34,7 @@ const routes = [
         name: "boardwrite",
         // beforeEnter: onlyAuthUser,
         component: () => import("@/components/board/board-write"),
-      }
+      },
     ],
   },
   {
@@ -67,8 +67,8 @@ const routes = [
         component: () => import("@/components/plan/plan-write"),
       },
       {
-        path: "detail",
-        name: "plandetail",
+        path: "view/:planId",
+        name: "planview",
         component: () => import("@/components/plan/plan-detail"),
       },
     ],

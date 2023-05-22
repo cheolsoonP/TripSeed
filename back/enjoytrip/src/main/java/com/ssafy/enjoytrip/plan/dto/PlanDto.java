@@ -8,6 +8,7 @@ public class PlanDto {
 	private String startDate;
 	private String endDate;
 	private int complete;
+	private String image;
 	
 	public int getPlanId() {
 		return planId;
@@ -45,11 +46,20 @@ public class PlanDto {
 	public void setComplete(int complete) {
 		this.complete = complete;
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	
 	@Override
 	public String toString() {
 		return "PlanDto [planId=" + planId + ", userId=" + userId + ", planTitle=" + planTitle + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", complete=" + complete + "]";
+				+ startDate + ", endDate=" + endDate + ", complete=" + complete + ", image=" + image + "]";
 	}
+	
+	
+
 	
 }

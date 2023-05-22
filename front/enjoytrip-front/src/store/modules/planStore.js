@@ -11,6 +11,7 @@ const planStore = {
         attractionId: "",
         memo: "",
         visitTime: "",
+        image: "",
       },
     ],
   },
@@ -26,6 +27,7 @@ const planStore = {
           startDate: plan.startDate,
           endDate: plan.endDate,
           complete: plan.complete,
+          image: plan.image,
         });
       });
     },

@@ -20,7 +20,7 @@
           </v-card>
         </v-col>
         <v-col cols="auto" class="d-flex justify-center">
-          <img :src="imgsrc"/>
+          <v-img :src="imgsrc" max-width="200" contain/>
         </v-col>
       </v-row>
     </v-card>

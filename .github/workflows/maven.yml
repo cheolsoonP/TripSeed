@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - fix/back-ci-cd
   pull_request: 
     branches:
       - main
@@ -22,49 +21,39 @@ jobs:
         with:
           java-version: '8'
 
-
       - name: Make application.properties
         run: |
-          ls
-          cd back/enjoytrip
-          touch ./src/main/resources/application.properties
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> ./src/main/resources/application.properties
+          touch back/enjoytrip/src/main/resources/application.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" >> back/enjoytrip/src/main/resources/application.properties
 
         shell: bash 
+
         
       - name: Build with Maven
         run: |
           cd back/enjoytrip
           mvn -B package --file ./pom.xml
 
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          registry: ${{ secrets.ECR_REGISTRY_URI }}
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
-          
-      - name: Build and push Docker image to ECR
-        id: build-image
-        uses: docker/build-push-action@v2
-        with:
-          context: EnjoyTrip/enjoytrip
-          push: true
-          tags: ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
-          build-args: |
-            JAR_FILE=./back/enjoytrip/target/*.jar
-          dockerfile: ./back/enjoytrip/src/main/docker/Dockerfile
-          
-          
-      - name: SSH and run Docker image on EC2 instance
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            docker stop ${{ secrets.CONTAINER_NAME }} || true
-            docker rm ${{ secrets.CONTAINER_NAME }} || true
-            docker pull ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
-            docker run -d -p 8080:8080 --name ${{ secrets.CONTAINER_NAME }} ${{ secrets.ECR_REGISTRY_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:${{ secrets.IMAGE_TAG }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.ECR_REGION }}
+
+      - name: Login to ECR
+        run: aws ecr get-login-password --region ${{ secrets.ECR_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com
+
+    
+      - name: Build Docker Image
+        run: |
+          cd back/enjoytrip
+          docker build -t tripseed-api .
+
+      - name: Tag Docker Image
+        run: docker tag tripseed-api:latest ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
+
+      - name: Push Docker Image to ECR
+        run: docker push ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
+

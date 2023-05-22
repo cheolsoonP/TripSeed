@@ -1,14 +1,11 @@
 <template>
   <div>
-    <v-card class="ma-3" width="100%" height="auto" tile :to="'/plan/view/' + planInfo.planId">
-      <v-list-item>
-        <v-col cols="3">
-          <v-list-item-avatar tile size="200">
-            <v-img :src="planInfo.image" contain></v-img>
-          </v-list-item-avatar>
+    <v-card class="ma-3 pa-0" width="100%" height="auto" tile :to="'/plan/view/' + planInfo.planId">
+      <v-list-item class="pa-0">
+        <v-col class="ma-0 mr-2 pa-0" cols="3">
+          <v-img :src="planInfo.image"></v-img>
         </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="8">
+        <v-col cols="9">
           <v-list-item-content>
             <v-list-item>
               <div class="primary rounded-pill px-3 py-1">
@@ -18,7 +15,10 @@
               </div>
             </v-list-item>
             <v-list-item-title>
-              <span class="text-h4">
+              <span v-if="isSmall" class="text-h5">
+                {{ planInfo.planTitle }}
+              </span>
+              <span v-else class="text-h4">
                 {{ planInfo.planTitle }}
               </span>
             </v-list-item-title>
@@ -41,7 +41,10 @@
 <script>
 export default {
   name: "PlanListItem",
-  props: ["planInfo"],
+  props: {
+    planInfo: [],
+    isSmall: Boolean,
+  },
 };
 </script>
 

@@ -1,10 +1,7 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" sm="6">
-        <v-date-picker v-model="dates" range></v-date-picker>
-      </v-col>
-      <v-col cols="12" sm="6">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
         <v-menu
           v-model="startMenu"
           :close-on-content-click="false"
@@ -20,6 +17,7 @@
               prepend-icon="mdi-calendar"
               v-bind="attrs"
               v-on="on"
+              hide-details
             ></v-text-field>
           </template>
           <v-date-picker
@@ -27,6 +25,8 @@
             @input="startMenu = false"
           ></v-date-picker>
         </v-menu>
+      </v-col>
+    <v-col cols="12" md="6">
         <v-menu
           v-model="endMenu"
           :close-on-content-click="false"
@@ -42,6 +42,7 @@
               prepend-icon="mdi-calendar"
               v-bind="attrs"
               v-on="on"
+              hide-details
             ></v-text-field>
           </template>
           <v-date-picker
@@ -50,6 +51,16 @@
             :min="dates[0]"
           ></v-date-picker>
         </v-menu>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-date-picker v-model="dates" range
+          show-adjacent-months
+          full-width
+          no-title
+          locale="ko"
+        ></v-date-picker>
       </v-col>
     </v-row>
   </v-container>

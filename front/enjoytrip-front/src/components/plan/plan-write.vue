@@ -2,19 +2,19 @@
   <v-container class="py-0">
     <v-stepper v-model="e1" elevation="0">
       <v-stepper-header>
-        <v-stepper-step :complete="e1 > 1" step="1">
+        <v-stepper-step :complete="e1 > 1" editable step="1">
           여행 정보 입력
         </v-stepper-step>
 
         <v-divider />
 
-        <v-stepper-step :complete="e1 > 2" step="2">
+        <v-stepper-step :complete="e1 > 2" editable step="2">
           여행 일정 선택
         </v-stepper-step>
 
         <v-divider />
 
-        <v-stepper-step :complete="e1 > 3" step="3">
+        <v-stepper-step :complete="e1 > 3" editable step="3">
           여행 계획 생성
         </v-stepper-step>
       </v-stepper-header>
@@ -46,7 +46,7 @@
           </v-col>
         </v-stepper-content>
 
-        <v-stepper-content step="3">
+        <v-stepper-content step="3" class="pa-0">
           <plan-write-route />
         </v-stepper-content>
       </v-stepper-items>

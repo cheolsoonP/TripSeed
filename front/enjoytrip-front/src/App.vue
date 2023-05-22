@@ -49,3 +49,23 @@ export default {
   }
 };
 </script>
+
+<style>
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400,500,600;
+    font-style: normal;
+}
+
+* {
+  font-family: 'Pretendard-Regular';
+}
+
+.v-btn__content {
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+
+</style>

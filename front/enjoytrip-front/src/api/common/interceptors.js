@@ -1,3 +1,4 @@
+// import router from "@/router";
 import store from "@/store/index";
 
 export function setInterceptors(instance) {
@@ -25,6 +26,11 @@ export function setInterceptors(instance) {
     function (error) {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
+      if (error.response.data.message.includes("JWT expired")) {
+        // router.push({
+        //   name: "/login",
+        // });
+      }
       return Promise.reject(error);
     }
   );

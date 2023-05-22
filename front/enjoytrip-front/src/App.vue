@@ -60,7 +60,6 @@ export default {
 
 * {
   font-family: 'Pretendard-Regular';
-  font-weight: 600;
 }
 
 .v-btn__content {

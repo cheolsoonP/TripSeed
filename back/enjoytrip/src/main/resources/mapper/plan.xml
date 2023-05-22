@@ -17,7 +17,11 @@
 		<result column="attraction_id" property="attractionId"/>
 		<result column="visit_order" property="visitOrder"/>
 		<result column="memo" property="memo"/>
-		<result column="visit_time" property="visitTime"/>		
+		<result column="title" property="title"/>		
+		<result column="latitude" property="latitude"/>		
+		<result column="longitude" property="longitude"/>		
+		<result column="image" property="image"/>
+		<result column="addr" property="addr"/>
 	</resultMap>
 	
 	<!-- 여행 계획 추가/조회/변경/삭제  -->
@@ -28,7 +32,7 @@
 	</insert>	
 	
 	<select id="getPlanList" parameterType="string" resultMap="plan">
-		select plan_id, user_id, plan_title, start_date, end_date, complete 
+		select plan_id, user_id, plan_title, start_date, end_date, complete, image 
 		from trip_plan
 		where user_id=#{userId}	
 	</select>
@@ -50,7 +54,7 @@
 	</update>
 	
 	<select id="getPlan" parameterType="string" resultMap="plan">
-		select plan_id, user_id, plan_title, start_date, end_date, complete, image
+		select *
 		from trip_plan
 		where plan_id=#{planId}	
 	</select>
@@ -65,9 +69,12 @@
 	</insert>
 	
 	<select id="getRoute" parameterType="string" resultMap="route">
-		select plan_id, attraction_id, visit_order, memo, visit_time
-		from trip_route
-		where plan_id = #{planId}
+		select 
+			r.plan_id, r.attraction_id, r.visit_order, r.memo, r.visit_time,
+			a.first_image image, a.title, a.latitude, a.longitude, a.addr1 addr
+		from trip_route r join attraction_info a
+		on r.attraction_id = a.attraction_id
+		where plan_id = #{planId};
 	</select>
 	
 	<delete id="deleteRoute" parameterType="string">

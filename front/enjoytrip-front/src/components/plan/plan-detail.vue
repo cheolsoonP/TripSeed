@@ -1,26 +1,35 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="my-5">
       <!-- 왼쪽 -->
-      <v-col cols="12" md="6">
-        <v-row>{{ plan.planTitle }}</v-row>
+      <v-col cols="12" md="8">
+        <v-row class="text-h3 justify-center">{{ plan.planTitle }}</v-row>
+        <v-btn elevation="0" color="primary" :to="url">
+          <v-icon>mdi-plus</v-icon>
+          <span class="pl-1">동행 초대하기</span>
+        </v-btn>
         <v-row>
           <v-col>
-            <v-list-item>시작</v-list-item>
-            <v-list-item>{{ plan.startDate }}</v-list-item>
+            <v-list-item class="text-h6 justify-center"> <span>시작</span></v-list-item>
+            <v-list-item class="justify-center">
+              <v-chip color="primary" outlined large>{{ plan.startDate }}</v-chip>
+              <!-- <span class="rounded-pill primary mx-2 pa-3 date">{{ plan.startDate }}</span> -->
+            </v-list-item>
           </v-col>
           <v-col>
-            <v-list-item>종료</v-list-item>
-            <v-list-item>{{ plan.endDate }}</v-list-item>
+            <v-list-item class="text-h6 justify-center"> <span>종료</span></v-list-item>
+            <v-list-item class="justify-center">
+              <v-chip color="primary" outlined large>{{ plan.endDate }}</v-chip>
+            </v-list-item>
           </v-col>
         </v-row>
-        <v-row>
-          <v-btn>동행 초대하기</v-btn>
+        <!-- 카카오 맵 -->
+        <v-row class="justify-center">
+          <plan-detail-map :routes="routes"></plan-detail-map>
         </v-row>
-        <v-row> 지도 </v-row>
       </v-col>
       <!-- 오른쪽 -->
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="4">
         <v-list-item v-for="(route, index) in routes" :key="index">
           <route-item :route="route"></route-item>
         </v-list-item>
@@ -32,13 +41,25 @@
 <script>
 import { getPlanDetailApi, getRouteApi } from "@/api/plan.js";
 import routeItem from "@/components/plan/route-item.vue";
+import PlanDetailMap from "./plan-detail-map.vue";
 export default {
   name: "PlanDetail",
-  components: { routeItem },
+  components: { routeItem, PlanDetailMap },
   data() {
     return {
       plan: {},
-      routes: [],
+      routes: [
+        {
+          addr: "",
+          attractionId: "",
+          image: "",
+          latitude: "",
+          longitude: "",
+          memo: "",
+          title: "",
+          visitOrder: "",
+        },
+      ],
     };
   },
   created() {

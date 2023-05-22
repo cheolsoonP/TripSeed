@@ -56,3 +56,33 @@ jobs:
 
       - name: Push Docker Image to ECR
         run: docker push ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
+
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.EC2_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.EC2_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.EC2_REGION }}
+
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH into EC2 and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            script: |
+              docker stop ${{ secrets.CONTAINER_NAME}}
+              docker rm ${{ secrets.CONTAINER_NAME}}
+              # ECR에서 도커파일 가져오기
+              aws ecr get-login-password --region ${{ secrets.ECR_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com
+              docker pull ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
+              # 도커파일 실행
+              docker run -d --name ${{ secrets.CONTAINER_NAME}} -p ${{ secrets.HOST_PORT }}:${{ secrets.CONTAINER_PORT }} tripseed:latest
+
+

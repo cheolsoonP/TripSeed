@@ -9,6 +9,7 @@
 		<result column="start_date" property="startDate" />
 		<result column="end_date" property="endDate" />
 		<result column="complete" property="complete" />
+		<result column="image" property="image" />
 	</resultMap>
 	
 	<resultMap type="routeDto" id="route">
@@ -49,7 +50,7 @@
 	</update>
 	
 	<select id="getPlan" parameterType="string" resultMap="plan">
-		select plan_id, user_id, plan_title, start_date, end_date, complete 
+		select plan_id, user_id, plan_title, start_date, end_date, complete, image
 		from trip_plan
 		where plan_id=#{planId}	
 	</select>

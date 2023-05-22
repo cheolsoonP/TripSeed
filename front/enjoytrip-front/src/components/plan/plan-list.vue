@@ -7,7 +7,7 @@
         url="/plan/write"
         btn_icon="mdi-plus"
         btn_text="일정 생성"
-        imgsrc=""
+        :imgsrc="headerImage"
       />
     </div>
     <v-row>
@@ -25,17 +25,18 @@
 </template>
 
 <script>
-// import PlanSideBar from "@/components/bar/plan-side-bar"
 import { mapActions, mapState } from "vuex"
+import PlanSideBar from "@/components/bar/plan-side-bar.vue"
 import PlanListItem from "@/components/plan/plan-list-item"
 import HeaderBar from "@/components/bar/header-bar.vue";
 const planStore = "planStore";
 const userStore = "userStore";
 
 export default {
-  components: { PlanListItem, HeaderBar },
+  components: { PlanSideBar, PlanListItem, HeaderBar },
   data() {
     return {
+      headerImage: process.env.VUE_APP_BUCKET_BASE_URL + "HeaderBarImg.png",
 
     }
   },
@@ -45,6 +46,7 @@ export default {
   },
   created() {
     this.getPlanListAction(this.userId);
+    console.log(this.plans);
   },
   methods: {
     ...mapActions(planStore, ["getPlanListAction"]),

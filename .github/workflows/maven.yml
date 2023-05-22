@@ -78,12 +78,10 @@ jobs:
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             script: |
               docker stop ${{ secrets.CONTAINER_NAME}}
-              docker rm ${{ secrets.CONTAINER_NAME}}
+              docker rm -f ${{ secrets.CONTAINER_NAME}}
               # ECR에서 도커파일 가져오기
               aws ecr get-login-password --region ${{ secrets.ECR_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com
-              docker pull ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}
+              docker pull ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
               # 도커파일 실행
-              docker run -d --name ${{ secrets.CONTAINER_NAME}} -p ${{ secrets.HOST_PORT }}:${{ secrets.CONTAINER_PORT }} 
-                ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
-
+              docker run -d --name ${{ secrets.CONTAINER_NAME}} -p ${{ secrets.HOST_PORT }}:${{ secrets.CONTAINER_PORT }} ${{ secrets.ECR_USER }}.dkr.ecr.${{ secrets.ECR_REGION }}.amazonaws.com/${{ secrets.ECR_NAME }}:latest
 

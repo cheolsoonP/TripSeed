@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
 			log.info("일치합니다.");
 			// 사용자 로그인 정보가 일치한다면 토큰 발급
 			authInfo.put("authToken", JwtUtil.createJwt(userId, secretKey, expiredMs));
+			authInfo.remove("salt");
+			authInfo.remove("userPassword");
 			return authInfo;
 		}
 		return null;

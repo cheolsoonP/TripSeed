@@ -21,4 +21,6 @@ public interface BoardMapper {
 
 	void deletePost(String postId) throws SQLException;
 
+	List<BoardDto> getUserPostList(String userId) throws SQLException;
+
 }

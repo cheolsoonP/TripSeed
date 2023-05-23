@@ -20,7 +20,7 @@
       label="비밀번호를 입력하세요"
       required
       v-model="userPassword"
-      type='password'
+      type="password"
       outlined
       dense
       prepend-inner-icon="mdi-lock"
@@ -29,14 +29,7 @@
       {{ errorMsg }}
     </span>
     <div>
-      <v-btn
-        type="button"
-        @click="loginUser"
-        color="primary"
-        width="100%"
-      >
-        로그인
-      </v-btn>
+      <v-btn type="button" @click="loginUser" color="primary" width="100%"> 로그인 </v-btn>
     </div>
   </v-form>
 </template>
@@ -55,7 +48,7 @@ export default {
       userPassword: "",
       valid: false,
       errorMsg: "",
-    }
+    };
   },
   computed: {
     ...mapState(userStore, ["isLogin"]),
@@ -64,11 +57,10 @@ export default {
     ...mapActions(userStore, ["loginUserAction"]),
     loginUser() {
       if (this.userId === "") {
-        this.errorMsg = "아이디를 입력해주세요."
+        this.errorMsg = "아이디를 입력해주세요.";
         return;
-      }
-      else if (this.userPassword === "") {
-        this.errorMsg = "비밀번호를 입력해주세요."
+      } else if (this.userPassword === "") {
+        this.errorMsg = "비밀번호를 입력해주세요.";
         return;
       }
       let body = {
@@ -81,18 +73,13 @@ export default {
       if (this.isLogin === true) {
         alert("로그인 되었습니다.");
         this.errorMsg = "";
-        this.$router.push({
-          name: "/"
-        })
+        this.$router.push("/");
       } else {
         this.errorMsg = "비밀번호를 다시 입력해주세요.";
       }
     },
-  }
-}
-
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

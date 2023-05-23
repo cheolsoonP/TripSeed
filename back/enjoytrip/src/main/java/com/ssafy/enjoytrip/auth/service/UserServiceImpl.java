@@ -1,9 +1,11 @@
 package com.ssafy.enjoytrip.auth.service;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.enjoytrip.auth.dto.FollowDto;
 import com.ssafy.enjoytrip.auth.dto.UserDto;
 import com.ssafy.enjoytrip.auth.mapper.UserMapper;
 import com.ssafy.enjoytrip.auth.util.JwtUtil;
@@ -70,4 +72,21 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(String userId) throws Exception {
 		userMapper.deleteUser(userId);
 	}
+
+	@Override
+	public List<UserDto> searchUserList(Map<String, Object> map) throws Exception {
+		return userMapper.searchUser(map);
+	}
+
+	@Override
+	public void addFollowUser(FollowDto followDto) throws Exception {
+		userMapper.addFollowUser(followDto);
+	}
+
+	@Override
+	public List<UserDto> getFollowerList(String userId) throws Exception {
+		return userMapper.getFollowerList(userId);
+	}
+
+
 }

@@ -11,6 +11,14 @@
 		<result column="user_email" property="userEmail"/>
 	</resultMap>
 	
+	<resultMap type="userDto" id="userinfo">
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>		
+		<result column="user_nickname" property="userNickname"/>
+		<result column="user_email" property="userEmail"/>
+	</resultMap>
+
+	
 	<insert id="joinUser" parameterType="userDto" >
 		insert into user 
 		values (#{userId}, #{userName}, #{userNickname}, #{userEmail}, #{userPassword}, #{salt})
@@ -44,5 +52,27 @@
 		from user
 		where id = #{userId}
 	</select>
+	
+	<select id="searchUser" parameterType="hashMap" resultMap="userinfo">
+		select user_id, user_name, user_nickname, user_email
+		from user
+		<trim prefix="where" suffixOverrides="and">
+			<if test="userId != null">user_id like concat('%', #{userId}, '%')</if>
+			<if test="userNickname != null">user_nickname like concat('%', #{userNickname}, '%')</if>
+		</trim>
+	</select>
+
+	<insert id="addFollowUser" parameterType="followDto" >
+		insert ignore into follow
+		values (#{userId}, #{followingUserId})
+	</insert>
+	
+	<select id="getFollowerList" parameterType="string" resultMap="userinfo">
+		select user_id, following_user_id
+		from follow
+		where following_user_id = #{user_id}
+	</select>
+	
+	
 
 </mapper>

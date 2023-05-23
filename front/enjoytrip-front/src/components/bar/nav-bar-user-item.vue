@@ -15,7 +15,7 @@
       </v-list>
     </v-menu>
     <div v-else>
-      <v-btn class="d-none d-flex" text v-on="on" to="/user/login">로그인/회원가입</v-btn>
+      <v-btn class="d-none d-flex" text v-on="on" to="/login">로그인/회원가입</v-btn>
     </div>
     <!-- <v-menu open-on-hover offset-y v-else>
       <template v-slot:activator="{ on }">

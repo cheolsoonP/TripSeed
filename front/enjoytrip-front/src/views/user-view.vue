@@ -1,6 +1,9 @@
 <template>
   <div class="plan">
-    <router-view></router-view>
+    <v-row>
+      <v-col><mypage-side-bar></mypage-side-bar></v-col>
+      <v-col> <router-view></router-view> </v-col>
+    </v-row>
   </div>
 </template>
 

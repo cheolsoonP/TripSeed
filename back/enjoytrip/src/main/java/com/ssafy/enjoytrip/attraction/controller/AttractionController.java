@@ -32,11 +32,12 @@ public class AttractionController {
 	}
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAttractionList(@RequestParam(value = "sido", required = false) Integer sidoCode, 
-												@RequestParam(value = "gugun", required = false) Integer gugunCode,
+	public ResponseEntity<?> getAttractionList(@RequestParam(value = "sidoCode", required = false) Integer sidoCode, 
+												@RequestParam(value = "gugunCode", required = false) Integer gugunCode,
 												@RequestParam(value = "contentType", required = false) Integer contentTypeId,
 												@RequestParam(value = "keyword", required = false) String keyword){
 		try {
+			System.out.println(sidoCode);
 			Map<String, Object> map = new HashMap<>();
 			map.put("sidoCode", sidoCode);
 			map.put("gugunCode", gugunCode);

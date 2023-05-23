@@ -6,7 +6,9 @@ const regionStore = {
     sidos: [{ value: null, text: "선택하세요" }],
     guguns: [{ gugunCode: null, gugunName: "시도를 선택해주세요." }],
   },
-  getters: {},
+  getters: {
+    
+  },
   mutations: {
     SET_SIDO_LIST(state, sidos) {
       state.sidos = [];

@@ -134,10 +134,6 @@ export default {
   methods: {
     ...mapActions(regionStore, ["getGugun"]),
 
-    getGugunList() {
-      this.getGugun(this.sidoCode);
-    },
-
     onClickWritePost() {
       if (this.title === "") {
         this.errorMsg = "제목을 입력해주세요."

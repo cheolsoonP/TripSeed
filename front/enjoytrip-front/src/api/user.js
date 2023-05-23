@@ -10,4 +10,8 @@ async function loginUserApi(body, success, fail) {
   await api.post(`/users/login`, body).then(success).catch(fail);
 }
 
-export { joinUserApi, loginUserApi };
+function updateUserApi(body, success, fail) {
+  api.put(`/users/modify`, body).then(success).catch(fail);
+}
+
+export { joinUserApi, loginUserApi, updateUserApi };

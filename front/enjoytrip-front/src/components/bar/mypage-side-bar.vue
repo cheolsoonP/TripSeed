@@ -1,5 +1,5 @@
 <template>
-  <v-card height="auto" width="256" class="mx-auto">
+  <v-card height="500" width="256" class="mx-auto">
     <v-navigation-drawer permanent>
       <v-list-item>
         <v-list-item-content>
@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       items: [
-        { title: "회원정보", icon: "mdi-file-document-edit-outline", route: "/user/info" },
-        { title: "내가 작성한 글", icon: "mdiTableOfContents", route: "/user/info/content" },
+        { title: "회원정보", icon: "mdi-file-document-edit-outline", route: "/user/info/detail" },
+        { title: "내가 작성한 글", icon: "mdi-table-of-contents", route: "/user/info/content" },
         { title: "팔로워", icon: "mdi-account-arrow-left", route: "/user/info/followers" },
         { title: "팔로우", icon: "mdi-account-arrow-right", route: "/user/info/following" },
       ],

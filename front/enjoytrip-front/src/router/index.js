@@ -66,8 +66,9 @@ const routes = [
     ],
   },
   {
-    path: "/user",
-    name: "user",
+    path: "/user/info",
+    name: "userinfo",
+    redirect: "/user/info/detail",
     component: () => import("@/views/user-view"),
     children: [
       {

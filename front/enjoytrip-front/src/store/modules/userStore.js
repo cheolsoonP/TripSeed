@@ -6,6 +6,7 @@ const userStore = {
     userId: "",
     userName: "",
     userNickname: "",
+    userEmail: "",
     authToken: "",
     isLogin: false,
     authFail: false,
@@ -24,6 +25,7 @@ const userStore = {
       state.userId = "";
       state.userName = "";
       state.userNickname = "";
+      state.userEmail = "";
       state.isLogin = false;
       state.authFail = false;
     },
@@ -32,6 +34,7 @@ const userStore = {
       state.userId = info.userId;
       state.userName = info.userName;
       state.userNickname = info.userNickname;
+      state.userEmail = info.userEmail;
       state.isLogin = true;
       state.authFail = false;
     },

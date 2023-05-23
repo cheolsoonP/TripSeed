@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { searchUserApi } from "@/api/user";
+import { searchUserApi, addFollowUserApi } from "@/api/user";
 import { mapState } from "vuex";
 
 const userStore = "userStore";
@@ -100,10 +100,16 @@ export default {
         followingUserId: followingUserId,
       };
 
-      addFollowApi(
+      console.log(body);
+
+      addFollowUserApi(
         body,
-        () => {},
-        () => {}
+        () => {
+          alert(`${followingUserId}님에게 팔로우 신청하였습니다.`);
+        },
+        (error) => {
+          console.log(error);
+        }
       );
     },
   },

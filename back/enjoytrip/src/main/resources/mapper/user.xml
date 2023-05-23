@@ -62,5 +62,17 @@
 		</trim>
 	</select>
 
+	<insert id="addFollowUser" parameterType="followDto" >
+		insert ignore into follow
+		values (#{userId}, #{followingUserId})
+	</insert>
+	
+	<select id="getFollowerList" parameterType="string" resultMap="userinfo">
+		select user_id, following_user_id
+		from follow
+		where following_user_id = #{user_id}
+	</select>
+	
+	
 
 </mapper>

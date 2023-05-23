@@ -18,4 +18,19 @@ function searchUserApi(param, success, fail) {
   api.get(`/users/search`, { params: param }).then(success).catch(fail);
 }
 
-export { joinUserApi, loginUserApi, updateUserApi, searchUserApi };
+function addFollowUserApi(body, success, fail) {
+  api.post(`/users/${body.userId}/following`, body.followingUserId).then(success).catch(fail);
+}
+
+function getFollowerListApi(userId, success, fail) {
+  api.get(`/users/${userId}/followers`).then(success).catch(fail);
+}
+
+export {
+  joinUserApi,
+  loginUserApi,
+  updateUserApi,
+  searchUserApi,
+  addFollowUserApi,
+  getFollowerListApi,
+};

@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class followDto {
+public class FollowDto {
 	private String userId;
 	private String followingUserId;
 }

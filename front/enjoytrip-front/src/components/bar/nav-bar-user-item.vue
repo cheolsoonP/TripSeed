@@ -45,6 +45,7 @@ export default {
     ...mapActions(userStore, ["initUserInfoAction"]),
     onClickLogout() {
       this.initUserInfoAction().then(alert("로그아웃 되었습니다."));
+      this.$router.push("/login");
     },
   },
 };

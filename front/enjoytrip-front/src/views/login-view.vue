@@ -1,13 +1,15 @@
 <template>
   <div class="login">
-    <router-view></router-view>
+    <user-login />
   </div>
 </template>
 
 <script>
+import UserLogin from "@/components/user/user-login.vue";
 export default {
   name: "LoginView",
-}
+  components: { UserLogin },
+};
 </script>
 
 <style>

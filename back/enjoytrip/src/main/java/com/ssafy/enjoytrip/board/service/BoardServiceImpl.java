@@ -48,6 +48,12 @@ public class BoardServiceImpl implements BoardService {
 	public void deletePost(String postId) throws Exception {
 		boardMapper.deletePost(postId);
 	}
+
+
+	@Override
+	public List<BoardDto> getUserPostList(String userId) throws Exception {
+		return boardMapper.getUserPostList(userId);
+	}
 	
 
 }

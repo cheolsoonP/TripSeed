@@ -8,6 +8,7 @@
 		<result column="user_id" property="userId"/>
 		<result column="user_name" property="userName"/>		
 		<result column="user_nickname" property="userNickname"/>
+		<result column="user_email" property="userEmail"/>
 	</resultMap>
 	
 	<insert id="joinUser" parameterType="userDto" >
@@ -16,7 +17,7 @@
 	</insert>
 
 	<select id="getAuthInfo" parameterType="string" resultMap="authinfo">
-		select salt, user_password, user_id, user_name, user_nickname
+		select salt, user_password, user_id, user_name, user_nickname, user_email
 		from user
 		where user_id=#{userId}
 	</select>

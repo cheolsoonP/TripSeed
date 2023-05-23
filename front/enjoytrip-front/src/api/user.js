@@ -14,4 +14,8 @@ function updateUserApi(body, success, fail) {
   api.put(`/users/modify`, body).then(success).catch(fail);
 }
 
-export { joinUserApi, loginUserApi, updateUserApi };
+function searchUserApi(param, success, fail) {
+  api.get(`/users/search`, { params: param }).then(success).catch(fail);
+}
+
+export { joinUserApi, loginUserApi, updateUserApi, searchUserApi };

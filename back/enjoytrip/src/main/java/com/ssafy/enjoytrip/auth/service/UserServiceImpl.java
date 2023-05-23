@@ -1,4 +1,5 @@
 package com.ssafy.enjoytrip.auth.service;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -70,4 +71,11 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(String userId) throws Exception {
 		userMapper.deleteUser(userId);
 	}
+
+	@Override
+	public List<UserDto> searchUserList(Map<String, Object> map) throws Exception {
+		return userMapper.searchUser(map);
+	}
+
+
 }

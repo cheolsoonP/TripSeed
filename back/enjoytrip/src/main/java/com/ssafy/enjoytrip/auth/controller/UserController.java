@@ -8,16 +8,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.attraction.dto.AttractionDto;
 import com.ssafy.enjoytrip.auth.dto.UserDto;
 import com.ssafy.enjoytrip.auth.service.UserService;
+import com.ssafy.enjoytrip.board.dto.BoardDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -76,6 +79,25 @@ public class UserController {
 	    } catch (Exception e) {
 	        return exceptionHandling(e);
 	    }
+	}
+	
+
+	@GetMapping("/search")
+	public ResponseEntity<?> searchUserList(
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "userNickname", required = false) String userNickname) 
+	{
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userId", userId);
+			map.put("userNickname", userNickname);
+			List<UserDto> userList;
+			userList = userService.searchUserList(map);
+			System.out.println(userList);
+			return new ResponseEntity<List<UserDto>>(userList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
 	}
 	
 	private ResponseEntity<String> exceptionHandling(Exception e) {

@@ -1,5 +1,5 @@
 <template>
-  <v-card height="500" width="256" class="mx-auto">
+  <v-card height="500" width="256" class="mx-auto card">
     <v-navigation-drawer permanent>
       <v-list-item>
         <v-list-item-content>
@@ -43,4 +43,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.card {
+  display: block;
+  position: fixed;
+}
+</style>

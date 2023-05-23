@@ -1,5 +1,5 @@
 <template>
-  <div class="d-none d-flex">
+  <div>
     <v-menu open-on-hover offset-y v-if="this.isLogin">
       <template v-slot:activator="{ on }">
         <v-btn block text max-width="200px" v-on="on">
@@ -14,16 +14,17 @@
         <v-list-item @click="onClickLogout">로그아웃</v-list-item>
       </v-list>
     </v-menu>
-
-    <v-menu open-on-hover offset-y v-else>
+    <div v-else>
+      <v-btn class="d-none d-flex" text v-on="on" to="/user/login">로그인/회원가입</v-btn>
+    </div>
+    <!-- <v-menu open-on-hover offset-y v-else>
       <template v-slot:activator="{ on }">
-        <v-btn block text max-width="200px" v-on="on" to="/user/login">로그인/회원가입</v-btn>
       </template>
-      <!-- <v-list>
-      <v-list-item to="/user/login">로그인</v-list-item> -->
-      <!-- <v-list-item to="/user/login">회원가입</v-list-item> -->
-      <!-- </v-list> -->
-    </v-menu>
+      <v-list>
+        <v-list-item to="/user/login">로그인</v-list-item>
+        <v-list-item to="/user/login">회원가입</v-list-item>
+      </v-list>
+    </v-menu> -->
   </div>
 </template>
 

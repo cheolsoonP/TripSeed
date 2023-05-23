@@ -2,10 +2,12 @@ import { apiInstance } from "./index.js";
 import { awsFileUpload } from "@/api/fileUpload.js";
 const api = apiInstance();
 
-function postList(param, success, fail) {
+function postListApi(param, success, fail) {
   api.get(`/board/list`, { params: param }).then(success).catch(fail);
 }
-
+function userPostListApi(param, success, fail) {
+  api.get(`/board/list/${param}`).then(success).catch(fail);
+}
 function getPost(postId, success, fail) {
   api.get(`/board/view/${postId}`).then(success).catch(fail);
 }
@@ -34,4 +36,4 @@ async function writePostApi(body, success, fail) {
   }
 }
 
-export { postList, getPost, writePostApi };
+export { postListApi, userPostListApi, getPost, writePostApi };

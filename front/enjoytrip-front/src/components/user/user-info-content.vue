@@ -11,13 +11,28 @@
 </template>
 
 <script>
+import BoardListItem from "@/components/board/board-list-item.vue";
+import { mapActions, mapState } from "vuex";
+
+const boardStore = "boardStore";
+const userStore = "userStore";
+
 export default {
   name: "UserInfoContent",
+  components: { BoardListItem },
   data() {
     return {};
   },
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapState(userStore, ["userId"]),
+    ...mapState(boardStore, ["posts"]),
+  },
+  created() {
+    this.getUserPostList(this.userId);
+  },
+  methods: {
+    ...mapActions(boardStore, ["getUserPostList"]),
+  },
 };
 </script>
 

@@ -11,6 +11,7 @@ const regionStore = {
   getters: {},
   mutations: {
     SET_SIDO_LIST(state, sidos) {
+      state.guguns = [];
       state.sidos = [];
       sidos.forEach((sido) => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });

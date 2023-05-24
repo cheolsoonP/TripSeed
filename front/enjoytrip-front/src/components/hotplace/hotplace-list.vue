@@ -3,6 +3,9 @@
     <header-bar
       title="핫 플레이스"
       content="지역별 지금 핫한 관광지를 확인할 수 있어요.<br/>가장 핫한 여행지를 한눈에!"
+      url="/plan/write"
+      btn_icon="mdi-plus"
+      btn_text="여행 계획하기"
       :imgsrc="headerImage"
     />
     <v-container>

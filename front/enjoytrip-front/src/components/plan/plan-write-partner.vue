@@ -48,7 +48,7 @@
         <div v-for="(user, index) in users" :key="index">
           <v-list-item class="ma-n3 pa-n3">
             <v-list-item-avatar>
-              <v-img :alt="`${user.userId} avatar`" :src="user.userProfile"></v-img>
+              <v-img :alt="`${user.userId} avatar`" :src="user.profile"></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
               <span>{{ user.userId }} </span>

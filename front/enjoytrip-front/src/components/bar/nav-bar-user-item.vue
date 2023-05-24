@@ -3,7 +3,10 @@
     <v-menu open-on-hover offset-y v-if="this.isLogin">
       <template v-slot:activator="{ on }">
         <v-btn block text max-width="200px" v-on="on">
-          <v-avatar color="teal" size="36">
+          <v-card v-if="profile !== null" class="rounded-pill" width="30" height="30">
+            <v-img :src="profile"></v-img>
+          </v-card>
+          <v-avatar v-else color="teal" size="36">
             <v-icon dark> mdi-account-circle </v-icon>
           </v-avatar>
           <span> &nbsp; {{ userNickname }} 님</span>
@@ -36,7 +39,7 @@ const userStore = "userStore";
 export default {
   name: "NavBarUserItem",
   computed: {
-    ...mapState(userStore, ["isLogin", "userId", "userNickname"]),
+    ...mapState(userStore, ["isLogin", "userId", "userNickname", "profile"]),
   },
   data() {
     return {};

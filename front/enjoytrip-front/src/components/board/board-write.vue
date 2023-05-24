@@ -14,11 +14,7 @@
           ></v-text-field>
         </v-col>
         <v-col cols="auto">
-          <v-btn 
-            x-large rounded elevation="0" 
-            color="primary"
-            @click="onClickWritePost"
-          >
+          <v-btn x-large rounded elevation="0" color="primary" @click="onClickWritePost">
             게시하기
           </v-btn>
         </v-col>
@@ -79,12 +75,7 @@
       </v-row>
       <v-row>미리보기</v-row>
       <v-row>
-        <v-img
-          v-if="thumnail !== null"
-          :src="thumnail"
-          max-height="300"
-          max-width="300"
-        ></v-img>
+        <v-img v-if="thumnail !== null" :src="thumnail" max-height="300" max-width="300"></v-img>
       </v-row>
     </div>
     <div class="pt-3">
@@ -104,7 +95,7 @@
 </template>
 
 <script>
-import { writePostApi } from '@/api/board';
+import { writePostApi } from "@/api/board";
 import { mapActions, mapState } from "vuex";
 
 const regionStore = "regionStore";
@@ -123,7 +114,7 @@ export default {
       thumnail: null,
       file: null,
       fileRules: [
-        value => !value || value.size < 5000000 || '이미지 용량은 5MB를 초과할 수 없습니다.',
+        (value) => !value || value.size < 5000000 || "이미지 용량은 5MB를 초과할 수 없습니다.",
       ],
     };
   },
@@ -136,15 +127,12 @@ export default {
 
     onClickWritePost() {
       if (this.title === "") {
-        this.errorMsg = "제목을 입력해주세요."
+        this.errorMsg = "제목을 입력해주세요.";
+        return;
+      } else if (this.conetent === "") {
+        this.errorMsg = "내용을 입력해주세요.";
         return;
       }
-      else if (this.conetent === "") {
-        this.errorMsg = "내용을 입력해주세요."
-        return;
-      }
-      const formData = new FormData();
-      formData.append("file", this.file);
 
       let body = {
         sidoCode: this.sidoCode,
@@ -154,12 +142,12 @@ export default {
         writerId: this.userId,
         writerNickname: this.userNickname,
         file: this.file,
-      }
-      
+      };
+
       writePostApi(
         body,
         () => {
-          alert("게시글 업로드 성공!")
+          alert("게시글 업로드 성공!");
           this.$router.push("/board/list");
         },
         (error) => {
@@ -175,7 +163,7 @@ export default {
         this.thumnail = null;
         this.file = null;
       }
-    }
+    },
   },
 };
 </script>
@@ -188,5 +176,4 @@ export default {
   padding: 16px;
   z-index: 1;
 }
-
 </style>

@@ -1,9 +1,10 @@
-import { postListApi, userPostListApi } from "@/api/board";
+import { getReplyList, postListApi, userPostListApi } from "@/api/board";
 
 const boardStore = {
   namespaced: true,
   state: {
     posts: [],
+    replys: [],
   },
   getters: {},
   mutations: {
@@ -11,6 +12,12 @@ const boardStore = {
       state.posts = [];
       posts.forEach((post) => {
         state.posts.push(post);
+      });
+    },
+    SET_REPLY_LIST(state, replys) {
+      state.replys = [];
+      replys.forEach((reply) => {
+        state.replys.push(reply);
       });
     },
   },
@@ -31,6 +38,17 @@ const boardStore = {
         param,
         ({ data }) => {
           commit("SET_POST_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getReplyListAction: ({ commit }, body) => {
+      getReplyList(
+        body,
+        ({ data }) => {
+          commit("SET_REPLY_LIST", data);
         },
         (error) => {
           console.log(error);

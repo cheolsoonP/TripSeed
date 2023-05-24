@@ -1,27 +1,32 @@
 <template>
   <form @submit.prevent="submit" height="100%">
+    <div>
+      <div class="text-subtitle ml-5">프로필 등록</div>
+      <v-row class="text-h6">
+        <v-col cols="2">
+          <v-card class="rounded-pill my-3 mx-2" width="100" height="100">
+            <v-img v-if="profile !== null" :src="profile" max-height="100" max-width="100"></v-img>
+          </v-card>
+        </v-col>
+        <v-col cols="3">
+          <v-file-input
+            @change="onChangeFile"
+            color="primary"
+            light
+            chips
+            counter
+            show-size
+            :rules="fileRules"
+            accept="image/*"
+            truncate-length="34"
+          ></v-file-input>
+        </v-col>
+      </v-row>
+    </div>
     <v-text-field
       v-model="userId"
       :counter="50"
       label="아이디"
-      required
-      outlined
-      disabled
-      dense
-    ></v-text-field>
-    <v-text-field
-      v-model="userName"
-      :counter="50"
-      label="이름"
-      required
-      outlined
-      disabled
-      dense
-    ></v-text-field>
-    <v-text-field
-      v-model="userEmail"
-      label="이메일"
-      :rules="emailRules"
       required
       outlined
       disabled
@@ -102,6 +107,11 @@ export default {
           return pattern.test(value) || "잘못된 이메일 형식입니다.";
         },
       ],
+      profile: null,
+      file: null,
+      fileRules: [
+        (value) => !value || value.size < 5000000 || "이미지 용량은 5MB를 초과할 수 없습니다.",
+      ],
     };
   },
   methods: {
@@ -118,6 +128,7 @@ export default {
         userId: this.userId,
         userNickname: this.newNickname,
         userPassword: this.userPassword,
+        file: this.file,
       };
 
       // 새로운 닉네임이 없다면 기존 닉네임으로 사용
@@ -135,6 +146,15 @@ export default {
           console.log(error);
         }
       );
+    },
+    onChangeFile(file) {
+      if (file !== null) {
+        this.profile = URL.createObjectURL(file);
+        this.file = file;
+      } else {
+        this.profile = null;
+        this.file = null;
+      }
     },
   },
   computed: {

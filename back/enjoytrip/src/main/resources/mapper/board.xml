@@ -10,6 +10,7 @@
 		<result column="content" property="content" />
 		<result column="like_count" property="likeCount" />
 		<result column="view_count" property="viewCount" />
+		<result column="reply_count" property="replyCount" />
 		<result column="write_date" property="writeDate" />
 		<result column="update_date" property="updateDate" />
 		<result column="sido_code" property="sidoCode" />
@@ -17,6 +18,16 @@
 		<result column="sido_name" property="sidoName" />
 		<result column="gugun_name" property="gugunName" />
 		<result column="image" property="image" />
+	</resultMap>
+	
+	<resultMap type="replyDto" id="reply">
+		<result column="reply_id" property="replyId"/>
+		<result column="post_id" property="postId"/>
+		<result column="writer_id" property="writerId"/>
+		<result column="reply_content" property="replyContent"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="user_nickname" property="userNickname"/>
 	</resultMap>
 	
 	<insert id="writePost" parameterType="boardDto">
@@ -36,7 +47,8 @@
 		<trim prefix="where" suffixOverrides="and">
 			<if test="sidoCode != null">b.sido_code=#{sidoCode} and</if>
 			<if test="gugunCode != null">b.gugun_code=#{gugunCode} and</if>
-			<if test="keyword != null">b.title like concat('%', #{keyword}, '%')</if>
+			<if test="keyword != null">b.title like concat('%', #{keyword}, '%') or</if>
+			<if test="keyword != null">b.content like concat('%', #{keyword}, '%')</if>		
 		</trim>
 		order by b.post_id DESC
 	</select>
@@ -73,10 +85,43 @@
 			update_date = CURRENT_TIMESTAMP
 		where post_id = #{postId}
 	</update>
+
+	<update id="addView" parameterType="string">
+		update tour_info_board
+		set view_count = view_count+1
+		where post_id = #{postId}
+	</update>
 	
-	<delete id="deletePost">
+	<delete id="deletePost" parameterType="string">
 		delete from tour_info_board
 		where post_id = #{postId}
+	</delete>
+
+
+	<!-- 댓글 -->
+	<insert id="writeReply" parameterType="replyDto">
+		insert into reply
+	    	(post_id, writer_id, reply_content)
+    	values (#{postId}, #{writerId}, #{replyContent});
+	</insert>
+	
+	<select id="getReplyList" parameterType="string" resultMap="reply">
+		select r.*, u.user_nickname
+		from reply r join user u
+        on r.writer_id = u.user_id
+		where post_id = #{postId};
+	</select>
+	
+	<update id="updateReply" parameterType="replyDto">
+		update reply
+		set reply_content = #{replyContent},
+			update_date = CURRENT_TIMESTAMP
+		where reply_id = #{replyId}
+	</update>
+	
+	<delete id="deleteReply" parameterType="string">
+		delete from reply
+		where reply_id = #{replyId}
 	</delete>
 
 </mapper>

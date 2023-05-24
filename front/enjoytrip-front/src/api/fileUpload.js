@@ -23,7 +23,6 @@ async function awsFileUpload(file) {
       newFileName += str;
     });
 
-    console.log(file);
     // 파일 업로드
     const params = {
       Bucket: bucketName,

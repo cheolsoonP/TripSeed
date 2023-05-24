@@ -2,11 +2,12 @@ package com.ssafy.enjoytrip.board.dto;
 
 public class ReplyDto {
 	private int replyId;
-	private int contentId;
-	private String writeId;
+	private int postId;
+	private String writerId;
 	private String replyContent;
 	private String writeDate;
 	private String updateDate;
+	private String userNickname;
 	
 	public int getReplyId() {
 		return replyId;
@@ -14,18 +15,7 @@ public class ReplyDto {
 	public void setReplyId(int replyId) {
 		this.replyId = replyId;
 	}
-	public int getContentId() {
-		return contentId;
-	}
-	public void setContentId(int contentId) {
-		this.contentId = contentId;
-	}
-	public String getWriteId() {
-		return writeId;
-	}
-	public void setWriteId(String writeId) {
-		this.writeId = writeId;
-	}
+
 	public String getReplyContent() {
 		return replyContent;
 	}
@@ -44,10 +34,31 @@ public class ReplyDto {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
+	public String getWriterId() {
+		return writerId;
+	}
+	public void setWriterId(String writerId) {
+		this.writerId = writerId;
+	}
+	public String getUserNickname() {
+		return userNickname;
+	}
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
 	@Override
 	public String toString() {
-		return "ReplyDto [replyId=" + replyId + ", contentId=" + contentId + ", writeId=" + writeId + ", replyContent="
-				+ replyContent + ", writeDate=" + writeDate + ", updateDate=" + updateDate + "]";
+		return "ReplyDto [replyId=" + replyId + ", postId=" + postId + ", writerId=" + writerId + ", replyContent="
+				+ replyContent + ", writeDate=" + writeDate + ", updateDate=" + updateDate + ", userNickname="
+				+ userNickname + "]";
 	}
+	
+	
+
 }

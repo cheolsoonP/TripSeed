@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%">
-    <v-col class="d-flex px-0">
+    <v-col class="d-flex px-0 pt-0">
       <v-col>
         <v-select
           dark
@@ -34,26 +34,33 @@
         label="검색"
         solo
         v-model="searchWord"
+        hide-details=""
       ></v-text-field>
     </v-col>
-    <div style="max-height: 300px; overflow-y;">
-      <div v-for="(attraction, i) in attractions" :key="i">
-        <v-row v-if="i <= attractionCount">
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-icon v-if="attraction.firstImage2 === ''">mdi-heart</v-icon>
-              <v-img v-else :src="attraction.firstImage2" />
-            </v-list-item-avatar>
+    <v-container style="max-height: 320px; overflow-y: auto" class="mt-4">
+      <v-row
+        v-for="(attraction, i) in attractions.slice(0, attractionCount)"
+        :key="i"
+      >
+        <v-list-item>
+          <v-list-item-avatar>
+            <v-icon v-if="attraction.firstImage2 === ''" color="primary">mdi-sprout</v-icon>
+            <v-img v-else :src="attraction.firstImage2" />
+          </v-list-item-avatar>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ attraction.title }}</v-list-item-title>
+          <v-list-item-content>
+            <v-list-item-title>{{ attraction.title }}</v-list-item-title>
 
-              <v-list-item-subtitle>{{attraction.addr1}}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-row>
-      </div>
-    </div>
+            <v-list-item-subtitle>{{ attraction.addr1 }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-row>
+      <v-row justify="center">
+        <v-btn text @click="loadMore" v-if="attractionCount < attractions.length">
+          더보기
+        </v-btn>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -72,7 +79,7 @@ export default {
       gugunCode: null,
       gugunName: null,
       searchWord: null,
-      dialog: false,
+      attractionCount: 10, // 추가
     };
   },
   created() {
@@ -83,7 +90,6 @@ export default {
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
     ...mapState(attractionStore, ["attractions", "attractionCount"]),
-    // ...mapGetters(attractionStore, ["getAttractionItems", "filteredAttractions"]),
     attractions() {
       return this.$store.getters["attractionStore/filteredAttractions"](
         this.gugunCode
@@ -103,9 +109,11 @@ export default {
       };
       this.getGugun(this.sidoCode);
       this.getAttractionListAction(param);
-      // this.attractions += this.getAttractionItems(0, 10);
     },
     selectGugun() {},
+    loadMore() {
+      this.attractionCount += 10;
+    }
   },
 };
 </script>

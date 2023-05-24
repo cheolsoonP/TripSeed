@@ -103,7 +103,18 @@ public class BoardCotroller {
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
-		
+	}
+	
+	@GetMapping("/list/{userId}")
+	public ResponseEntity<?> getPostList(@PathVariable("userId") String userId) {
+		try {
+			Map<String, Object> map = new HashMap<>();
+			List<BoardDto> postList;
+			postList = boardService.getUserPostList(userId);
+			return new ResponseEntity<List<BoardDto>>(postList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
 	}
 	
 

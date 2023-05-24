@@ -1,4 +1,4 @@
-import { postList } from "@/api/board";
+import { postListApi, userPostListApi } from "@/api/board";
 
 const boardStore = {
   namespaced: true,
@@ -10,28 +10,24 @@ const boardStore = {
     SET_POST_LIST(state, posts) {
       state.posts = [];
       posts.forEach((post) => {
-        state.posts.push({
-          postId: post.postId,
-          title: post.title,
-          writerId: post.writerId,
-          content: post.content,
-          likeCount: post.likeCount,
-          viewCount: post.viewCount,
-          writeDate: post.writeDate,
-          updateDate: post.updateDate,
-          sidoCode: post.sidoCode,
-          sidoName: post.sidoName,
-          gugunCode: post.gugunCode,
-          gugunName: post.gugunName,
-          image: post.image,
-        });
+        state.posts.push(post);
       });
     },
   },
   actions: {
     getPostList: ({ commit }, param) => {
-      console.log(param);
-      postList(
+      postListApi(
+        param,
+        ({ data }) => {
+          commit("SET_POST_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getUserPostList: ({ commit }, param) => {
+      userPostListApi(
         param,
         ({ data }) => {
           commit("SET_POST_LIST", data);

@@ -17,4 +17,6 @@ public interface BoardService {
 
 	void deletePost(String postId) throws Exception;
 
+	List<BoardDto> getUserPostList(String userId) throws Exception;
+
 }

@@ -1,10 +1,12 @@
 package com.ssafy.enjoytrip.auth.mapper;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ssafy.enjoytrip.auth.dto.FollowDto;
 import com.ssafy.enjoytrip.auth.dto.UserDto;
 
 
@@ -22,5 +24,11 @@ public interface UserMapper {
 	void deleteUser(String userId) throws SQLException;
 	
 	UserDto getUserInfo(String userId) throws SQLException;
+
+	List<UserDto> searchUser(Map<String, Object> map) throws SQLException;
+
+	void addFollowUser(FollowDto followDto) throws SQLException;
+
+	List<UserDto> getFollowerList(String userId) throws SQLException;
 
 }

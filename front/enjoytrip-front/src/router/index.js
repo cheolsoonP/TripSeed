@@ -38,17 +38,9 @@ const routes = [
     ],
   },
   {
-    path: "/user",
-    name: "user",
+    path: "/login",
+    name: "login",
     component: () => import("@/views/login-view"),
-    redirect: "/user/login",
-    children: [
-      {
-        path: "login",
-        name: "userlogin",
-        component: () => import("@/components/user/user-login"),
-      },
-    ],
   },
   {
     path: "/plan",
@@ -75,6 +67,34 @@ const routes = [
         path: "edit/:planId",
         name: "planedit",
         component: () => import("@/components/plan/plan-edit"),
+      },
+    ],
+  },
+  {
+    path: "/user/info",
+    name: "userinfo",
+    redirect: "/user/info/detail",
+    component: () => import("@/views/user-view"),
+    children: [
+      {
+        path: "detail",
+        name: "userdetail",
+        component: () => import("@/components/user/user-info-detail"),
+      },
+      {
+        path: "content",
+        name: "usercontent",
+        component: () => import("@/components/user/user-info-content"),
+      },
+      {
+        path: "followers",
+        name: "userfollowers",
+        component: () => import("@/components/user/user-info-followers"),
+      },
+      {
+        path: "following",
+        name: "userfollowing",
+        component: () => import("@/components/user/user-info-following"),
       },
     ],
   },

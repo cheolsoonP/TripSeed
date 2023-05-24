@@ -1,9 +1,5 @@
 <template>
-  <v-card
-    height="400"
-    width="256"
-    class="mx-auto"
-  >
+  <v-card height="600" width="256" class="mx-auto card">
     <v-navigation-drawer permanent>
       <v-list-item>
         <v-list-item-content>
@@ -27,15 +23,8 @@
       </v-list-item>
       <v-divider></v-divider>
 
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="gugun in guguns"
-          :key="gugun.gugunCode"
-          link
-        >
+      <v-list dense nav>
+        <v-list-item v-for="gugun in guguns" :key="gugun.gugunCode" link>
           {{ gugun.gugunName }}
         </v-list-item>
       </v-list>
@@ -44,30 +33,33 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex"
+import { mapActions, mapState } from "vuex";
 
 const regionStore = "regionStore";
 
 export default {
-    name: "SideBar",
-    data () {
-      return {
-        sidoCode: null,
-        sidoName:null,
-        gugunCode: null,
-        gugunName:null,
-        searchWord:null,
-      }
+  name: "SideBar",
+  data() {
+    return {
+      sidoCode: null,
+      sidoName: null,
+      gugunCode: null,
+      gugunName: null,
+      searchWord: null,
+    };
   },
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
   },
   methods: {
     ...mapActions(regionStore, ["getGugun"]),
-  }
-}
+  },
+};
 </script>
 
 <style>
-
+.card {
+  display: block;
+  /* position: fixed; */
+}
 </style>

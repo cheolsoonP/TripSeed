@@ -9,6 +9,7 @@
             label="검색"
             solo
             v-model="searchWord"
+            @keyup.enter="searchPost"
           ></v-text-field>
           <v-select
             dark
@@ -68,6 +69,14 @@ export default {
       let param = {
         sidoCode: this.sidoCode,
         gugunCode: this.gugunCode,
+      };
+      this.getPostList(param);
+    },
+    searchPost() {
+      let param = {
+        sidoCode: this.sidoCode,
+        gugunCode: this.gugunCode,
+        keyword: this.searchWord,
       };
       this.getPostList(param);
     },

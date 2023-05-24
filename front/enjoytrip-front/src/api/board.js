@@ -39,4 +39,28 @@ function addView(postId, success, fail) {
   api.put(`/board/view/${postId}`).then(success).catch(fail);
 }
 
-export { postListApi, userPostListApi, getPost, writePostApi, addView };
+function postReply(body, success, fail) {
+  api.post(`/board/${body.postId}/reply`, body.reply).then(success).catch(fail);
+}
+
+function getReplyList(postId, success, fail) {
+  api.get(`/board/${postId}/reply`).then(success).catch(fail);
+}
+
+function updateReply(body, success, fail) {
+  api.put(`/board/${body.postId}/reply/${body.replyId}`, body.reply).then(success).catch(fail);
+}
+function deleteReply(body, success, fail) {
+  api.delete(`/board/${body.postId}/reply/${body.replyId}`).then(success).catch(fail);
+}
+export {
+  postListApi,
+  userPostListApi,
+  getPost,
+  writePostApi,
+  addView,
+  postReply,
+  getReplyList,
+  updateReply,
+  deleteReply,
+};

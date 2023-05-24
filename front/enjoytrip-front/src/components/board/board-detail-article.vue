@@ -78,6 +78,9 @@
 
 <script>
 import { addView, getPost } from "@/api/board.js";
+import { mapState } from "vuex";
+
+const userStore = "userStore";
 
 export default {
   name: "BoardDetailArticle",
@@ -85,6 +88,9 @@ export default {
     return {
       post: {},
     };
+  },
+  computed: {
+    ...mapState(userStore, ["userId"]),
   },
   created() {
     let postId = this.$route.params.postId;

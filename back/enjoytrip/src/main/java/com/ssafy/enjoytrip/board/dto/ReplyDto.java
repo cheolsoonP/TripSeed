@@ -7,6 +7,7 @@ public class ReplyDto {
 	private String replyContent;
 	private String writeDate;
 	private String updateDate;
+	private String userNickname;
 	
 	public int getReplyId() {
 		return replyId;
@@ -45,11 +46,19 @@ public class ReplyDto {
 	public void setWriterId(String writerId) {
 		this.writerId = writerId;
 	}
+	public String getUserNickname() {
+		return userNickname;
+	}
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
 	@Override
 	public String toString() {
 		return "ReplyDto [replyId=" + replyId + ", postId=" + postId + ", writerId=" + writerId + ", replyContent="
-				+ replyContent + ", writeDate=" + writeDate + ", updateDate=" + updateDate + "]";
+				+ replyContent + ", writeDate=" + writeDate + ", updateDate=" + updateDate + ", userNickname="
+				+ userNickname + "]";
 	}
+	
 	
 
 }

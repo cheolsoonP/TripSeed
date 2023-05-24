@@ -27,6 +27,7 @@
 		<result column="reply_content" property="replyContent"/>
 		<result column="write_date" property="writeDate"/>
 		<result column="update_date" property="updateDate"/>
+		<result column="user_nickname" property="userNickname"/>
 	</resultMap>
 	
 	<insert id="writePost" parameterType="boardDto">
@@ -46,7 +47,8 @@
 		<trim prefix="where" suffixOverrides="and">
 			<if test="sidoCode != null">b.sido_code=#{sidoCode} and</if>
 			<if test="gugunCode != null">b.gugun_code=#{gugunCode} and</if>
-			<if test="keyword != null">b.title like concat('%', #{keyword}, '%')</if>
+			<if test="keyword != null">b.title like concat('%', #{keyword}, '%') or</if>
+			<if test="keyword != null">b.content like concat('%', #{keyword}, '%')</if>		
 		</trim>
 		order by b.post_id DESC
 	</select>
@@ -104,9 +106,10 @@
 	</insert>
 	
 	<select id="getReplyList" parameterType="string" resultMap="reply">
-		select *
-		from reply
-		where post_id = #{postId}
+		select r.*, u.user_nickname
+		from reply r join user u
+        on r.writer_id = u.user_id
+		where post_id = #{postId};
 	</select>
 	
 	<update id="updateReply" parameterType="replyDto">

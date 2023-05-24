@@ -143,7 +143,7 @@ public class BoardCotroller {
 	}
 	
 	
-	@GetMapping("/reply/{postId}")
+	@GetMapping("/{postId}/reply")
 	public ResponseEntity<?> getReplyList(
 			@PathVariable("postId") String postId) 
 	{
@@ -160,8 +160,9 @@ public class BoardCotroller {
 		}
 	}
 	
-	@PutMapping("/reply/{replyId}")
+	@PutMapping("/{postId}/reply/{replyId}")
 	public ResponseEntity<?> updateReply(
+			@PathVariable("postId") String postId,
 			@PathVariable("replyId") String replyId,
 			@RequestBody ReplyDto replyDto) 
 	{
@@ -173,8 +174,9 @@ public class BoardCotroller {
 		}
 	}
 	
-	@DeleteMapping("/reply/{replyId}")
+	@DeleteMapping("/{postId}/reply/{replyId}")
 	public ResponseEntity<?> deleteReply(
+			@PathVariable("postId") String postId,
 			@PathVariable("replyId") String replyId) 
 	{
 		try {

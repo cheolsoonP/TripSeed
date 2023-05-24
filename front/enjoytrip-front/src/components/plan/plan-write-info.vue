@@ -1,18 +1,21 @@
 <template>
   <v-container>
     <v-row class="pa-3">
-      <v-col cols="4" v-if="thumnail !== null">
-        <v-img :src="thumnail" max-height="300" max-width="300" contain></v-img>
+      <v-col cols="4" v-if="tempPlan.thumnail !== null">
+        <v-img :src="tempPlan.thumnail" max-height="300" max-width="300" contain></v-img>
       </v-col>
-      <v-col cols="thumbnail == null ? 12 : 8">
+      <v-col cols="tempPlan.thumbnail == null ? 12 : 8">
         <v-card-title class="py-3"> 여행 제목을 입력하세요 </v-card-title>
         <v-list-item>
           <v-text-field
             clearable
+            v-model="tempPlan.title"
             placeholder="여행 제목"
             solo
             hide-details
-          ></v-text-field>
+            @blur="onChangeTitle"
+          >
+          </v-text-field>
         </v-list-item>
         <v-list-item class="mt-4">
           <v-list-item-content>
@@ -40,30 +43,43 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
+const planStore = "planStore";
+const userStore = "userStore";
+
 export default {
   name: "PlanWriteInfo",
   data() {
     return {
-      thumnail: null,
-      file: null,
       fileRules: [
-        (value) =>
-          !value ||
-          value.size < 5000000 ||
-          "이미지 용량은 5MB를 초과할 수 없습니다.",
+        (value) => !value || value.size < 5000000 || "이미지 용량은 5MB를 초과할 수 없습니다.",
       ],
     };
   },
-
+  computed: {
+    ...mapState(userStore, ["userId"]),
+    ...mapState(planStore, ["tempPlan"]),
+  },
   methods: {
+    ...mapActions(planStore, ["updateDateAction", "updateTitleAction", "updateThumnailAction"]),
     onChangeFile(file) {
       if (file !== null) {
-        this.thumnail = URL.createObjectURL(file);
-        this.file = file;
+        let body = {
+          file: file,
+          thumnail: URL.createObjectURL(file),
+        };
+        this.updateThumnailAction(body);
       } else {
-        this.thumnail = null;
-        this.file = null;
+        let body = {
+          file: null,
+          thumnail: null,
+        };
+        this.updateThumnailAction(body);
       }
+    },
+    onChangeTitle(e) {
+      this.updateTitleAction(e.target.value);
     },
   },
 };

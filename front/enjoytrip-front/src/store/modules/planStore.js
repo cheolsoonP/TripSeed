@@ -15,9 +15,11 @@ const planStore = {
       },
     ],
     tempPlan: {
-      startDate: "2023-02-01",
-      endDate: "2023-02-05",
-      title:"임시제목",
+      startDate: "",
+      endDate: "",
+      title: "",
+      thumnail: "",
+      file: "",
     },
   },
   getters: {},
@@ -46,10 +48,30 @@ const planStore = {
         state.routes.push({ planId: plan.planId });
       });
     },
-    UPDATE_DATE(state, body){
+    INIT_PLAN_INFO(state) {
+      state.tempPlan.title = "새 여행일정";
+      let currDate = new Date();
+      let year = currDate.getFullYear();
+      let month = currDate.getMonth() + 1;
+      if (month < 10) month = "0" + month;
+      let date = currDate.getDate();
+      if (date < 10) date = "0" + date;
+      state.tempPlan.startDate = year + "-" + month + "-" + date;
+      state.tempPlan.endDate = year + "-" + month + "-" + date;
+      state.tempPlan.file = null;
+      state.tempPlan.thumnail = null;
+    },
+    UPDATE_DATE(state, body) {
       state.tempPlan.startDate = body.startDate;
       state.tempPlan.endDate = body.endDate;
-    }
+    },
+    UPDATE_TITLE(state, title) {
+      state.tempPlan.title = title;
+    },
+    UPDATE_THUMNAIL(state, body) {
+      state.tempPlan.file = body.file;
+      state.tempPlan.thumnail = body.thumnail;
+    },
   },
   actions: {
     getPlanListAction: ({ commit }, userId) => {
@@ -85,9 +107,18 @@ const planStore = {
         }
       );
     },
-    updateDateAction: ({commit}, body) => {
+    initTempPlanAction: ({ commit }) => {
+      commit("INIT_PLAN_INFO");
+    },
+    updateDateAction: ({ commit }, body) => {
       commit("UPDATE_DATE", body);
-    }
+    },
+    updateTitleAction: ({ commit }, title) => {
+      commit("UPDATE_TITLE", title);
+    },
+    updateThumnailAction: ({ commit }, body) => {
+      commit("UPDATE_THUMNAIL", body);
+    },
   },
 };
 

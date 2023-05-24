@@ -18,10 +18,16 @@
               <v-chip color="primary" outlined large>{{ plan.endDate }}</v-chip>
             </v-list-item>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="2">
             <v-btn elevation="0" color="primary">
               <v-icon>mdi-plus</v-icon>
               <span class="pl-1">동행 초대하기</span>
+            </v-btn>
+          </v-col>
+          <v-col cols="3">
+            <v-btn elevation="0" color="primary" :to="'/plan/edit/' + plan.planId">
+              <v-icon>mdi-plus</v-icon>
+              <span class="pl-1">수정하기</span>
             </v-btn>
           </v-col>
         </v-row>

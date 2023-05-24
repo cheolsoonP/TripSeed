@@ -38,7 +38,47 @@
     </v-col>
     <div style="max-height: 300px; overflow-y;">
       <v-row v-for="(attraction, i) in attractions" :key="i">
-        {{ attraction.title }}
+        <v-list-item>
+          <v-list-item-avatar>
+            <v-icon v-if="attraction.firstImage2 === ''">mdi-heart</v-icon>
+            <v-img v-else :src="attraction.firstImage2" />
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ attraction.title }}</v-list-item-title>
+
+            <v-list-item-subtitle>{{ attraction.addr1 }}</v-list-item-subtitle>
+          </v-list-item-content>
+
+          <v-list-item-action>
+            <v-dialog v-model="dialog" width="700">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on">
+                  <v-icon color="grey lighten-1">mdi-information</v-icon>
+                </v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title class="text-h5 primary">
+                  {{ attraction.title }}
+                </v-card-title>
+
+                <v-card-text class="pt-6">
+                  이제 여기에 관광지에 대한 정보가 들어가야 합니다.
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="dialog = false">
+                    CLOSE
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-list-item-action>
+        </v-list-item>
       </v-row>
     </div>
   </div>
@@ -59,33 +99,35 @@ export default {
       gugunCode: null,
       gugunName: null,
       searchWord: null,
+      dialog: false,
     };
   },
   created() {
+    this.getSido();
+    this.initAttractionListAction();
     // this.getAttractionListAction(); // 데이터가 커서 시간 많이 소요
   },
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
     ...mapState(attractionStore, ["attractions"]),
+    // ...mapGetters(attractionStore, ["getAttractionItems", "filteredAttractions"]),
     attractions() {
       return this.$store.getters["attractionStore/filteredAttractions"](this.gugunCode);
-    }
+    },
   },
   methods: {
-    ...mapActions(regionStore, ["getGugun"]),
-    ...mapActions(attractionStore, ["getAttractionListAction"]),
+    ...mapActions(regionStore, ["getSido", "getGugun"]),
+    ...mapActions(attractionStore, ["getAttractionListAction", "initAttractionListAction"]),
 
     selectSido() {
       let param = {
         sidoCode: this.sidoCode,
-      }
+      };
       this.getGugun(this.sidoCode);
       this.getAttractionListAction(param);
+      // this.attractions += this.getAttractionItems(0, 10);
     },
-    selectGugun() {
-
-    }
-
+    selectGugun() {},
   },
 };
 </script>

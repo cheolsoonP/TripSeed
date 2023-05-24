@@ -12,7 +12,7 @@ const attractionStore = {
       } else {
         return state.attractions;
       }
-    }
+    },
   },
   mutations: {
     SET_ATTRACTION_LIST(state, attractions) {
@@ -21,6 +21,9 @@ const attractionStore = {
         state.attractions.push(attraction);
       });
     },
+    INIT_ATTRACTION_LIST(state){
+      state.attractions = [];
+    }
   },
   actions: {
     getAttractionListAction: ({ commit } ,param) => {
@@ -36,6 +39,9 @@ const attractionStore = {
         }
       );
     },
+    initAttractionListAction:({commit} )=>{
+      commit("INIT_ATTRACTION_LIST");
+    }
   },
 };
 

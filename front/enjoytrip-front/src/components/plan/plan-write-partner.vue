@@ -150,9 +150,12 @@ export default {
               partners: this.tempPlan.partners,
               planId: planId,
             };
+            console.log("여행 경로 추가 완료")
+
             postPlanPartner(
               temp,
               () => {
+                console.log("파트너 추가완료")
                 this.$router.push(`/plan/edit/${planId}`);
               },
               (error) => {
@@ -161,10 +164,13 @@ export default {
             );
           } else {
             // 추가할 파트너 없으면 바로 이동
+            console.log("파트너 추가없이 추가 완료")
+
             this.$router.push(`/plan/edit/${planId}`);
           }
         },
         (error) => {
+          console.log("에러발생");
           console.log(error);
         }
       );

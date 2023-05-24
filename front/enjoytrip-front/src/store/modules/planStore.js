@@ -5,15 +5,7 @@ const planStore = {
   state: {
     plans: [],
     planDetail: {},
-    routes: [
-      {
-        planId: "",
-        attractionId: "",
-        memo: "",
-        visitTime: "",
-        image: "",
-      },
-    ],
+    routes: [],
     tempPlan: {
       dates: [],
       title: "",

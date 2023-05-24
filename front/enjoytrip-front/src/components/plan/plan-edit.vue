@@ -9,7 +9,7 @@
           </div>
         </v-col>
         <v-col class="pa-0">
-          <div style="background-color:beige;">
+          <div>
             <plan-edit-search />
           </div>
         </v-col>

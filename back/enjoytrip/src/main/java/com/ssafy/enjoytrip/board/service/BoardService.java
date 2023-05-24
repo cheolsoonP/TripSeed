@@ -28,4 +28,6 @@ public interface BoardService {
 
 	List<ReplyDto> getReplyList(String postId) throws Exception;
 
+	void addView(String postId) throws Exception;
+
 }

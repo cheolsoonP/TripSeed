@@ -83,6 +83,12 @@
 			update_date = CURRENT_TIMESTAMP
 		where post_id = #{postId}
 	</update>
+
+	<update id="addView" parameterType="string">
+		update tour_info_board
+		set view_count = view_count+1
+		where post_id = #{postId}
+	</update>
 	
 	<delete id="deletePost" parameterType="string">
 		delete from tour_info_board

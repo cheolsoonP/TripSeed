@@ -79,6 +79,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<ReplyDto> getReplyList(String postId) throws Exception {
 		return 	boardMapper.getReplyList(postId);
 	}
+
+
+	@Override
+	public void addView(String postId) throws Exception {
+		boardMapper.addView(postId);
+	}
 	
 
 }

@@ -32,4 +32,6 @@ public interface BoardMapper {
 
 	List<ReplyDto> getReplyList(String postId) throws SQLException;
 
+	void addView(String postId) throws SQLException;
+
 }

@@ -95,6 +95,16 @@ public class BoardCotroller {
 		}
 	}
 	
+	@PutMapping("/view/{postId}")
+	public ResponseEntity<?> addView(@PathVariable("postId") String postId) {
+		try {
+			boardService.addView(postId);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
 	@DeleteMapping("/{postId}")
 	public ResponseEntity<?> deletePost(@PathVariable("postId") String postId) {
 		try {
@@ -174,6 +184,8 @@ public class BoardCotroller {
 			return exceptionHandling(e);
 		}
 	}
+	
+
 	
 
 	private ResponseEntity<String> exceptionHandling(Exception e) {

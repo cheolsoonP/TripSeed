@@ -35,4 +35,8 @@ async function writePostApi(body, success, fail) {
   }
 }
 
-export { postListApi, userPostListApi, getPost, writePostApi };
+function addView(postId, success, fail) {
+  api.put(`/board/view/${postId}`).then(success).catch(fail);
+}
+
+export { postListApi, userPostListApi, getPost, writePostApi, addView };

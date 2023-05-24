@@ -1,10 +1,5 @@
 <template>
-  <v-card
-    elevation="0"
-    tile
-    :to="'/board/view/' + post.postId"
-    min-width="100%"
-  >
+  <v-card elevation="0" tile :to="'/board/view/' + post.postId" min-width="100%">
     <v-card-title>
       <v-col cols="12">
         <v-row class="pb-1" v-if="!post.sidoName && !post.gugunName">
@@ -24,20 +19,16 @@
       </v-col>
 
       <v-row>
-      <v-col>
-        <h4>{{ post.title }}</h4>
-        <v-list-item class="pt-2 px-0">
-          {{ previewContent(post.content, 120) }}
-        </v-list-item>
-      </v-col>
+        <v-col>
+          <h4>{{ post.title }}</h4>
+          <v-list-item class="pt-2 px-0">
+            {{ previewContent(post.content, 120) }}
+          </v-list-item>
+        </v-col>
 
-      <v-col cols="3" v-if="post.image !== null">
-        <v-img
-          :src="post.image"
-          aspect-ratio="1"
-          fill-height
-        ></v-img>
-      </v-col>
+        <v-col cols="3" v-if="post.image !== null">
+          <v-img :src="post.image" aspect-ratio="1" fill-height></v-img>
+        </v-col>
       </v-row>
     </v-card-title>
     <v-col>
@@ -52,18 +43,22 @@
         </v-col>
         <v-col cols="auto" class="pd-0">
           <v-card-text class="pa-0">
-            <span
-              class="pr-4"
-              v-for="reaction in reactions"
-              :key="reaction.icon"
-            >
-              <v-icon>{{ reaction.icon }}</v-icon>
-              <span class="pl-1"> {{ reaction.cnt }}</span>
+            <span class="pr-4">
+              <v-icon>mdi-heart-outline</v-icon>
+              <span class="pl-1"> {{ post.likeCount }}</span>
+            </span>
+            <span class="pr-4">
+              <v-icon>mdi-comment-outline</v-icon>
+              <span class="pl-1"> {{ post.replyCount }}</span>
+            </span>
+            <span class="pr-4">
+              <v-icon>mdi-eye-outline</v-icon>
+              <span class="pl-1"> {{ post.viewCount }}</span>
             </span>
           </v-card-text>
         </v-col>
       </v-row>
-    </v-col>    
+    </v-col>
 
     <v-divider />
   </v-card>

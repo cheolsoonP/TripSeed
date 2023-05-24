@@ -38,26 +38,72 @@
         @keydown.enter="searchAttractions"
       ></v-text-field>
     </v-col>
-    <v-container style="max-height: 320px; overflow-x: hidden; overflow-y: auto" class="mt-4">
+    <v-container
+      style="max-height: 320px; overflow-x: hidden; overflow-y: auto"
+      class="mt-4"
+    >
       <v-row
         v-for="(attraction, i) in attractions.slice(0, attractionCount)"
         :key="i"
       >
-        <v-list-item>
-          <v-list-item-avatar>
-            <v-icon v-if="attraction.firstImage2 === ''" color="primary"
-              >mdi-sprout</v-icon
-            >
-            <v-img v-else :src="attraction.firstImage2" />
-          </v-list-item-avatar>
+        <v-card width="100%" elevation="0">
+          <v-list-item>
+            <v-col>
+              <v-row align="center" style="min-width: 250px">
+                <v-col cols="auto" class="pa-0">
+                  <v-list-item-avatar>
+                    <v-icon v-if="attraction.firstImage2 === ''" color="primary"
+                      >mdi-sprout</v-icon
+                    >
+                    <v-img v-else :src="attraction.firstImage2" />
+                  </v-list-item-avatar>
+                </v-col>
+                <v-col class="pa-0">
+                  <v-list-item-content>
+                    <v-list-item-title>{{
+                      attraction.title
+                    }}</v-list-item-title>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ attraction.title }}</v-list-item-title>
+                    <v-list-item-subtitle>
+                      <v-dialog v-model="dialog" width="500">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn text v-bind="attrs" v-on="on" class="pa-0">
+                            {{ attraction.addr1 }}
+                          </v-btn>
+                        </template>
 
-            <v-list-item-subtitle>{{ attraction.addr1 }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+                        <v-card>
+                          <v-card-title class="text-h5 grey lighten-2">
+                            {{ attraction.title }}
+                          </v-card-title>
+
+                          <v-card-text>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                          </v-card-text>
+                        </v-card>
+                      </v-dialog>
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col cols="auto">
+              <v-btn fab small elevation="0" color="primary">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-col>
+          </v-list-item>
+        </v-card>
       </v-row>
+
       <v-row justify="center">
         <v-btn
           text
@@ -96,7 +142,7 @@ export default {
   },
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
-    ...mapState(attractionStore, ["attractions", "attractionCount"]),
+    ...mapState(attractionStore, ["attractions"]),
     attractions() {
       if (this.searchWord) {
         return this.$store.getters["attractionStore/filteredAttractions"](

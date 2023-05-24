@@ -33,18 +33,21 @@
         background-color="primary"
         label="검색"
         solo
-        v-model="searchWord"
+        v-model.lazy="searchWord"
         hide-details=""
+        @keydown.enter="searchAttractions"
       ></v-text-field>
     </v-col>
-    <v-container style="max-height: 320px; overflow-y: auto" class="mt-4">
+    <v-container style="max-height: 320px; overflow-x: hidden; overflow-y: auto" class="mt-4">
       <v-row
         v-for="(attraction, i) in attractions.slice(0, attractionCount)"
         :key="i"
       >
         <v-list-item>
           <v-list-item-avatar>
-            <v-icon v-if="attraction.firstImage2 === ''" color="primary">mdi-sprout</v-icon>
+            <v-icon v-if="attraction.firstImage2 === ''" color="primary"
+              >mdi-sprout</v-icon
+            >
             <v-img v-else :src="attraction.firstImage2" />
           </v-list-item-avatar>
 
@@ -56,7 +59,11 @@
         </v-list-item>
       </v-row>
       <v-row justify="center">
-        <v-btn text @click="loadMore" v-if="attractionCount < attractions.length">
+        <v-btn
+          text
+          @click="loadMore"
+          v-if="attractionCount < attractions.length"
+        >
           더보기
         </v-btn>
       </v-row>
@@ -91,9 +98,15 @@ export default {
     ...mapState(regionStore, ["sidos", "guguns"]),
     ...mapState(attractionStore, ["attractions", "attractionCount"]),
     attractions() {
-      return this.$store.getters["attractionStore/filteredAttractions"](
-        this.gugunCode
-      );
+      if (this.searchWord) {
+        return this.$store.getters["attractionStore/filteredAttractions"](
+          this.gugunCode
+        ).filter((attraction) => attraction.title.includes(this.searchWord));
+      } else {
+        return this.$store.getters["attractionStore/filteredAttractions"](
+          this.gugunCode
+        );
+      }
     },
   },
   methods: {
@@ -106,6 +119,7 @@ export default {
     selectSido() {
       let param = {
         sidoCode: this.sidoCode,
+        keyword: this.searchWord,
       };
       this.getGugun(this.sidoCode);
       this.getAttractionListAction(param);
@@ -113,7 +127,13 @@ export default {
     selectGugun() {},
     loadMore() {
       this.attractionCount += 10;
-    }
+    },
+    searchAttractions() {
+      let param = {
+        keyWord: this.searchWord,
+      };
+      this.getAttractionListAction(param);
+    },
   },
 };
 </script>

@@ -17,6 +17,8 @@
 		<result column="attraction_id" property="attractionId"/>
 		<result column="visit_order" property="visitOrder"/>
 		<result column="memo" property="memo"/>
+		<result column="visit_time" property="visitTime"/>		
+		<result column="visit_date" property="visitDate"/>		
 		<result column="title" property="title"/>		
 		<result column="latitude" property="latitude"/>		
 		<result column="longitude" property="longitude"/>		
@@ -70,7 +72,7 @@
 	
 	<select id="getRoute" parameterType="string" resultMap="route">
 		select 
-			r.plan_id, r.attraction_id, r.visit_order, r.memo, r.visit_time,
+			r.plan_id, r.attraction_id, r.visit_order, r.memo, r.visit_time, r.visit_date,
 			a.first_image image, a.title, a.latitude, a.longitude, a.addr1 addr
 		from trip_route r join attraction_info a
 		on r.attraction_id = a.attraction_id

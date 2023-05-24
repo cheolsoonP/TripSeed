@@ -5,20 +5,7 @@ const planStore = {
   state: {
     plans: [],
     planDetail: {},
-    routes: [
-      {
-        planId: "",
-        attractionId: "",
-        memo: "",
-        visitTime: "",
-        image: "",
-      },
-    ],
-    tempPlan: {
-      startDate: "2023-02-01",
-      endDate: "2023-02-05",
-      title:"임시제목",
-    },
+    routes: [],
   },
   getters: {},
   mutations: {

@@ -15,6 +15,7 @@ public class RouteDto {
 	private int visitOrder;
 	private String memo;
 	private String visitTime;
+	private String visitDate;
 	private String title;
 	private String latitude;
 	private String longitude;

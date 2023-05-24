@@ -3,7 +3,7 @@
     <header-bar
       title="핫 플레이스"
       content="지역별 지금 핫한 관광지를 확인할 수 있어요.<br/>가장 핫한 여행지를 한눈에!"
-      imgsrc="headerImage"
+      :imgsrc="headerImage"
     />
     <v-container>
       <v-row>

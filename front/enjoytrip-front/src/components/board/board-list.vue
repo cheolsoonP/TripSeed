@@ -6,7 +6,7 @@
       url="/board/write"
       btn_icon="mdi-plus"
       btn_text="글쓰기"
-      imgsrc="headerImage"
+      :imgsrc="headerImage"
     />
     <v-container>
       <v-row>

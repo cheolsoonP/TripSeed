@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.enjoytrip.board.dto.BoardDto;
+import com.ssafy.enjoytrip.board.dto.ReplyDto;
 import com.ssafy.enjoytrip.board.mapper.BoardMapper;
 
 @Service
@@ -53,6 +54,30 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> getUserPostList(String userId) throws Exception {
 		return boardMapper.getUserPostList(userId);
+	}
+
+
+	@Override
+	public void writeReply(ReplyDto replyDto) throws Exception {
+		boardMapper.writeReply(replyDto);
+	}
+
+
+	@Override
+	public void deleteReply(String replyId) throws Exception {
+		boardMapper.deleteReply(replyId);
+	}
+
+
+	@Override
+	public void updateReply(ReplyDto replyDto) throws Exception {
+		boardMapper.updateReply(replyDto);
+	}
+
+
+	@Override
+	public List<ReplyDto> getReplyList(String postId) throws Exception {
+		return 	boardMapper.getReplyList(postId);
 	}
 	
 

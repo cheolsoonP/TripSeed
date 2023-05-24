@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoytrip.board.dto.BoardDto;
+import com.ssafy.enjoytrip.board.dto.ReplyDto;
 import com.ssafy.enjoytrip.board.service.BoardService;
 
 @RestController
@@ -36,7 +37,6 @@ public class BoardCotroller {
 	@PostMapping("/write")
 	public ResponseEntity<?> writePost(@RequestBody BoardDto boardDto) {
 		try {
-			System.out.println(boardDto);
 			if (boardDto.getTitle() == null || boardDto.getContent() == null) {
 				return new ResponseEntity<String>("제목과 내용을 모두 입력해야 합니다.", HttpStatus.BAD_REQUEST);
 			}
@@ -112,6 +112,64 @@ public class BoardCotroller {
 			List<BoardDto> postList;
 			postList = boardService.getUserPostList(userId);
 			return new ResponseEntity<List<BoardDto>>(postList, HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
+	@PostMapping("/{postId}/reply")
+	public ResponseEntity<?> writeReply(
+			@PathVariable("postId") String postId,
+			@RequestBody ReplyDto replyDto) 
+	{
+		try {
+			System.out.println(replyDto);
+			boardService.writeReply(replyDto);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
+	@GetMapping("/reply/{postId}")
+	public ResponseEntity<?> getReplyList(
+			@PathVariable("postId") String postId) 
+	{
+		try {
+			List<ReplyDto> replyList = boardService.getReplyList(postId);
+			if(replyList != null) {
+				return new ResponseEntity<List<ReplyDto>>(replyList, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@PutMapping("/reply/{replyId}")
+	public ResponseEntity<?> updateReply(
+			@PathVariable("replyId") String replyId,
+			@RequestBody ReplyDto replyDto) 
+	{
+		try {
+			boardService.updateReply(replyDto);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@DeleteMapping("/reply/{replyId}")
+	public ResponseEntity<?> deleteReply(
+			@PathVariable("replyId") String replyId) 
+	{
+		try {
+			boardService.deleteReply(replyId);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}

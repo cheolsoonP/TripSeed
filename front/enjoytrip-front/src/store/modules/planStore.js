@@ -13,8 +13,17 @@ const planStore = {
       file: "",
       partners: [],
     },
+    route: {
+      planId: "",
+      attractionId: "",
+      visitOrder: "",
+      memo: "",
+      visitTime: "",
+      visitDate: "",
+    },
+    activeTabDate: "",
   },
-  getters: {},
+  getters: { },
   mutations: {
     SET_PLAN_LIST(state, plans) {
       state.plans = [];
@@ -73,6 +82,16 @@ const planStore = {
       const index = state.tempPlan.partners.findIndex(findPartner);
       state.tempPlan.partners.splice(index, 1);
     },
+    ADD_ATTRACTION_TO_ROUTE(state, route) {
+      state.routes.push(route)
+    },
+    INIT_PLAN_EDIT_ROUTE(state, startDate) {
+      state.activeTabDate = startDate;
+      state.routes = [];
+    },
+    SET_ACTIVE_TAB_DATE(state, date) {
+      state.activeTabDate = date;
+    }
   },
   actions: {
     getPlanListAction: ({ commit }, userId) => {
@@ -125,6 +144,17 @@ const planStore = {
     },
     deletePartnerAction: ({ commit }, partnerId) => {
       commit("DELETE_PARTNER", partnerId);
+    },
+    addAttractionToRouteAction: ({ commit }, route) => {
+      console.log(route);
+      commit("ADD_ATTRACTION_TO_ROUTE", route);
+    },
+    initPlanEditRouteAction:({ commit }, startDate) => {
+      commit("INIT_PLAN_EDIT_ROUTE", startDate);
+    },
+    setActiveTabDateAction: ({ commit }, date) => {
+      console.log(date);
+      commit("SET_ACTIVE_TAB_DATE", date);
     },
   },
 };

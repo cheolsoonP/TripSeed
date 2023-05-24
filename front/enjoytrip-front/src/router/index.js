@@ -98,6 +98,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/hotplace",
+    name: "hotplace",
+    component: () => import("@/views/hotplace-view"),
+  },
 ];
 
 const router = new VueRouter({

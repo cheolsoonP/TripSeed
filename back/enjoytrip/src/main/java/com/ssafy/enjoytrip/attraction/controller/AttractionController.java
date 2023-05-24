@@ -72,8 +72,8 @@ public class AttractionController {
 	
 	
 	@GetMapping("/hotplace")
-	public ResponseEntity<?> getHotplaceList(@RequestParam(value = "sido", required = false) Integer sidoCode, 
-												@RequestParam(value = "gugun", required = false) Integer gugunCode,
+	public ResponseEntity<?> getHotplaceList(@RequestParam(value = "sidoCode", required = false) Integer sidoCode, 
+												@RequestParam(value = "gugunCode", required = false) Integer gugunCode,
 												@RequestParam(value = "limit", required = false) Integer limit,
 												@RequestParam(value = "keyword", required = false) String keyword){
 		try {

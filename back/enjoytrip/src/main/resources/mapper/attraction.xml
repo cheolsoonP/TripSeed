@@ -29,6 +29,7 @@
 		<result column="latitude" property="latitude"/>
 		<result column="longitude" property="longitude"/>
 		<result column="mlevel" property="mlevel"/>
+		<result column="overview" property="overview"/>
 	</resultMap>
 	
 
@@ -58,19 +59,19 @@
 	</select>
 	
 	<select id="getHotplaceList" parameterType="hashMap" resultMap="attraction">
-		select 	attraction_id, content_type_id, title, 
-				addr1, addr2, zipcode, tel, first_image, first_image2, 
-				readcount, sido_code, gugun_code, 
-				latitude, longitude, mlevel
-		from attraction_info
+		select 	a.attraction_id, a.content_type_id, a.title, 
+				a.addr1, a.addr2, a.zipcode, a.tel, a.first_image, a.first_image2, 
+				a.readcount, a.sido_code, a.gugun_code, 
+				a.latitude, a.longitude, a.mlevel, d.overview
+		from attraction_info a join attraction_description d
+		on a.attraction_id = d.attraction_id
 		<trim prefix="where" suffixOverrides="and">
 			<if test="sidoCode != null">sido_code=#{sidoCode} and</if>
 			<if test="gugunCode != null">gugun_code=#{gugunCode} and</if>
 			<if test="keyword != null">title like concat('%', #{keyword}, '%')</if>
 		</trim>
 		order by readcount DESC
-		<if test="contentTypeId != null">limit #{limit}</if>
-		<if test="contentTypeId == null">limit 10</if>
+		limit 100
 	</select>
 	
 </mapper>

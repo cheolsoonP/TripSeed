@@ -19,6 +19,7 @@ const planStore = {
       title: "",
       thumnail: "",
       file: "",
+      partners: [],
     },
   },
   getters: {},
@@ -56,6 +57,7 @@ const planStore = {
       state.tempPlan.dates[1] = today;
       state.tempPlan.file = null;
       state.tempPlan.thumnail = null;
+      state.tempPlan.partners = [];
     },
     UPDATE_DATE(state, dates) {
       state.tempPlan.dates = dates;
@@ -66,6 +68,18 @@ const planStore = {
     UPDATE_THUMNAIL(state, body) {
       state.tempPlan.file = body.file;
       state.tempPlan.thumnail = body.thumnail;
+    },
+    ADD_PARTNER(state, partnerInfo) {
+      if (!state.tempPlan.partners.includes(partnerInfo)) {
+        state.tempPlan.partners.push(partnerInfo);
+      }
+    },
+    DELETE_PARTNER(state, partnerId) {
+      function findPartner(partner) {
+        if (partner.userId === partnerId) return true;
+      }
+      const index = state.tempPlan.partners.findIndex(findPartner);
+      state.tempPlan.partners.splice(index, 1);
     },
   },
   actions: {
@@ -113,6 +127,12 @@ const planStore = {
     },
     updateThumnailAction: ({ commit }, body) => {
       commit("UPDATE_THUMNAIL", body);
+    },
+    addPatnerAction: ({ commit }, partnerInfo) => {
+      commit("ADD_PARTNER", partnerInfo);
+    },
+    deletePartnerAction: ({ commit }, partnerId) => {
+      commit("DELETE_PARTNER", partnerId);
     },
   },
 };

@@ -35,11 +35,9 @@
         </v-stepper-content>
 
         <v-stepper-content step="3" class="pa-0">
-          <v-row>
-            <v-col>
-              <v-btn @click="postPlan">생성하기</v-btn>
-            </v-col>
-          </v-row>
+          <v-card elevation="0">
+            <plan-write-partner />
+          </v-card>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -49,12 +47,13 @@
 <script>
 import PlanWriteInfo from "@/components/plan/plan-write-info.vue";
 import PlanWriteDate from "@/components/plan/plan-write-date.vue";
+import PlanWritePartner from "@/components/plan/plan-write-partner.vue";
 import { mapActions } from "vuex";
 
 const planStore = "planStore";
 
 export default {
-  components: { PlanWriteInfo, PlanWriteDate },
+  components: { PlanWriteInfo, PlanWriteDate, PlanWritePartner },
   data() {
     return {
       e1: 1,
@@ -62,12 +61,6 @@ export default {
   },
   methods: {
     ...mapActions(planStore, ["initTempPlanAction"]),
-    postPlan() {
-      // vuex plan tile ~백엔드로 요청 api ->
-      /*
-      동기화 요청으로 then -> 생성완료 되면 생성된 plan_id를 제공해준다.
-       */
-    },
   },
   created() {
     this.initTempPlanAction();

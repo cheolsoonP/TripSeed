@@ -13,7 +13,6 @@ function getPost(postId, success, fail) {
 }
 
 async function writePostApi(body, success, fail) {
-  console.log(body);
   // 업로드할 파일이 있다면
   // 파일 업로드 후에 해당 링크 Backend 전달
   if (body.file !== null) {

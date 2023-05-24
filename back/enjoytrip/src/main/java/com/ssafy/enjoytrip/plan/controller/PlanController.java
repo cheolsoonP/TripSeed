@@ -38,7 +38,8 @@ public class PlanController {
 	public ResponseEntity<?> addPlan(@RequestBody PlanDto planDto) {
 		try {
 			planService.addPlan(planDto);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			String planId = Integer.toString(planDto.getPlanId());
+			return new ResponseEntity<String>(planId, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
@@ -175,6 +176,19 @@ public class PlanController {
 			data.put("planId", planId);
 			data.put("attractionId", attractionId);
 			planService.updateVisitTime(data);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	
+	@PostMapping("/{planId}/partners")
+	public ResponseEntity<?> addPartners(@PathVariable("planId") String planId,
+										@RequestBody Map<String, Object> data) {
+		try {
+			data.put("planId", planId);
+			planService.addPartner(data);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

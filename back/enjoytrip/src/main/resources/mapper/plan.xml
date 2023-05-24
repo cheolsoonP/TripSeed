@@ -25,10 +25,10 @@
 	</resultMap>
 	
 	<!-- 여행 계획 추가/조회/변경/삭제  -->
-	<insert id="addPlan" parameterType="planDto">
+	<insert id="addPlan" parameterType="planDto" useGeneratedKeys="true" keyProperty="planId">
 		insert into trip_plan 
-				(user_id, plan_title, start_date, end_date, complete) 
-				values (#{userId},#{planTitle},#{startDate},#{endDate},#{complete})
+			(user_id, plan_title, start_date, end_date, image) 
+			values (#{userId},#{planTitle},#{startDate},#{endDate},#{image})
 	</insert>	
 	
 	<select id="getPlanList" parameterType="string" resultMap="plan">
@@ -99,4 +99,13 @@
 		where plan_id = #{planId}
 		and attraction_id = #{attractionId}
 	</update>
+
+	<insert id="addPartner" parameterType="hashMap" >
+		insert into partner (plan_id, partner_id) 
+		values
+		<foreach collection="partners" item="partner" separator=",">
+			(#{planId}, #{partner.userId})
+		</foreach>
+	</insert>
+	
 </mapper>

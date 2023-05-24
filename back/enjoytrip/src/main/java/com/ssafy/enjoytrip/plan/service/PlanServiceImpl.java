@@ -19,9 +19,8 @@ public class PlanServiceImpl implements PlanService {
 	}
 	
 	@Override
-	public void addPlan(PlanDto planDto) throws Exception {
-		System.out.println(planDto);
-		planMapper.addPlan(planDto);
+	public int addPlan(PlanDto planDto) throws Exception {
+		return planMapper.addPlan(planDto);
 	}
 
 	@Override
@@ -74,6 +73,11 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public void updateVisitTime(Map<String, Object> data) throws Exception {
 		planMapper.updateVisitTime(data);
+	}
+
+	@Override
+	public void addPartner(Map<String, Object> data) throws Exception {
+		planMapper.addPartner(data);
 	}
 
 

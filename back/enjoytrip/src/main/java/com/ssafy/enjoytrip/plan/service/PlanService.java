@@ -8,7 +8,7 @@ import com.ssafy.enjoytrip.plan.dto.RouteDto;
 
 public interface PlanService {
 
-	void addPlan(PlanDto planDto) throws Exception;
+	int addPlan(PlanDto planDto) throws Exception;
 
 	List<PlanDto> getPlanList(String userId) throws Exception;
 
@@ -29,5 +29,7 @@ public interface PlanService {
 	void updateMemo(Map<String, Object> data) throws Exception;
 
 	void updateVisitTime(Map<String, Object> data) throws Exception;
+
+	void addPartner(Map<String, Object> data) throws Exception;
 
 }

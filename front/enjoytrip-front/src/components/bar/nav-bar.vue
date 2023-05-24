@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-app-bar app flat elevation="2" color="white">
-      <v-app-bar-title class="ml-2">
+      <v-app-bar-title class="mt-2">
         <router-link to="/">
-          <img src="@/assets/logo_title.svg" height="40px" />
+          <img src="@/assets/new_logo_title.svg" height="48px" />
         </router-link>
       </v-app-bar-title>
 

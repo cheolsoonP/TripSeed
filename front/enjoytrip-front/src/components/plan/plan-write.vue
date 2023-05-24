@@ -15,7 +15,7 @@
         <v-divider />
 
         <v-stepper-step :complete="e1 > 3" editable step="3">
-          여행 계획 생성
+          여행 친구 추가
         </v-stepper-step>
       </v-stepper-header>
 
@@ -47,7 +47,6 @@
         </v-stepper-content>
 
         <v-stepper-content step="3" class="pa-0">
-          <plan-write-route />
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -57,9 +56,8 @@
 <script>
 import PlanWriteInfo from '@/components/plan/plan-write-info.vue';
 import PlanWriteDate from '@/components/plan/plan-write-date.vue';
-import planWriteRoute from "@/components/plan/plan-write-route.vue";
 export default {
-  components: { PlanWriteInfo, PlanWriteDate, planWriteRoute },
+  components: { PlanWriteInfo, PlanWriteDate, },
   data() {
     return {
       e1: 1,

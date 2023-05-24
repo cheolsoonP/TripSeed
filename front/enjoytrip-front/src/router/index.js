@@ -63,6 +63,11 @@ const routes = [
         name: "planview",
         component: () => import("@/components/plan/plan-detail"),
       },
+      {
+        path: "edit/:planId",
+        name: "planedit",
+        component: () => import("@/components/plan/plan-edit"),
+      },
     ],
   },
   {

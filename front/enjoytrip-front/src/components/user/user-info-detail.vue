@@ -138,7 +138,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(userStore, ["userId", "userName", "userNickname", "userName"]),
+    ...mapState(userStore, ["userId", "userName", "userNickname", "userEmail"]),
   },
 };
 </script>

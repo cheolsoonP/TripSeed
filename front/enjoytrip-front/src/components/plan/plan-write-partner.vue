@@ -116,7 +116,6 @@ export default {
       searchUserApi(
         param,
         (data) => {
-          console.log(data);
           this.users = data.data;
         },
         (error) => {

@@ -39,6 +39,7 @@ public class PlanController {
 	public ResponseEntity<?> addPlan(@RequestBody PlanDto planDto) {
 		try {
 			planService.addPlan(planDto);
+			System.out.println(planDto);
 			String planId = Integer.toString(planDto.getPlanId());
 			return new ResponseEntity<String>(planId, HttpStatus.OK);
 		} catch (Exception e) {

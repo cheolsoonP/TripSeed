@@ -12,7 +12,7 @@ import com.ssafy.enjoytrip.plan.dto.RouteDto;
 @Mapper
 public interface PlanMapper {
 
-	void addPlan(PlanDto planDto) throws SQLException;
+	int addPlan(PlanDto planDto) throws SQLException;
 
 	List<PlanDto> getPlanList(String userId) throws SQLException;
 
@@ -33,5 +33,7 @@ public interface PlanMapper {
 	void updateMemo(Map<String, Object> data) throws SQLException;
 
 	void updateVisitTime(Map<String, Object> data) throws SQLException;
+
+	void addPartner(Map<String, Object> data) throws SQLException;
 
 }

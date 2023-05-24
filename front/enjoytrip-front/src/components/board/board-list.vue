@@ -10,7 +10,7 @@
     />
     <v-container>
       <v-row>
-        <v-col cols="3"><side-bar /></v-col>
+        <v-col cols="3"><board-side-bar /></v-col>
         <v-col cols="9">
           <v-list>
             <v-list-item v-for="(post, index) in posts" :key="index">
@@ -25,7 +25,7 @@
 
 <script>
 import HeaderBar from "@/components/bar/header-bar.vue";
-import SideBar from "@/components/bar/side-bar.vue";
+import BoardSideBar from "@/components/bar/board-side-bar.vue";
 import BoardListItem from "@/components/board/board-list-item.vue";
 import { mapActions, mapState } from "vuex";
 
@@ -33,7 +33,7 @@ const regionStore = "regionStore";
 const boardStore = "boardStore";
 
 export default {
-  components: { HeaderBar, SideBar, BoardListItem },
+  components: { HeaderBar, BoardSideBar, BoardListItem },
   data() {
     return {
       headerImage: process.env.VUE_APP_BUCKET_BASE_URL + "HeaderBarImg.png",

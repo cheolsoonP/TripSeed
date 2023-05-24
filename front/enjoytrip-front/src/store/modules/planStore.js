@@ -15,8 +15,7 @@ const planStore = {
       },
     ],
     tempPlan: {
-      startDate: "",
-      endDate: "",
+      dates: [],
       title: "",
       thumnail: "",
       file: "",
@@ -50,20 +49,16 @@ const planStore = {
     },
     INIT_PLAN_INFO(state) {
       state.tempPlan.title = "새 여행일정";
-      let currDate = new Date();
-      let year = currDate.getFullYear();
-      let month = currDate.getMonth() + 1;
-      if (month < 10) month = "0" + month;
-      let date = currDate.getDate();
-      if (date < 10) date = "0" + date;
-      state.tempPlan.startDate = year + "-" + month + "-" + date;
-      state.tempPlan.endDate = year + "-" + month + "-" + date;
+      let today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10);
+      state.tempPlan.dates[0] = today;
+      state.tempPlan.dates[1] = today;
       state.tempPlan.file = null;
       state.tempPlan.thumnail = null;
     },
-    UPDATE_DATE(state, body) {
-      state.tempPlan.startDate = body.startDate;
-      state.tempPlan.endDate = body.endDate;
+    UPDATE_DATE(state, dates) {
+      state.tempPlan.dates = dates;
     },
     UPDATE_TITLE(state, title) {
       state.tempPlan.title = title;
@@ -110,8 +105,8 @@ const planStore = {
     initTempPlanAction: ({ commit }) => {
       commit("INIT_PLAN_INFO");
     },
-    updateDateAction: ({ commit }, body) => {
-      commit("UPDATE_DATE", body);
+    updateDateAction: ({ commit }, dates) => {
+      commit("UPDATE_DATE", dates);
     },
     updateTitleAction: ({ commit }, title) => {
       commit("UPDATE_TITLE", title);

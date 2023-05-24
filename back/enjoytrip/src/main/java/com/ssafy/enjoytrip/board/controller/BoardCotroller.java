@@ -49,8 +49,8 @@ public class BoardCotroller {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<?> getPostList(@RequestParam(value = "sido", required = false) Integer sidoCode,
-			@RequestParam(value = "gugun", required = false) Integer gugunCode,
+	public ResponseEntity<?> getPostList(@RequestParam(value = "sidoCode", required = false) Integer sidoCode,
+			@RequestParam(value = "gugunCode", required = false) Integer gugunCode,
 			@RequestParam(value = "keyword", required = false) String keyword) {
 		try {
 			Map<String, Object> map = new HashMap<>();

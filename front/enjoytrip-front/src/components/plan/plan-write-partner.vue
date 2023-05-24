@@ -139,7 +139,6 @@ export default {
         file: this.tempPlan.file,
         image: null,
       };
-      console.log(body);
       postPlanApi(
         body,
         (data) => {
@@ -167,7 +166,6 @@ export default {
           }
         },
         (error) => {
-          console.log("에러발생");
           console.log(error);
         }
       );

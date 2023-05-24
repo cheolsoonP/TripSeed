@@ -37,49 +37,22 @@
       ></v-text-field>
     </v-col>
     <div style="max-height: 300px; overflow-y;">
-      <v-row v-for="(attraction, i) in attractions" :key="i">
-        <v-list-item>
-          <v-list-item-avatar>
-            <v-icon v-if="attraction.firstImage2 === ''">mdi-heart</v-icon>
-            <v-img v-else :src="attraction.firstImage2" />
-          </v-list-item-avatar>
+      <div v-for="(attraction, i) in attractions" :key="i">
+        <v-row v-if="i <= attractionCount">
+          <v-list-item>
+            <v-list-item-avatar>
+              <v-icon v-if="attraction.firstImage2 === ''">mdi-heart</v-icon>
+              <v-img v-else :src="attraction.firstImage2" />
+            </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ attraction.title }}</v-list-item-title>
+            <v-list-item-content>
+              <v-list-item-title>{{ attraction.title }}</v-list-item-title>
 
-            <v-list-item-subtitle>{{ attraction.addr1 }}</v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-dialog v-model="dialog" width="700">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon color="grey lighten-1">mdi-information</v-icon>
-                </v-btn>
-              </template>
-
-              <v-card>
-                <v-card-title class="text-h5 primary">
-                  {{ attraction.title }}
-                </v-card-title>
-
-                <v-card-text class="pt-6">
-                  이제 여기에 관광지에 대한 정보가 들어가야 합니다.
-                </v-card-text>
-
-                <v-divider></v-divider>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" text @click="dialog = false">
-                    CLOSE
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-list-item-action>
-        </v-list-item>
-      </v-row>
+              <v-list-item-subtitle>{{attraction.addr1}}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-row>
+      </div>
     </div>
   </div>
 </template>
@@ -109,15 +82,20 @@ export default {
   },
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
-    ...mapState(attractionStore, ["attractions"]),
+    ...mapState(attractionStore, ["attractions", "attractionCount"]),
     // ...mapGetters(attractionStore, ["getAttractionItems", "filteredAttractions"]),
     attractions() {
-      return this.$store.getters["attractionStore/filteredAttractions"](this.gugunCode);
+      return this.$store.getters["attractionStore/filteredAttractions"](
+        this.gugunCode
+      );
     },
   },
   methods: {
     ...mapActions(regionStore, ["getSido", "getGugun"]),
-    ...mapActions(attractionStore, ["getAttractionListAction", "initAttractionListAction"]),
+    ...mapActions(attractionStore, [
+      "getAttractionListAction",
+      "initAttractionListAction",
+    ]),
 
     selectSido() {
       let param = {

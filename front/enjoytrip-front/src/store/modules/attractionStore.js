@@ -4,6 +4,7 @@ const attractionStore = {
   namespaced: true,
   state: {
     attractions: [],
+    attractionCount: 0,
   },
   getters: {
     filteredAttractions: (state) => (gugunCode) => {// 구군 선택 시 : 시도별 attractions에서 필터링
@@ -20,9 +21,11 @@ const attractionStore = {
       attractions.forEach((attraction) => {
         state.attractions.push(attraction);
       });
+      state.attractionCount = 10;
     },
     INIT_ATTRACTION_LIST(state){
       state.attractions = [];
+      state.attractionCount = 0;
     }
   },
   actions: {

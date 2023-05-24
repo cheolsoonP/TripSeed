@@ -16,5 +16,6 @@ public class UserDto {
 	private String userEmail;
 	private String userPassword;
 	private String salt;
+	private String profile;
 	
 }

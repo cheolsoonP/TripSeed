@@ -28,6 +28,7 @@ const userStore = {
       state.userEmail = "";
       state.isLogin = false;
       state.authFail = false;
+      state.profile = null;
     },
     SET_AUTH_USER(state, info) {
       state.authToken = info.authToken;
@@ -37,6 +38,7 @@ const userStore = {
       state.userEmail = info.userEmail;
       state.isLogin = true;
       state.authFail = false;
+      state.profile = info.profile;
     },
     SET_AUTH_FAIL(state) {
       state.isLogin = false;

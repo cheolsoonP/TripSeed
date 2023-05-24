@@ -94,7 +94,6 @@ public class UserController {
 			map.put("userNickname", userNickname);
 			List<UserDto> userList;
 			userList = userService.searchUserList(map);
-			System.out.println(userList);
 			return new ResponseEntity<List<UserDto>>(userList, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);
@@ -121,7 +120,6 @@ public class UserController {
 		try {
 			List<UserDto> userList;
 			userList = userService.getFollowerList(userId);
-			System.out.println(userList);
 			return new ResponseEntity<List<UserDto>>(userList, HttpStatus.OK);
 		} catch (Exception e) {
 			return exceptionHandling(e);

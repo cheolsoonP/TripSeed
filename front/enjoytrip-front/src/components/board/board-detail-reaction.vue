@@ -50,10 +50,9 @@ export default {
       };
       postReply(
         body,
-        ({ data }) => {
-          console.log(this.postId);
+        () => {
           this.getReplyListAction(this.postId);
-          console.log(data);
+          this.replyContent = "";
         },
         (error) => {
           console.log(error);

@@ -21,7 +21,7 @@
         <v-row style="backgroud-color: pink">
           <v-col cols="12" md="4">
             <v-list dense nav height="50vh">
-              <div v-for="(route, index) in routes" :key="index">
+              <div v-for="(route, index) in sortOrderRoutes" :key="index">
                 <v-list-item v-if="date === route.visitDate">
                   {{ route.title }}
                 </v-list-item>
@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import { getPlanDetailApi, getRouteApi } from "@/api/plan.js";
-import { mapState, mapActions } from "vuex";
+import { getPlanDetailApi } from "@/api/plan.js";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 const planStore = "planStore";
 
@@ -45,7 +45,6 @@ export default {
   data() {
     return {
       plan: {},
-      routes: [],
       dates: [],
       startMenu: false,
     };
@@ -64,23 +63,16 @@ export default {
         console.log(error);
       }
     );
-    getRouteApi(
-      planId,
-      ({ data }) => {
-        console.log(data);
-        this.routes = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.getRouteAction(planId);
   },
   computed: {
-    ...mapState(planStore, ["activeTabDate"]),
+    ...mapState(planStore, ["activeTabDate",]),
+    ...mapGetters(planStore, ["sortOrderRoutes"]),
   },
   methods: {
     ...mapActions(planStore, [
       "initPlanEditRouteAction",
+      "getRouteAction",
       "setActiveTabDateAction",
     ]),
 

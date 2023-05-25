@@ -23,7 +23,23 @@ const planStore = {
     },
     activeTabDate: "",
   },
-  getters: { },
+  getters: { 
+    sortOrderRoutes:(state) => {
+      // value 기준으로 정렬
+      state.routes.sort(function (a, b) {
+        if (a.visitOrder > b.visitOrder) {
+          return 1;
+        }
+        if (a.visitOrder < b.visitOrder) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+
+      return state.routes;
+    }
+  },
   mutations: {
     SET_PLAN_LIST(state, plans) {
       state.plans = [];
@@ -45,8 +61,8 @@ const planStore = {
     },
     SET_PLAN_ROUTES(state, routes) {
       state.routes = [];
-      routes.forEach((plan) => {
-        state.routes.push({ planId: plan.planId });
+      routes.forEach((route) => {
+        state.routes.push(route);
       });
     },
     INIT_PLAN_INFO(state) {
@@ -83,6 +99,7 @@ const planStore = {
       state.tempPlan.partners.splice(index, 1);
     },
     ADD_ATTRACTION_TO_ROUTE(state, route) {
+      console.log(route)
       state.routes.push(route)
     },
     INIT_PLAN_EDIT_ROUTE(state, startDate) {
@@ -120,6 +137,7 @@ const planStore = {
       getRouteApi(
         planId,
         ({ data }) => {
+          console.log(data);
           commit("SET_PLAN_ROUTES", data);
         },
         (error) => {
@@ -146,7 +164,6 @@ const planStore = {
       commit("DELETE_PARTNER", partnerId);
     },
     addAttractionToRouteAction: ({ commit }, route) => {
-      console.log(route);
       commit("ADD_ATTRACTION_TO_ROUTE", route);
     },
     initPlanEditRouteAction:({ commit }, startDate) => {

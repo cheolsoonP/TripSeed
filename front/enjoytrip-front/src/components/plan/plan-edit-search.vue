@@ -134,6 +134,7 @@ export default {
       gugunName: null,
       searchWord: null,
       attractionCount: 10, // 추가
+      dialog: false,
     };
   },
   created() {
@@ -185,13 +186,13 @@ export default {
       this.getAttractionListAction(param);
     },
     addToRoute(attraction) {
+      console.log(attraction);
       let route = {
         planId: this.$route.params.planId,
-        attractionId: attraction.attractionId,
+        ...attraction,
         visitDate: this.activeTabDate,
         visitOrder: this.routes.length+1,
       };
-
       this.addAttractionToRouteAction(route);
     },
   },

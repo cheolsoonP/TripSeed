@@ -16,7 +16,7 @@
                 <v-card-title>{{ card.title }}</v-card-title>
                 <v-card-subtitle>{{ card.subtitle }}</v-card-subtitle>
                 <v-card-actions class="py-0">
-                  <v-btn color="primary" text> 바로가기 </v-btn>
+                  <v-btn color="primary" text :to="card.url"> 바로가기 </v-btn>
                 </v-card-actions>
               </v-col>
             </v-row>
@@ -33,10 +33,11 @@ export default {
   data() {
     return {
       cards: [
-        { title: "핫 플레이스", subtitle: "나만 빼고 다 가는 곳" },
+        { title: "핫 플레이스", subtitle: "나만 빼고 다 가는 곳", url: "/hotplace" },
         {
           title: "여행 꿀팁 공유",
           subtitle: "지역을 선택하고 관련 정보를 확인",
+          url: "/board/list"
         },
       ],
     };

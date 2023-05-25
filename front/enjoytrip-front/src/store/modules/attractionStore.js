@@ -28,6 +28,19 @@ const attractionStore = {
       state.attractions = [];
       state.attractionCount = 0;
     },
+    SORT_ATTRACTION_POPULAR(state) {
+      // value 기준으로 정렬
+      state.attractions.sort(function (a, b) {
+        if (a.readcount < b.readcount) {
+          return 1;
+        }
+        if (a.readcount > b.readcount) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+    },
   },
   actions: {
     getAttractionListAction: ({ commit }, param) => {
@@ -57,6 +70,9 @@ const attractionStore = {
           console.log(error);
         }
       );
+    },
+    sortAttractionPopularAction: ({ commit }) => {
+      commit("SORT_ATTRACTION_POPULAR");
     },
   },
 };

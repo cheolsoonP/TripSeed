@@ -7,9 +7,7 @@
         <v-row>
           <v-col cols="8" class="d-flex justify-center align-center">
             <v-col cols="auto">
-              <v-list-item class="text-h6 justify-center">
-                <span>시작일</span></v-list-item
-              >
+              <v-list-item class="text-h6 justify-center"> <span>시작일</span></v-list-item>
               <v-list-item>
                 <v-chip color="primary" outlined large>
                   <div class="px-2">{{ plan.startDate }}</div>
@@ -18,9 +16,7 @@
               </v-list-item>
             </v-col>
             <v-col cols="auto">
-              <v-list-item class="text-h6 justify-center">
-                <span>종료일</span></v-list-item
-              >
+              <v-list-item class="text-h6 justify-center"> <span>종료일</span></v-list-item>
               <v-list-item>
                 <v-chip color="primary" outlined large>
                   <div class="px-2">{{ plan.endDate }}</div>
@@ -36,13 +32,7 @@
               </v-btn>
             </v-row>
             <v-row class="pa-2 mt-2 d-flex justify-center">
-              <v-btn
-                elevation="0"
-                color="primary"
-                rounded
-                large
-                :to="'/plan/edit/' + plan.planId"
-              >
+              <v-btn elevation="0" color="primary" rounded large :to="'/plan/edit/' + plan.planId">
                 <v-icon class="pr-1">mdi-pencil</v-icon>
                 <span class="px-1">수정하기</span>
               </v-btn>
@@ -67,16 +57,10 @@
                 </div>
               </v-card>
             </v-tab>
-            <v-tab
-              v-for="(group, visitDate, d) in groupByDate"
-              :key="d"
-              class="pa-0"
-            >
+            <v-tab v-for="(group, visitDate, d) in groupByDate" :key="d" class="pa-0">
               <v-card elevation="0">
                 <div class="px-2">
-                  <v-card-title class="flex justify-center">
-                    {{ d + 1 }} 일차
-                  </v-card-title>
+                  <v-card-title class="flex justify-center"> {{ d + 1 }} 일차 </v-card-title>
                   <v-card-subtitle class="flex justify-center">
                     {{ visitDate }}
                   </v-card-subtitle>
@@ -88,29 +72,17 @@
               <v-container class="py-0" style="height: 760px; overflow-y: auto">
                 <v-timeline align-top>
                   <template v-for="(group, visitDate, d) in groupByDate">
-                    <v-timeline-item
-                      v-for="(route, i) in group"
-                      :key="i"
-                      :color="colors[d % 10]"
-                    >
+                    <v-timeline-item v-for="(route, i) in group" :key="i" :color="colors[d % 10]">
                       <route-item :route="route"></route-item>
                     </v-timeline-item>
                   </template>
                 </v-timeline>
               </v-container>
             </v-tab-item>
-            <v-tab-item
-              v-for="(group, visitDate, d) in groupByDate"
-              :key="d"
-              class="mt-4"
-            >
+            <v-tab-item v-for="(group, visitDate, d) in groupByDate" :key="d" class="mt-4">
               <v-container class="py-0" style="height: 760px; overflow-y: auto">
                 <v-timeline align-top>
-                  <v-timeline-item
-                    v-for="(route, i) in group"
-                    :key="i"
-                    :color="colors[d % 10]"
-                  >
+                  <v-timeline-item v-for="(route, i) in group" :key="i" :color="colors[d % 10]">
                     <route-item :route="route"></route-item>
                   </v-timeline-item>
                 </v-timeline>
@@ -187,13 +159,14 @@ export default {
       let group = {};
 
       this.routes.forEach((route) => {
+        console.log(route);
         const visitDate = route.visitDate;
         if (!group[visitDate]) {
           group[visitDate] = [];
         }
         group[visitDate].push(route);
       });
-
+      console.log(group);
       return group;
     },
   },

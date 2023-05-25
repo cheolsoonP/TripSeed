@@ -1,16 +1,13 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="6"> </v-col>
+    <v-row class="ma-2">
+      <v-col class="align-center">
+        <v-btn width="80%" color="primary" @click="updateRoutes">수정완료</v-btn>
+      </v-col>
     </v-row>
 
     <v-tabs show-arrows height="100%">
-      <v-tab
-        v-for="(date, i) in dates"
-        :key="i"
-        class="px-2"
-        @click="selectTab(date)"
-      >
+      <v-tab v-for="(date, i) in dates" :key="i" class="px-2" @click="selectTab(date)">
         <v-card outlined>
           <v-card-title> {{ i + 1 }} 일차 </v-card-title>
           <v-card-subtitle> {{ date }} </v-card-subtitle>
@@ -18,55 +15,61 @@
       </v-tab>
 
       <v-tab-item v-for="(date, i) in dates" :key="i">
-        <v-row style="backgroud-color: pink">
-          <v-col cols="12" md="4">
-            <v-list dense nav height="50vh">
-              <div v-for="(route, index) in sortOrderRoutes" :key="index">
-                <v-list-item v-if="date === route.visitDate">
-                  {{ route.title }}
-                </v-list-item>
-              </div>
-            </v-list>
-          </v-col>
-        </v-row>
+        <v-list dense nav height="60vh" style="overflow-x: hidden; overflow-y: auto">
+          <div v-for="(route, index) in sortOrderRoutes" :key="index">
+            <v-list-item v-if="date === route.visitDate">
+              <plan-edit-route-item :attraction="route" />
+            </v-list-item>
+          </div>
+        </v-list>
       </v-tab-item>
     </v-tabs>
   </div>
 </template>
 
 <script>
-import { getPlanDetailApi } from "@/api/plan.js";
+import { getPlanDetailApi, updateRouteApi } from "@/api/plan.js";
 import { mapState, mapActions, mapGetters } from "vuex";
-
+import PlanEditRouteItem from "./plan-edit-route-item.vue";
 const planStore = "planStore";
 
 export default {
   name: "PlanEditRoute",
+  components: { PlanEditRouteItem },
   data() {
     return {
       plan: {},
       dates: [],
       startMenu: false,
+      planId: "",
     };
   },
   created() {
-    let planId = this.$route.params.planId;
+    this.planId = this.$route.params.planId;
+
     getPlanDetailApi(
-      planId,
+      this.planId,
       ({ data }) => {
         console.log(data);
         this.plan = data;
-        this.makeDates();
         this.initPlanEditRouteAction(this.plan.startDate);
+        this.makeDates();
+
+        this.getRouteAction(
+          this.planId,
+          ({ data }) => {
+            console.log(data);
+          },
+          () => {}
+        );
       },
       (error) => {
         console.log(error);
       }
     );
-    this.getRouteAction(planId);
   },
   computed: {
-    ...mapState(planStore, ["activeTabDate",]),
+    ...mapState(planStore, ["activeTabDate", "routes"]),
     ...mapGetters(planStore, ["sortOrderRoutes"]),
   },
   methods: {
@@ -93,13 +96,21 @@ export default {
     selectTab(date) {
       this.setActiveTabDateAction(date);
     },
-  },
-  watch: {
-    routes: {
-      handler: function (newRoutes) {
-        this.routes = newRoutes;
-      },
-      deep: true,
+    updateRoutes() {
+      let body = {
+        planId: this.planId,
+        routes: this.sortOrderRoutes,
+      };
+      updateRouteApi(
+        body,
+        () => {
+          alert("여행 계획 생성 완료!");
+          this.$router.push("/plan");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 };

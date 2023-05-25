@@ -63,10 +63,16 @@
 	
 	<!-- 여행 경로 추가/조회/삭제/변경 -->
 	<insert id="addRoute" parameterType="hashMap" >
-		insert into trip_route (plan_id, attraction_id, visit_order) 
+		insert into trip_route (
+			plan_id, attraction_id, 
+			visit_order, visit_date,
+			memo
+		) 
 		values
 		<foreach collection="routes" item="route" separator=",">
-			(#{planId}, #{route.attractionId}, #{route.visitOrder})
+			(#{planId}, #{route.attractionId}, 
+			#{route.visitOrder}, #{route.visitDate}, 
+			#{route.memo})
 		</foreach>
 	</insert>
 	

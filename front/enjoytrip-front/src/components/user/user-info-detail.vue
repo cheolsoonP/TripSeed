@@ -4,9 +4,9 @@
       <div class="text-subtitle ml-5">프로필 등록</div>
       <v-row class="text-h6">
         <v-col cols="2">
-          <v-card class="rounded-pill my-3 mx-2" width="100" height="100">
+          <v-avatar class="my-3 mx-2" width="100" height="100">
             <v-img v-if="profile !== null" :src="profile" max-height="100" max-width="100"></v-img>
-          </v-card>
+          </v-avatar>
         </v-col>
         <v-col cols="3">
           <v-file-input
@@ -44,7 +44,7 @@
     <v-text-field
       v-model="newNickname"
       :counter="50"
-      label="변경할 닉네임"
+      label="변경할 닉네임 (기본값은 현재 닉네임)"
       outlined
       dense
     ></v-text-field>
@@ -61,6 +61,7 @@
       label="비밀번호 확인"
       :error-messages="errors"
       :rules="passwordRules"
+      v-model="checkPassword"
       type="password"
       outlined
       required
@@ -87,6 +88,7 @@ export default {
     return {
       invalid: false,
       userPassword: "",
+      checkPassword: "",
       newNickname: "",
       errors: "",
       errorMsg: "",
@@ -117,7 +119,7 @@ export default {
   methods: {
     ...mapActions(userStore, ["initUserInfoAction"]),
     updateUserInfo() {
-      if (this.userPassword === "") {
+      if (this.userPassword === "" || this.checkPassword === "") {
         this.errorMsg = "새로운 비밀번호를 입력해주세요.";
         return;
       }

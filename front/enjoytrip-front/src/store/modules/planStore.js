@@ -45,15 +45,7 @@ const planStore = {
     SET_PLAN_LIST(state, plans) {
       state.plans = [];
       plans.forEach((plan) => {
-        state.plans.push({
-          planId: plan.planId,
-          userId: plan.userId,
-          planTitle: plan.planTitle,
-          startDate: plan.startDate,
-          endDate: plan.endDate,
-          complete: plan.complete,
-          image: plan.image,
-        });
+        state.plans.push(plan);
       });
     },
     SET_PLAN_DETAIL(state, planDetail) {

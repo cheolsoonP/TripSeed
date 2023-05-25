@@ -21,7 +21,7 @@
       <v-expand-transition>
         <div v-show="show">
           <v-divider></v-divider>
-          <v-textarea solo name="input-7-4" label="메모 작성하기">{{ route.memo }}</v-textarea>
+          <v-textarea solo name="input-7-4" label="메모 작성하기" hide-details>{{ route.memo }}</v-textarea>
         </div>
       </v-expand-transition>
     </v-card>

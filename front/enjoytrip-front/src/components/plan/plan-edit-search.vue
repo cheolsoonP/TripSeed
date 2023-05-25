@@ -128,7 +128,6 @@ export default {
   created() {
     this.getSido();
     this.initAttractionListAction();
-    // this.getAttractionListAction(); // 데이터가 커서 시간 많이 소요
   },
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
@@ -152,7 +151,7 @@ export default {
       "initAttractionListAction",
       "sortAttractionPopularAction",
     ]),
-    ...mapActions(planStore, ["addAttractionToRouteAction"]),
+    ...mapActions(planStore, ["addAttractionToRouteAction", "addMarker"]),
 
     selectSido() {
       let param = {

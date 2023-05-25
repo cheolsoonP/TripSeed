@@ -37,4 +37,29 @@ function postPlanPartner(body, success, fail) {
   api.post(`/plans/${body.planId}/partners`, body).then(success).catch(fail);
 }
 
-export { getPlanListApi, getPlanDetailApi, getRouteApi, postPlanApi, postPlanPartner };
+function updateRouteApi(body, success, fail) {
+  deleteRouteApi(
+    body.planId,
+    () => {
+      console.log(body.routes);
+      api.put(`/plans/${body.planId}/routes`, body).then(success).catch(fail);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+}
+
+function deleteRouteApi(planId, success, fail) {
+  api.delete(`/plans/${planId}/routes`).then(success).catch(fail);
+}
+
+export {
+  getPlanListApi,
+  getPlanDetailApi,
+  getRouteApi,
+  postPlanApi,
+  postPlanPartner,
+  updateRouteApi,
+  deleteRouteApi,
+};

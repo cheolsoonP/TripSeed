@@ -22,6 +22,7 @@ const planStore = {
       visitDate: "",
     },
     activeTabDate: "",
+    markers: [],
   },
   getters: {
     sortOrderRoutes: (state) => {
@@ -99,11 +100,19 @@ const planStore = {
       state.tempPlan.partners.splice(index, 1);
     },
     ADD_ATTRACTION_TO_ROUTE(state, route) {
-      state.routes.push(route);
+      function findRoute(item) {
+        if (item.attractionId === route.attractionId) return true;
+      }
+      if (!state.routes.find(findRoute)) {
+        state.routes.push(route);
+        // 새로운 route 객체를 추가할 때, 마커도 함께 생성하여 저장합니다.
+        state.markers.push({ lat: route.latitude, lng: route.longitude });
+      }
     },
     INIT_PLAN_EDIT_ROUTE(state, startDate) {
       state.activeTabDate = startDate;
       state.routes = [];
+      state.markers = [];
     },
     SET_ACTIVE_TAB_DATE(state, date) {
       state.activeTabDate = date;
@@ -115,6 +124,10 @@ const planStore = {
       }
       const index = state.routes.findIndex(findRoute);
       state.routes.splice(index, 1);
+      state.markers.splice(index, 1);
+      state.routes.forEach((route, idx) => {
+        if (idx >= index) route.visitOrder--;
+      });
     },
     ORDER_UP(state, route) {
       function findRoute(item) {
@@ -124,6 +137,9 @@ const planStore = {
       if (index !== 0) {
         state.routes[index - 1].visitOrder++;
         state.routes[index].visitOrder--;
+        let temp = state.markers[index - 1];
+        state.markers.splice(index - 1, 1);
+        state.markers.splice(index, 0, temp);
       }
     },
     ORDER_DOWN(state, route) {
@@ -134,7 +150,21 @@ const planStore = {
       if (index !== state.routes.length - 1) {
         state.routes[index].visitOrder++;
         state.routes[index + 1].visitOrder--;
+        let temp = state.markers[index + 1];
+        state.markers.splice(index + 1, 1);
+        state.markers.splice(index, 0, temp);
       }
+    },
+
+    UPDATE_MARKER(state, { index, marker }) {
+      state.markers.splice(index, 1, marker);
+    },
+    REMOVE_MARKER(state, index) {
+      state.markers.splice(index, 1);
+    },
+    SET_MARKER(state, markers) {
+      state.markers = [];
+      markers.forEach((marker) => state.markers.push(marker));
     },
   },
   actions: {
@@ -161,6 +191,7 @@ const planStore = {
       );
     },
     getRouteAction: ({ commit }, planId) => {
+      console.log("경로 불러오기");
       getRouteApi(
         planId,
         ({ data }) => {
@@ -197,7 +228,6 @@ const planStore = {
       commit("INIT_PLAN_EDIT_ROUTE", startDate);
     },
     setActiveTabDateAction: ({ commit }, date) => {
-      console.log(date);
       commit("SET_ACTIVE_TAB_DATE", date);
     },
     deleteRouteAction: ({ commit }, route) => {
@@ -208,6 +238,16 @@ const planStore = {
     },
     orderDownAction: ({ commit }, route) => {
       commit("ORDER_DOWN", route);
+    },
+    updateMarker({ commit, state }, { index, marker }) {
+      const updatedMarker = { ...state.markers[index], ...marker };
+      commit("UPDATE_MARKER", { index, marker: updatedMarker });
+    },
+    removeMarker({ commit }, index) {
+      commit("REMOVE_MARKER", index);
+    },
+    setMarker({ commit }, markers) {
+      commit("SET_MARKER", markers);
     },
   },
 };

@@ -48,7 +48,6 @@ const attractionStore = {
       getAttractionListApi(
         param,
         ({ data }) => {
-          console.log(data);
           commit("SET_ATTRACTION_LIST", data);
         },
         (error) => {
@@ -63,7 +62,6 @@ const attractionStore = {
       getHotplaceListApi(
         param,
         ({ data }) => {
-          console.log(data);
           commit("SET_ATTRACTION_LIST", data);
         },
         (error) => {

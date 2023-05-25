@@ -134,7 +134,7 @@ public class PlanController {
 	public ResponseEntity<?> updateRoute(@PathVariable("planId") String planId, 
 										@RequestBody Map<String, Object> data){
 		try {
-
+			System.out.println(data);
 			data.put("planId", planId);
 			planService.updateRoute(data);
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -143,10 +143,11 @@ public class PlanController {
 		}
 	}
 	
-	/* 여행 경로 변경 */
+	/* 여행 경로 삭제 */
 	@DeleteMapping("/{planId}/routes")
-	public ResponseEntity<?> updateRoute(@PathVariable("planId") String planId){
+	public ResponseEntity<?> deleteRoute(@PathVariable("planId") String planId){
 		try {
+			System.out.println(planId);
 			planService.deleteRoute(planId);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {

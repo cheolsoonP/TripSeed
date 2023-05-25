@@ -1,34 +1,57 @@
 <template>
-  <v-card height="400" width="256" class="mx-auto">
-    <v-navigation-drawer permanent>
-      <v-list dense nav>
-        <div>
-          <v-list-item class="text-h5">
-            <v-btn text @click="$vuetify.goTo(target, options)"> 다가오는 여행 </v-btn>
-          </v-list-item>
-        </div>
-        <div>
-          <v-list-item class="text-h5">
-            <v-btn text>나의 여행</v-btn>
-          </v-list-item>
-          <v-list-item>
-            <v-btn text>여행 계획</v-btn>
-          </v-list-item>
-          <v-list-item>
-            <v-btn text>지난 여행</v-btn>
-          </v-list-item>
-        </div>
-        <v-divider></v-divider>
-        <div>
-          <v-list-item class="text-h5">
-            <span>참여한 여행</span>
-          </v-list-item>
-          <v-list-item>여행 계획</v-list-item>
-          <v-list-item>지난 여행</v-list-item>
-        </div>
-      </v-list>
-    </v-navigation-drawer>
-  </v-card>
+  <div>
+    <v-card height="400" width="256" class="mx-auto">
+      <v-navigation-drawer permanent>
+        <v-card class="mx-auto" elevation="0">
+          <v-list>
+            <v-list-item link @click="scrollTo('coming-plan')">
+              <v-list-item-title> 다가오는 여행 </v-list-item-title>
+            </v-list-item>
+
+            <v-divider />
+
+            <v-list-group :value="true">
+              <template v-slot:activator>
+                <v-list-item-title>나의 여행</v-list-item-title>
+              </template>
+
+              <v-list-item link @click="scrollTo('my-current')">
+                <v-list-item-title>여행 계획</v-list-item-title>
+              </v-list-item>
+              <v-list-item link @click="scrollTo('my-past')">
+                <v-list-item-title>지난 일정</v-list-item-title>
+              </v-list-item>
+            </v-list-group>
+
+            <v-divider />
+
+            <v-list-group
+              :value="false"
+             @click="showSnackbar('To be Continued...🙄')"
+            >
+              <template v-slot:activator>
+                <v-list-item-title>참여한 여행</v-list-item-title>
+              </template>
+<!-- 
+              <v-list-item link>
+                <v-list-item-title>여행 계획</v-list-item-title>
+              </v-list-item>
+              <v-list-item link>
+                <v-list-item-title>지난 일정</v-list-item-title>
+              </v-list-item> -->
+            </v-list-group>
+          </v-list>
+        </v-card>
+      </v-navigation-drawer>
+    </v-card>
+
+    <v-snackbar
+      v-model="snackbar.show"
+      :color="snackbar.color"
+      :timeout="snackbar.timeout"
+      >{{ snackbar.message }}</v-snackbar
+    >
+  </div>
 </template>
 
 <script>
@@ -39,7 +62,14 @@
 export default {
   name: "PlanSideBar",
   data() {
-    return {};
+    return {
+      snackbar: {
+        show: false,
+        message: "",
+        color: "",
+        timeout: 1000,
+      },
+    };
   },
   computed: {
     // ...mapState(planStore, [""]),
@@ -67,6 +97,24 @@ export default {
   },
   methods: {
     // ...mapActions(planStore, [""]),
+    scrollTo(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        element.style.color = "#66d49F";
+
+        setTimeout(() => {
+          element.style.color = "";
+        }, 500);
+      } else {
+        this.showSnackbar("일정이 없어요 :)");
+      }
+    },
+    showSnackbar(message) {
+      this.snackbar.message = message;
+      this.snackbar.color = "#66d49F";
+      this.snackbar.show = true;
+    },
   },
 };
 </script>

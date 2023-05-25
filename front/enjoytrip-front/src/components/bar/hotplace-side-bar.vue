@@ -1,5 +1,5 @@
 <template>
-  <v-card height="600" width="200" class="card">
+  <v-card height="600" width="256" class="card">
     <v-navigation-drawer permanent>
       <v-list-item>
         <v-list-item-content>

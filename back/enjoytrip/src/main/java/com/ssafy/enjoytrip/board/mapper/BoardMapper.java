@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.enjoytrip.board.dto.BoardDto;
+import com.ssafy.enjoytrip.board.dto.ReplyDto;
 
 @Mapper
 public interface BoardMapper {
@@ -22,5 +23,15 @@ public interface BoardMapper {
 	void deletePost(String postId) throws SQLException;
 
 	List<BoardDto> getUserPostList(String userId) throws SQLException;
+
+	void writeReply(ReplyDto replyDto) throws SQLException;
+
+	void deleteReply(String replyId) throws SQLException;
+
+	void updateReply(ReplyDto replyDto) throws SQLException;
+
+	List<ReplyDto> getReplyList(String postId) throws SQLException;
+
+	void addView(String postId) throws SQLException;
 
 }

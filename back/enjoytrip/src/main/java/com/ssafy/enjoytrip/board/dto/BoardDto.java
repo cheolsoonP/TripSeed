@@ -8,6 +8,7 @@ public class BoardDto {
 	private String content;
 	private int likeCount;
 	private int viewCount;
+	private int replyCount;
 	private String writeDate;
 	private String updateDate;
 	private int sidoCode;
@@ -100,13 +101,19 @@ public class BoardDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	@Override
 	public String toString() {
 		return "BoardDto [postId=" + postId + ", title=" + title + ", writerId=" + writerId + ", writerNickname="
 				+ writerNickname + ", content=" + content + ", likeCount=" + likeCount + ", viewCount=" + viewCount
-				+ ", writeDate=" + writeDate + ", updateDate=" + updateDate + ", sidoCode=" + sidoCode + ", gugunCode="
-				+ gugunCode + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", image=" + image + "]";
+				+ ", replyCount=" + replyCount + ", writeDate=" + writeDate + ", updateDate=" + updateDate
+				+ ", sidoCode=" + sidoCode + ", gugunCode=" + gugunCode + ", sidoName=" + sidoName + ", gugunName="
+				+ gugunName + ", image=" + image + "]";
 	}
-
 	
 }

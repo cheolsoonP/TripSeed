@@ -9,6 +9,7 @@
 		<result column="user_name" property="userName"/>		
 		<result column="user_nickname" property="userNickname"/>
 		<result column="user_email" property="userEmail"/>
+		<result column="profile" property="profile"/>				
 	</resultMap>
 	
 	<resultMap type="userDto" id="userinfo">
@@ -16,6 +17,7 @@
 		<result column="user_name" property="userName"/>		
 		<result column="user_nickname" property="userNickname"/>
 		<result column="user_email" property="userEmail"/>
+		<result column="profile" property="profile"/>		
 	</resultMap>
 
 	
@@ -25,7 +27,7 @@
 	</insert>
 
 	<select id="getAuthInfo" parameterType="string" resultMap="authinfo">
-		select salt, user_password, user_id, user_name, user_nickname, user_email
+		select salt, user_password, user_id, user_name, user_nickname, user_email, profile
 		from user
 		where user_id=#{userId}
 	</select>
@@ -36,6 +38,7 @@
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="userPassword != null">user_password=#{userPassword},</if>
 			<if test="userNickname != null">user_nickname=#{userNickname},</if>
+			<if test="profile != null">profile=#{profile},</if>
 			<if test="salt != null">salt=#{salt},</if>
 		</trim>
 		where user_id = #{userId}
@@ -48,13 +51,13 @@
 	</delete>
 	
 	<select id="getUserInfo" parameterType="string" resultType="userDto">
-		select user_id, user_name, user_nickname
+		select user_id, user_name, user_nickname, profile
 		from user
 		where id = #{userId}
 	</select>
 	
 	<select id="searchUser" parameterType="hashMap" resultMap="userinfo">
-		select user_id, user_name, user_nickname, user_email
+		select user_id, user_name, user_nickname, user_email, profile
 		from user
 		<trim prefix="where" suffixOverrides="and">
 			<if test="userId != null">user_id like concat('%', #{userId}, '%')</if>

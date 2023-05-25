@@ -2,45 +2,45 @@
   <v-col>
     <v-row class="text-h7 justify-space-between">
       <div class="d-flex">
-      <v-col cols="auto" v-if="!post.sidoName">
-        <v-btn elevation="0" color="transparent"> 전체 </v-btn>
-      </v-col>
-      <v-col cols="auto" class="pr-1">
-        <v-btn elevation="0" color="transparent"> {{ post.sidoName }} </v-btn>
-      </v-col>
-      <v-col cols="auto" v-if="post.gugunName" class="px-0 d-flex align-center">
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-col>
-      <v-col cols="auto" class="pl-1">
-        <v-btn elevation="0" color="transparent"> {{ post.gugunName }} </v-btn>
-      </v-col>
+        <v-col cols="auto" v-if="!post.sidoName">
+          <v-btn elevation="0" color="transparent"> 전체 </v-btn>
+        </v-col>
+        <v-col cols="auto" class="pr-1">
+          <v-btn elevation="0" color="transparent"> {{ post.sidoName }} </v-btn>
+        </v-col>
+        <v-col cols="auto" v-if="post.gugunName" class="px-0 d-flex align-center">
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-col>
+        <v-col cols="auto" class="pl-1">
+          <v-btn elevation="0" color="transparent"> {{ post.gugunName }} </v-btn>
+        </v-col>
       </div>
       <div>
-      <v-col cols="auto" class="justify-end">
-        <v-menu offset-y bottom left>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn elevation="0" color="transparent" v-bind="attrs" v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item>
-              <v-list-item-content> 수정하기 </v-list-item-content>
-              <v-list-item-icon>
-                <v-icon>mdi-pencil-outline</v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-            <v-list-item @click="onClickDeletePost">
-              <v-list-item-content class="red--text text--lighten-2">
-                삭제하기
-              </v-list-item-content>
-              <v-list-item-icon>
-                <v-icon color="red lighten-2">mdi-trash-can-outline</v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-col>
+        <v-col cols="auto" class="justify-end">
+          <v-menu offset-y bottom left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn elevation="0" color="transparent" v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content> 수정하기 </v-list-item-content>
+                <v-list-item-icon>
+                  <v-icon>mdi-pencil-outline</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+              <v-list-item @click="onClickDeletePost">
+                <v-list-item-content class="red--text text--lighten-2">
+                  삭제하기
+                </v-list-item-content>
+                <v-list-item-icon>
+                  <v-icon color="red lighten-2">mdi-trash-can-outline</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-col>
       </div>
     </v-row>
 
@@ -63,12 +63,7 @@
     </v-row>
 
     <v-row>
-        <v-img
-          v-if="post.image !== null"
-          :src="post.image"
-          max-height="300"
-          max-width="300"
-        ></v-img>
+      <v-img v-if="post.image !== null" :src="post.image" max-height="300" max-width="300"></v-img>
     </v-row>
     <v-row class="px-8 py-4">{{ post.content }}</v-row>
 
@@ -82,7 +77,10 @@
 </template>
 
 <script>
-import { getPost } from "@/api/board.js";
+import { addView, getPost } from "@/api/board.js";
+import { mapState } from "vuex";
+
+const userStore = "userStore";
 
 export default {
   name: "BoardDetailArticle",
@@ -90,6 +88,9 @@ export default {
     return {
       post: {},
     };
+  },
+  computed: {
+    ...mapState(userStore, ["userId"]),
   },
   created() {
     let postId = this.$route.params.postId;
@@ -99,6 +100,13 @@ export default {
         console.log(data);
         this.post = data;
       },
+      (error) => {
+        console.log(error);
+      }
+    );
+    addView(
+      postId,
+      () => {},
       (error) => {
         console.log(error);
       }

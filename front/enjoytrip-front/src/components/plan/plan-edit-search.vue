@@ -96,7 +96,7 @@
               </v-row>
             </v-col>
             <v-col cols="auto">
-              <v-btn fab small elevation="0" color="primary">
+              <v-btn fab small elevation="0" color="primary"  @click="addToRoute(attraction)">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </v-col>
@@ -122,6 +122,7 @@ import { mapActions, mapState } from "vuex";
 
 const regionStore = "regionStore";
 const attractionStore = "attractionStore";
+const planStore = "planStore";
 
 export default {
   name: "PlanEditSearch",
@@ -133,6 +134,7 @@ export default {
       gugunName: null,
       searchWord: null,
       attractionCount: 10, // 추가
+      dialog: false,
     };
   },
   created() {
@@ -143,6 +145,8 @@ export default {
   computed: {
     ...mapState(regionStore, ["sidos", "guguns"]),
     ...mapState(attractionStore, ["attractions"]),
+    ...mapState(planStore, ["routes", "activeTabDate"]),
+
     attractions() {
       if (this.searchWord) {
         return this.$store.getters["attractionStore/filteredAttractions"](
@@ -161,6 +165,7 @@ export default {
       "getAttractionListAction",
       "initAttractionListAction",
     ]),
+    ...mapActions(planStore, ["addAttractionToRouteAction"]),
 
     selectSido() {
       let param = {
@@ -179,6 +184,16 @@ export default {
         keyWord: this.searchWord,
       };
       this.getAttractionListAction(param);
+    },
+    addToRoute(attraction) {
+      console.log(attraction);
+      let route = {
+        planId: this.$route.params.planId,
+        ...attraction,
+        visitDate: this.activeTabDate,
+        visitOrder: this.routes.length+1,
+      };
+      this.addAttractionToRouteAction(route);
     },
   },
 };

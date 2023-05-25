@@ -22,7 +22,7 @@
 
 	
 	<insert id="joinUser" parameterType="userDto" >
-		insert into user 
+		insert into user (user_id, user_name, user_nickname, user_email, user_password, salt)
 		values (#{userId}, #{userName}, #{userNickname}, #{userEmail}, #{userPassword}, #{salt})
 	</insert>
 

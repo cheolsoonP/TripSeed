@@ -14,35 +14,40 @@
       <v-col cols="3"><plan-side-bar /></v-col>
       <v-col cols="9">
         <v-list>
-          <v-row>
+          <v-container>
             <h1>다가오는 여행</h1>
-            <h5>{{ upcomingPlans.length - 1 }}</h5>
-            <v-window show-arrows>
-              <template v-slot:prev="{ on, attrs }">
-                <v-btn fab v-bind="attrs" v-on="on">
-                  <v-icon>mdi-chevron-left</v-icon>
-                </v-btn>
-              </template>
-              <template v-slot:next="{ on, attrs }">
-                <v-btn fab v-bind="attrs" v-on="on">
-                  <v-icon>mdi-chevron-right</v-icon>
-                </v-btn>
-              </template>
-              <v-window-item
-                v-for="n in upcomingPlans.length - 1"
-                :key="`card-${n}`"
-              >
-                <v-col>
-                  <plan-list-item
-                    :planInfo="upcomingPlans[n]"
-                    :isSmall="true"
-                  />
-                </v-col>
-              </v-window-item>
-            </v-window>
-          </v-row>
+            <div v-if="upcomingPlans.length <= 0">
+              <h5>없음</h5>
+            </div>
+            <v-row v-else>
+              <h5>{{ upcomingPlans.length - 1 }}</h5>
+              <v-window show-arrows>
+                <template v-slot:prev="{ on, attrs }">
+                  <v-btn fab v-bind="attrs" v-on="on">
+                    <v-icon>mdi-chevron-left</v-icon>
+                  </v-btn>
+                </template>
+                <template v-slot:next="{ on, attrs }">
+                  <v-btn fab v-bind="attrs" v-on="on">
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </template>
+                <v-window-item
+                  v-for="n in upcomingPlans.length - 1"
+                  :key="`card-${n}`"
+                >
+                  <v-col>
+                    <plan-list-item
+                      :planInfo="upcomingPlans[n]"
+                      :isSmall="true"
+                    />
+                  </v-col>
+                </v-window-item>
+              </v-window>
+            </v-row>
+          </v-container>
 
-          <v-row>
+          <v-container>
             <h1>여행 계획</h1>
             <h5>{{ currentPlans.length }}</h5>
             <v-window show-arrows>
@@ -84,9 +89,9 @@
                 </v-row>
               </v-window-item>
             </v-window>
-          </v-row>
+          </v-container>
 
-          <v-row>
+          <v-container>
             <h1>지난 여행 일정</h1>
             <h5>{{ pastPlans.length }}</h5>
             <v-window show-arrows>
@@ -128,7 +133,7 @@
                 </v-row>
               </v-window-item>
             </v-window>
-          </v-row>
+          </v-container>
         </v-list>
       </v-col>
     </v-row>
@@ -154,7 +159,7 @@ export default {
     ...mapState(userStore, ["userId"]),
     ...mapState(planStore, ["plans"]),
     upcomingPlans() {
-      const oneWeekFromNow = new Date();
+      let oneWeekFromNow = new Date();
       oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
       return this.plans.filter(
         (plan) =>

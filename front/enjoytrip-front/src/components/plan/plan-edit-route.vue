@@ -5,12 +5,7 @@
     </v-row>
 
     <v-tabs show-arrows height="100%">
-      <v-tab
-        v-for="(date, i) in dates"
-        :key="i"
-        class="px-2"
-        @click="selectTab(date)"
-      >
+      <v-tab v-for="(date, i) in dates" :key="i" class="px-2" @click="selectTab(date)">
         <v-card outlined>
           <v-card-title> {{ i + 1 }} 일차 </v-card-title>
           <v-card-subtitle> {{ date }} </v-card-subtitle>
@@ -18,17 +13,13 @@
       </v-tab>
 
       <v-tab-item v-for="(date, i) in dates" :key="i">
-        <v-row style="backgroud-color: pink">
-          <v-col cols="12" md="4">
-            <v-list dense nav height="50vh">
-              <div v-for="(route, index) in sortOrderRoutes" :key="index">
-                <v-list-item v-if="date === route.visitDate">
-                  {{ route.title }}
-                </v-list-item>
-              </div>
-            </v-list>
-          </v-col>
-        </v-row>
+        <v-list dense nav height="50vh">
+          <div v-for="(route, index) in sortOrderRoutes" :key="index">
+            <v-list-item v-if="date === route.visitDate">
+              <plan-edit-route-item :attraction="route" />
+            </v-list-item>
+          </div>
+        </v-list>
       </v-tab-item>
     </v-tabs>
   </div>
@@ -37,11 +28,12 @@
 <script>
 import { getPlanDetailApi } from "@/api/plan.js";
 import { mapState, mapActions, mapGetters } from "vuex";
-
+import PlanEditRouteItem from "./plan-edit-route-item.vue";
 const planStore = "planStore";
 
 export default {
   name: "PlanEditRoute",
+  components: { PlanEditRouteItem },
   data() {
     return {
       plan: {},
@@ -66,7 +58,7 @@ export default {
     this.getRouteAction(planId);
   },
   computed: {
-    ...mapState(planStore, ["activeTabDate",]),
+    ...mapState(planStore, ["activeTabDate"]),
     ...mapGetters(planStore, ["sortOrderRoutes"]),
   },
   methods: {
@@ -92,14 +84,6 @@ export default {
     },
     selectTab(date) {
       this.setActiveTabDateAction(date);
-    },
-  },
-  watch: {
-    routes: {
-      handler: function (newRoutes) {
-        this.routes = newRoutes;
-      },
-      deep: true,
     },
   },
 };

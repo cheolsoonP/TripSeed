@@ -23,8 +23,8 @@ const planStore = {
     },
     activeTabDate: "",
   },
-  getters: { 
-    sortOrderRoutes:(state) => {
+  getters: {
+    sortOrderRoutes: (state) => {
       // value 기준으로 정렬
       state.routes.sort(function (a, b) {
         if (a.visitOrder > b.visitOrder) {
@@ -38,7 +38,7 @@ const planStore = {
       });
 
       return state.routes;
-    }
+    },
   },
   mutations: {
     SET_PLAN_LIST(state, plans) {
@@ -99,8 +99,7 @@ const planStore = {
       state.tempPlan.partners.splice(index, 1);
     },
     ADD_ATTRACTION_TO_ROUTE(state, route) {
-      console.log(route)
-      state.routes.push(route)
+      state.routes.push(route);
     },
     INIT_PLAN_EDIT_ROUTE(state, startDate) {
       state.activeTabDate = startDate;
@@ -108,7 +107,35 @@ const planStore = {
     },
     SET_ACTIVE_TAB_DATE(state, date) {
       state.activeTabDate = date;
-    }
+    },
+
+    DELETE_ROUTE(state, route) {
+      function findRoute(item) {
+        if (item.attractionId === route.attractionId) return true;
+      }
+      const index = state.routes.findIndex(findRoute);
+      state.routes.splice(index, 1);
+    },
+    ORDER_UP(state, route) {
+      function findRoute(item) {
+        if (item.attractionId === route.attractionId) return true;
+      }
+      const index = state.routes.findIndex(findRoute);
+      if (index !== 0) {
+        state.routes[index - 1].visitOrder++;
+        state.routes[index].visitOrder--;
+      }
+    },
+    ORDER_DOWN(state, route) {
+      function findRoute(item) {
+        if (item.attractionId === route.attractionId) return true;
+      }
+      const index = state.routes.findIndex(findRoute);
+      if (index !== state.routes.length - 1) {
+        state.routes[index].visitOrder++;
+        state.routes[index + 1].visitOrder--;
+      }
+    },
   },
   actions: {
     getPlanListAction: ({ commit }, userId) => {
@@ -166,12 +193,21 @@ const planStore = {
     addAttractionToRouteAction: ({ commit }, route) => {
       commit("ADD_ATTRACTION_TO_ROUTE", route);
     },
-    initPlanEditRouteAction:({ commit }, startDate) => {
+    initPlanEditRouteAction: ({ commit }, startDate) => {
       commit("INIT_PLAN_EDIT_ROUTE", startDate);
     },
     setActiveTabDateAction: ({ commit }, date) => {
       console.log(date);
       commit("SET_ACTIVE_TAB_DATE", date);
+    },
+    deleteRouteAction: ({ commit }, route) => {
+      commit("DELETE_ROUTE", route);
+    },
+    orderUpAction: ({ commit }, route) => {
+      commit("ORDER_UP", route);
+    },
+    orderDownAction: ({ commit }, route) => {
+      commit("ORDER_DOWN", route);
     },
   },
 };

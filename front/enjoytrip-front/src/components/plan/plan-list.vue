@@ -28,15 +28,9 @@
                   <v-icon>mdi-chevron-right</v-icon>
                 </v-btn>
               </template>
-              <v-window-item
-                v-for="n in upcomingPlans.length - 1"
-                :key="`card-${n}`"
-              >
+              <v-window-item v-for="n in upcomingPlans.length - 1" :key="`card-${n}`">
                 <v-col class="pa-0">
-                  <plan-list-item
-                    :planInfo="upcomingPlans[n]"
-                    :isSmall="true"
-                  />
+                  <plan-list-item :planInfo="upcomingPlans[n]" :isSmall="true" />
                 </v-col>
               </v-window-item>
             </v-window>
@@ -57,32 +51,18 @@
                     <v-icon>mdi-chevron-right</v-icon>
                   </v-btn>
                 </template>
-                <v-window-item
-                  v-for="n in Math.ceil(currentPlans.length / 2)"
-                  :key="`card-${n}`"
-                >
+                <v-window-item v-for="n in Math.ceil(currentPlans.length / 2)" :key="`card-${n}`">
                   <v-row>
                     <v-col cols="6" class="pa-0">
-                      <plan-list-item
-                        :planInfo="currentPlans[(n - 1) * 2]"
-                        :isSmall="true"
-                      />
+                      <plan-list-item :planInfo="currentPlans[(n - 1) * 2]" :isSmall="true" />
                     </v-col>
-                    <v-col
-                      cols="6"
-                      class="pa-0"
-                      v-if="currentPlans[(n - 1) * 2 + 1]"
-                    >
-                      <plan-list-item
-                        :planInfo="currentPlans[(n - 1) * 2 + 1]"
-                        :isSmall="true"
-                      />
+                    <v-col cols="6" class="pa-0" v-if="currentPlans[(n - 1) * 2 + 1]">
+                      <plan-list-item :planInfo="currentPlans[(n - 1) * 2 + 1]" :isSmall="true" />
                     </v-col>
                     <v-col
                       cols="6"
                       v-else-if="
-                        n === Math.ceil(currentPlans.length / 2) &&
-                        currentPlans.length % 2 === 1
+                        n === Math.ceil(currentPlans.length / 2) && currentPlans.length % 2 === 1
                       "
                     >
                     </v-col>
@@ -104,32 +84,18 @@
                     <v-icon>mdi-chevron-right</v-icon>
                   </v-btn>
                 </template>
-                <v-window-item
-                  v-for="n in Math.ceil(pastPlans.length / 2)"
-                  :key="`card-${n}`"
-                >
+                <v-window-item v-for="n in Math.ceil(pastPlans.length / 2)" :key="`card-${n}`">
                   <v-row>
                     <v-col cols="6" class="pa-0">
-                      <plan-list-item
-                        :planInfo="pastPlans[(n - 1) * 2]"
-                        :isSmall="true"
-                      />
+                      <plan-list-item :planInfo="pastPlans[(n - 1) * 2]" :isSmall="true" />
                     </v-col>
-                    <v-col
-                      cols="6"
-                      class="pa-0"
-                      v-if="pastPlans[(n - 1) * 2 + 1]"
-                    >
-                      <plan-list-item
-                        :planInfo="pastPlans[(n - 1) * 2 + 1]"
-                        :isSmall="true"
-                      />
+                    <v-col cols="6" class="pa-0" v-if="pastPlans[(n - 1) * 2 + 1]">
+                      <plan-list-item :planInfo="pastPlans[(n - 1) * 2 + 1]" :isSmall="true" />
                     </v-col>
                     <v-col
                       cols="6"
                       v-else-if="
-                        n === Math.ceil(pastPlans.length / 2) &&
-                        pastPlans.length % 2 === 1
+                        n === Math.ceil(pastPlans.length / 2) && pastPlans.length % 2 === 1
                       "
                     >
                     </v-col>
@@ -167,8 +133,7 @@ export default {
       oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
       return this.plans.filter(
         (plan) =>
-          new Date(plan.startDate) > new Date() &&
-          new Date(plan.startDate) <= oneWeekFromNow
+          new Date(plan.startDate) > new Date() && new Date(plan.startDate) <= oneWeekFromNow
       );
     },
     pastPlans() {

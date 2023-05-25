@@ -46,13 +46,13 @@ export default {
   },
   created() {
     this.planId = this.$route.params.planId;
-    this.initPlanEditRouteAction(this.plan.startDate);
 
     getPlanDetailApi(
       this.planId,
       ({ data }) => {
         console.log(data);
         this.plan = data;
+        this.initPlanEditRouteAction(this.plan.startDate);
         this.makeDates();
 
         this.getRouteAction(
@@ -105,6 +105,7 @@ export default {
         body,
         () => {
           alert("여행 계획 생성 완료!");
+          this.$router.push("/plan");
         },
         (error) => {
           console.log(error);

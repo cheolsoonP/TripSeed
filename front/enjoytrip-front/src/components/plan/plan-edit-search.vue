@@ -98,8 +98,10 @@
         </v-card>
       </v-row>
 
-      <v-row justify="center">
-        <v-btn text @click="loadMore" v-if="attractionCount < attractions.length"> 더보기 </v-btn>
+      <v-row class="my-4" justify="center">
+        <v-btn width="100%" text @click="loadMore" v-if="attractionCount < attractions.length">
+          더보기..
+        </v-btn>
       </v-row>
     </v-container>
   </div>

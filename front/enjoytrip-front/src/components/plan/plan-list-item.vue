@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="ma-3 pa-0" width="100%" height="auto" tile :to="'/plan/view/' + planInfo.planId">
+    <v-card class="ma-3 pa-0" height="auto" elevation="0" outlined :to="'/plan/view/' + planInfo.planId">
       <v-list-item class="pa-0">
         <v-col class="ma-0 mr-2 pa-0" cols="3">
           <v-img :src="planInfo.image"></v-img>

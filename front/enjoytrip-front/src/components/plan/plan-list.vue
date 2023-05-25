@@ -14,23 +14,120 @@
       <v-col cols="3"><plan-side-bar /></v-col>
       <v-col cols="9">
         <v-list>
-          <div>
-            <v-list-item-title>다가오는 여행</v-list-item-title>
-            <plan-list-item :planInfo="plans[0]" :isSmall="false" />
-          </div>
           <v-row>
-            <v-col cols="3"><v-list-item-title>나의 여행</v-list-item-title></v-col>
-            <v-spacer></v-spacer>
-            <v-col cols="1">
-              <v-btn text>
-                <v-icon>mdi-plus</v-icon>
-                <span class="pl-1">더보기</span>
-              </v-btn>
-            </v-col>
+            <h1>다가오는 여행</h1>
+            <h5>{{ upcomingPlans.length - 1 }}</h5>
+            <v-window show-arrows>
+              <template v-slot:prev="{ on, attrs }">
+                <v-btn fab v-bind="attrs" v-on="on">
+                  <v-icon>mdi-chevron-left</v-icon>
+                </v-btn>
+              </template>
+              <template v-slot:next="{ on, attrs }">
+                <v-btn fab v-bind="attrs" v-on="on">
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-btn>
+              </template>
+              <v-window-item
+                v-for="n in upcomingPlans.length - 1"
+                :key="`card-${n}`"
+              >
+                <v-col>
+                  <plan-list-item
+                    :planInfo="upcomingPlans[n]"
+                    :isSmall="true"
+                  />
+                </v-col>
+              </v-window-item>
+            </v-window>
           </v-row>
-          <v-row class="d-flex-row">
-            <v-col cols="6"><plan-list-item :planInfo="plans[1]" :isSmall="true" /></v-col>
-            <v-col cols="6"><plan-list-item :planInfo="plans[2]" :isSmall="true" /></v-col>
+
+          <v-row>
+            <h1>여행 계획</h1>
+            <h5>{{ currentPlans.length }}</h5>
+            <v-window show-arrows>
+              <template v-slot:prev="{ on, attrs }">
+                <v-btn fab v-bind="attrs" v-on="on">
+                  <v-icon>mdi-chevron-left</v-icon>
+                </v-btn>
+              </template>
+              <template v-slot:next="{ on, attrs }">
+                <v-btn fab v-bind="attrs" v-on="on">
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-btn>
+              </template>
+              <v-window-item
+                v-for="n in Math.ceil(currentPlans.length / 2)"
+                :key="`card-${n}`"
+              >
+                <v-row>
+                  <v-col cols="6">
+                    <plan-list-item
+                      :planInfo="currentPlans[(n - 1) * 2]"
+                      :isSmall="true"
+                    />
+                  </v-col>
+                  <v-col cols="6" v-if="currentPlans[(n - 1) * 2 + 1]">
+                    <plan-list-item
+                      :planInfo="currentPlans[(n - 1) * 2 + 1]"
+                      :isSmall="true"
+                    />
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    v-else-if="
+                      n === Math.ceil(currentPlans.length / 2) &&
+                      currentPlans.length % 2 === 1
+                    "
+                  >
+                  </v-col>
+                </v-row>
+              </v-window-item>
+            </v-window>
+          </v-row>
+
+          <v-row>
+            <h1>지난 여행 일정</h1>
+            <h5>{{ pastPlans.length }}</h5>
+            <v-window show-arrows>
+              <template v-slot:prev="{ on, attrs }">
+                <v-btn fab v-bind="attrs" v-on="on">
+                  <v-icon>mdi-chevron-left</v-icon>
+                </v-btn>
+              </template>
+              <template v-slot:next="{ on, attrs }">
+                <v-btn fab v-bind="attrs" v-on="on">
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-btn>
+              </template>
+              <v-window-item
+                v-for="n in Math.ceil(pastPlans.length / 2)"
+                :key="`card-${n}`"
+              >
+                <v-row>
+                  <v-col cols="6">
+                    <plan-list-item
+                      :planInfo="pastPlans[(n - 1) * 2]"
+                      :isSmall="true"
+                    />
+                  </v-col>
+                  <v-col cols="6" v-if="pastPlans[(n - 1) * 2 + 1]">
+                    <plan-list-item
+                      :planInfo="pastPlans[(n - 1) * 2 + 1]"
+                      :isSmall="true"
+                    />
+                  </v-col>
+                  <v-col
+                    cols="6"
+                    v-else-if="
+                      n === Math.ceil(pastPlans.length / 2) &&
+                      pastPlans.length % 2 === 1
+                    "
+                  >
+                  </v-col>
+                </v-row>
+              </v-window-item>
+            </v-window>
           </v-row>
         </v-list>
       </v-col>
@@ -56,6 +153,21 @@ export default {
   computed: {
     ...mapState(userStore, ["userId"]),
     ...mapState(planStore, ["plans"]),
+    upcomingPlans() {
+      const oneWeekFromNow = new Date();
+      oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+      return this.plans.filter(
+        (plan) =>
+          new Date(plan.startDate) > new Date() &&
+          new Date(plan.startDate) <= oneWeekFromNow
+      );
+    },
+    pastPlans() {
+      return this.plans.filter((plan) => new Date(plan.endDate) < new Date());
+    },
+    currentPlans() {
+      return this.plans.filter((plan) => new Date(plan.endDate) >= new Date());
+    },
   },
   created() {
     this.getPlanListAction(this.userId);
